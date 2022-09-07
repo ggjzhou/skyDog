@@ -9,9 +9,9 @@ public interface AddressDao {
 
    void add(Address address);
 
-   void delete(int addressId);
+   void delete(Integer addressId);
 
-   List<Address> queryId(int addressId);
+   Address queryId(Integer addressId);
 
    void update(Address address);
 

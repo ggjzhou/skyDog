@@ -6,91 +6,101 @@ import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
-   @Autowired
-   private UserDao userDao;
 
-   public void add(User user) {
-      // TODO: implement
-   }
-   
-   /** @param userId
-    * @pdOid fddd2298-85ea-4ab1-a70b-ca0aa320e450 */
-   public void delete(int userId) {
-      // TODO: implement
-   }
-   
-   /** @param user
-    * @pdOid 35320da9-c3fb-4583-8685-120f507f7561 */
-   public void update(User user) {
-      // TODO: implement
-   }
-   
-   /** @param userId
-    * @pdOid 0e617464-1593-4e32-b2c8-e0ce41fb358f */
-   public List<User> queryId(int userId) {
-      // TODO: implement
-      return null;
-   }
-   
-   /** @param userList
-    * @pdOid edc3cb8b-9aee-4852-bee7-9b7841425d03 */
-   public void batchAdd(List<User> userList) {
-      // TODO: implement
-   }
-   
-   /** @param list
-    * @pdOid 20d1f1f7-6de8-45e7-8970-39bdd77ae364 */
-   public void batchDelete(List list) {
-      // TODO: implement
-   }
-   
-   /** @pdOid fd5838ec-cf1e-45d4-8704-0b8355f10af3 */
-   public List<User> pageQuery() {
-      // TODO: implement
-      return null;
-   }
-   
-   /** @param userName 
-    * @param password
-    * @pdOid 2ac9f7d6-50c0-4572-a5dc-8a6b7c98b10f */
-   public void register(String userName, String password) {
-      // TODO: implement
-   }
-   
-   /** @param userName 
-    * @param password
-    * @pdOid 544c2d1a-e7a8-4bba-ac50-fadeee62d8b2 */
-   public void login(String userName, String password) {
-      // TODO: implement
-   }
-   
-   /** @param oldPassword 
-    * @param newPassword
-    * @pdOid b77411ec-2b7a-4298-9df1-889daf2fdcb3 */
-   public void updatePassword(String oldPassword, String newPassword) {
-      // TODO: implement
-   }
-   
-   /** @pdOid 0ef5b671-ffe2-4142-98cf-3f32f0052a83 */
-   public void updateAvatar() {
-      // TODO: implement
-   }
-   
-   /** @pdOid 7b184675-4f92-459e-a87d-97a662ea6aa9 */
-   public List<Cart> getCart() {
-      // TODO: implement
-      return null;
-   }
-   
-   /** @pdOid 5321e388-c637-4392-be63-0d46ddad30b4 */
-   public List<Order> getOrder() {
-      // TODO: implement
-      return null;
-   }
+    @Autowired
+    private UserDao userDao;
+
+    public void add(User user) {
+        userDao.add(user);
+    }
+
+
+    public void delete(Integer userId) {
+        userDao.delete(userId);
+    }
+
+
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+
+    public User queryId(Integer userId) {
+        return userDao.queryId(userId);
+    }
+
+
+    public User register(User user) {
+        User u = new User();
+        String nick = "User" + new Date().toString();
+        u.setNick(nick);
+        u.setUserName(user.getUserName());
+        u.setPassword(user.getPassword());
+        List<User> list = userDao.queryCondition(u);
+        if (list.isEmpty()) {
+            userDao.add(u);
+            return u;
+        } else {
+            return null;
+        }
+    }
+
+
+    public User login(User user) {
+        User u = new User();
+        u.setUserName(user.getUserName());
+        List<User> list = userDao.queryCondition(u);
+        if (list == null || list.isEmpty()) {
+            return null;
+        } else if(list.get(0).getPassword().equals(u.getPassword())) {
+            return u;
+        }else
+            return null;
+    }
+
+    public void batchAdd(List<User> userList) {
+        // TODO: implement
+    }
+
+
+    public void batchDelete(List list) {
+        // TODO: implement
+    }
+
+
+    public List<User> pageQuery() {
+        // TODO: implement
+        return null;
+    }
+
+
+    public void updatePassword(String oldPassword, String newPassword) {
+        // TODO: implement
+    }
+
+
+    public void updateAvatar() {
+        // TODO: implement
+    }
+
+
+    public List<Cart> getCart() {
+        // TODO: implement
+        return null;
+    }
+
+
+    public List<Order> getOrder() {
+        // TODO: implement
+        return null;
+    }
 
 }

@@ -11,21 +11,21 @@ public interface UserService {
 
    void add(User user);
 
-   void delete(int userId);
+   void delete(Integer userId);
 
    void update(User user);
 
-   List<User> queryId(int userId);
+   User queryId(Integer userId);
+
+   User register(User user);
+
+   User login(User user);
 
    void batchAdd(List<User> userList);
 
    void batchDelete(List list);
 
    List<User> pageQuery();
-
-   void register(String userName, String password);
-
-   void login(String userName, String password);
 
    void updatePassword(String oldPassword, String newPassword);
 

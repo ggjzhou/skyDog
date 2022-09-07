@@ -5,6 +5,136 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.skydog.dao.UserDao">
+    <resultMap id="userMap" type="User">
+        <id property="userId" column="userId"></id>
+        <result property="userName" column="userName"></result>
+        <result property="password" column="password"></result>
+        <result property="nick" column="nick"></result>
+        <result property="phone" column="phone"></result>
+        <result property="avatar" column="avatar"></result>
+        <result property="gender" column="gender"></result>
+        <result property="IDCard" column="IDCard"></result>
 
+    </resultMap>
+
+
+    <!-- 添加 -->
+    <insert id="add" parameterType="User">
+        insert into tb_user
+        <trim prefix="  values ("
+              suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="userName != null">
+                #{userName},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="nick != null">
+                #{nick},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="avatar != null">
+                #{avatar},
+            </if>
+            <if test="gender != null">
+                #{gender}
+            </if>
+            <if test="IDCard != null">
+                #{IDCard}
+            </if>
+        </trim>
+    </insert>
+
+
+    <!-- 删除 -->
+    <delete id="delete" parameterType="int">
+        delete
+        from tb_user
+        where userId = #{userId}
+    </delete>
+
+    <!-- 动态修改 -->
+    <update id="update" parameterType="User">
+        update tb_user u
+        <set>
+            <if test="userName !=null">
+                u.userName = #{userName},
+            </if>
+            <if test="password !=null">
+                u.password = #{password},
+            </if>
+            <if test="nick !=null">
+                u.nick = #{nick},
+            </if>
+            <if test="phone !=null">
+                u.phone = #{phone},
+            </if>
+            <if test="avatar !=null">
+                u.avatar = #{avatar},
+            </if>
+            <if test="gender !=null">
+                u.gender = #{gender},
+            </if>
+            <if test="IDCard !=null">
+                u.IDCard = #{IDCard},
+            </if>
+        </set>
+        where u.userId = #{userId}
+    </update>
+
+    <!-- Id查询 -->
+    <select id="queryId" parameterType="int" resultType="User">
+        select *
+        from tb_user u
+        where u.userId = #{userId}
+    </select>
+
+
+    <sql id="selectActive">
+        <where>
+            <if test="userId != null">
+                u.userId = #{userId}
+            </if>
+            <if test="userName != null">
+                and u.userName = like
+                concat('%',#{userName},'%')
+            </if>
+            <if test="nick != null">
+                and u.nick =like
+                concat('%',#{nick},'%')
+            </if>
+            <if test="phone != null">
+                and u.phone = like
+                concat('%',#{phone},'%')
+            </if>
+            <if test="gender != null">
+                and u.gender = #{gender}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 动态模糊查询 -->
+    <select id="queryCondition" parameterType="User" resultType="User">
+        select * from tb_user u
+        <!-- 查询条件 -->
+        <include refid="selectActive"/>
+    </select>
+
+    <insert id="batchAdd" parameterType="List">
+
+    </insert>
+
+    <delete id="batchDelete" parameterType="List">
+
+    </delete>
+
+    <select id="pageQuery" parameterType="List">
+
+    </select>
 
 </mapper>

@@ -1,24 +1,29 @@
 package com.example.skydog.dao;
 
 import com.example.skydog.module.entity.User;
+import io.swagger.models.auth.In;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.*;
 
-
+@Mapper
 public interface UserDao {
 
-   void add(User user);
+    void add(User user);
 
-   void delete(int userId);
+    void delete(Integer userId);
 
-   List<User> queryId(int userId);
+    User queryId(Integer userId);
 
-   void batchAdd(List<User> userList);
+    void update(User user);
 
-   void batchDelete(List list);
+    List<User> queryCondition(User user);
 
-   List<User> pageQuery();
+    void batchAdd(List<User> userList);
 
-   void update(User user);
+    void batchDelete(List list);
+
+    List<User> pageQuery();
+
 
 }

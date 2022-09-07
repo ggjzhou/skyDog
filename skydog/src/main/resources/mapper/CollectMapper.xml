@@ -3,6 +3,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.example.skydog.dao.CollectDao">
 
+    <insert id="add" parameterType="Product">
+
+    </insert>
+
+    <delete id="delete" parameterType="int">
+
+    </delete>
 </mapper>

@@ -11,7 +11,7 @@ public interface EvaluateDao {
 
    void delete(int evaluateId);
 
-   List<Evaluate> queryId(int evaluateId);
+   Evaluate queryId(int evaluateId);
 
    List<Evaluate> queryCondition();
 
