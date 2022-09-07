@@ -12,13 +12,13 @@ import java.util.*;
 public interface AdminService {
    /** @param admin
     * @pdOid f763e91d-6fc3-4c75-828f-6d5b9ce0b1a7 */
-   Boolean add(Admin admin);
+   void add(Admin admin);
    /** @param id
     * @pdOid 6266f103-fc10-467e-b53b-9495ad45d405 */
-   Boolean delete(Integer id);
+   void delete(Integer id);
    /** @param admin
     * @pdOid 5849b0b0-f14c-4fce-bdbf-5c75a7989b25 */
-   Boolean update(Admin admin);
+   void update(Admin admin);
    /** @param id
     * @pdOid b63b3833-f5cf-4186-8ce0-82e23c77e20b */
    Admin queryId(Integer id);

@@ -5,9 +5,11 @@ package com.example.skydog.dao; /***********************************************
  ***********************************************************************/
 
 import com.example.skydog.module.entity.Order;
+import org.mapstruct.Mapper;
 
 import java.util.*;
 
+@Mapper
 /** @pdOid 97365a4d-e319-488d-94a0-e6096654bb66 */
 public interface OrderDao {
    /** @param order

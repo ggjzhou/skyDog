@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.skydog.dao.OrderDao">
+    <insert id="add"></insert>
+    <delete id="delete"></delete>
+    <select id="queryId" parameterType="java.lang.Integer"></select>
+    <select id="queryCondition"></select>
+    <select id="update"></select>
+    <insert id="batchAdd"></insert>
+    <delete id="batchDelete"></delete>
+    <select id="pageQuery"></select>
+
 
 </mapper>

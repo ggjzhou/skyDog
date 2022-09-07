@@ -8,4 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor//含有参构造方法
 @NoArgsConstructor//含无参构造方法
 public class Admin {
+    private Integer adminId;
+    private String  adminName;
+    private String  adminAcc;
+    private String  adminPwd;
+
 }

@@ -1,5 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.skydog.dao.AdminDao">
+<!--添加管理员账号-->
+    <insert id="add">
+        insert into tb_admin(
+          adminId,
+          adminName,
+          adminAcc,
+          adminPwd
+          ) values(
+            #{adminId},
+            #{adminName},
+            #{adminAcc},
+            #{adminPwd}
+          )
+    </insert>
+
+<!-- 删除管理员账号   -->
+    <delete id="delete" parameterType="java.lang.Integer">
+    delete from tb_admin where adminId=#{id}
+    </delete>
+<!--更改账号信息-->
+    <select id="update" parameterType="com.example.skydog.dao.AdminDao">
+    update tb_admin
+    <set>
+        <if test="adminId != null">
+        adminId=#{adminId,jdbcType=int}
+        </if>
+
+        <if test="adminName != null">
+        adminName=#{adminName,jdbc=varchar}
+        </if>
+
+        <if test="adminAcc != null">
+        adminAcc=#{adminAcc,jdbc=varchar}
+        </if>
+
+        <if test="adminPwd !=null">
+        adminPwd=#{adminAcc,jdbc=varchar}
+        </if>
+    </set>
+
+    </select>
+
+<!--按主键查询 -->
+    <resultMap id="Query" type="com.example.skydog.module.entity.Admin">
+        <id column="adminId" property="adminId" jdbcType="int"/>
+        <result column="adminName" property="adminName" jdbcType="VARCHAR"/>
+        <result column="adminAcc" property="adminAcc"  jdbcType="VARCHAR"/>
+        <result column="adminPwd" property="adminPwd" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryId" parameterType="java.lang.Integer" resultMap="Query">
+    select *from tb_admin where adminId=#{id}
+    </select>
+
+<!--按条件查询-->
+<!--  查询条件  -->
+    <sql id="selectActive">
+    <where>
+    <if test="adminId != null">
+        adminId=#{adminId}
+    </if>
+    <if test="adminName !=null">
+        adminName=#{adminName}
+    </if>
+    <if test="adminAcc !=null">
+        adminAcc=#{adminAcc}
+    </if>
+    <if test="adminPwd !=null">
+        adminPwd=#{adminPwd}
+    </if>
+
+    </where>
+    </sql>
+
+
+    <select id="queryCondition" parameterType="Admin" resultMap="Query">
+    select *from tb_admin
+        <include refid="selectActive"/>
+    </select>
+
+
 
 </mapper>
