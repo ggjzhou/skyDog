@@ -17,6 +17,36 @@ spring:
       idle-timeout: 30000
       # 数据库连接超时时间，默认为30秒
       connection-timeout: 30000
+  #kafka
+  kafka:
+    #集群地址
+    bootstrap-servers: master:9092,slave01:9092,slave02:9092
+    #生产者配置
+    producer:
+      #系列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #采用的ack机制
+      acks: 1
+      #批量提交的数据大小 16kb
+      batch-size: 16384
+      #生产者暂存数据的缓冲区大小
+      buffer-memory: 33554432
+    #消费者配置
+    consumer:
+      #是否自动提交偏移量
+      enable-auto-commit: true
+      #消费消息后间隔多长时间提交偏移量
+      auto-commit-interval: 100
+      #默认的消费者组，代码中可以热键修改
+      group-id: test824
+      # earliest:当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费
+      # latest:当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据
+      # none:topic各分区都存在已提交的offset时，从offset后开始消费；只要有一个分区不存在已提交的offset，则抛出异常
+      auto-offset-reset: latest
+      #系列化方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   mvc:
     format:
       date: yyyy-MM-dd
