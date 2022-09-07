@@ -15,7 +15,11 @@ public interface CategoryDao {
 
    void add(Category category);
 
+   void batchAdd(List<Category> categories);
+
    void delete(Integer categoryId);
+
+   void batchDelete(List list);
 
    void update(Category category);
 

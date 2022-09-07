@@ -1,7 +1,9 @@
 package com.example.skydog.dao;
 
+import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
@@ -10,16 +12,21 @@ import java.util.*;
  * Data:2022/9/7
  */
 @Mapper
+@Repository
 public interface CartDao {
 
-   void add(Product product);
+   void add(Cart cart);
 
-   void update(Product product);
+   void batchAdd(List<Cart> carts);
 
-   void delete(Integer productId);
+   void update(Cart cart);
+
+   void batchDelete(List list);
+
+   void delete(Integer cartId);
 
    List<Product> queryId(Integer cartId);
 
-   List<Product> queryCondition();
+   List<Product> queryCondition(Cart cart);
 
 }

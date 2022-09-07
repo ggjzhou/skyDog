@@ -1,5 +1,6 @@
 package com.example.skydog.service;
 
+import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Product;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,14 @@ import java.util.*;
 @Service
 public interface CartService {
 
-   void add(Product product);
+   void add(Cart cart);
 
-   void update(Product product);
+   void update(Cart cart);
 
-   void delete(Integer productId);
+   void delete(Integer cartId);
 
    List<Product> queryId(Integer cartId);
 
-   List<Product> queryCondition(Product product);
+   List<Product> queryCondition(Cart cart);
 
 }

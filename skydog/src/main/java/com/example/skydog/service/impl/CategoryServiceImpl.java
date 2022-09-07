@@ -1,7 +1,9 @@
 package com.example.skydog.service.impl;
 
+import com.example.skydog.dao.CategoryDao;
 import com.example.skydog.module.entity.Category;
 import com.example.skydog.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -9,33 +11,49 @@ import java.util.*;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-   public Boolean add(Category category) {
-      // TODO: implement
-      return null;
-   }
-   
+   @Autowired
+   CategoryDao categoryDao;
 
-   public Boolean delete(Integer categoryId) {
-      // TODO: implement
-      return null;
+   /**
+    * 添加商品种类
+    * @param category
+    */
+   public void add(Category category) {
+      categoryDao.add(category);
    }
-   
 
-   public Boolean update(Category category) {
-      // TODO: implement
-      return null;
+   /**
+    * 删除商品种类
+    * @param categoryId
+    */
+   public void delete(Integer categoryId) {
+      categoryDao.delete(categoryId);
    }
-   
 
+   /**
+    * 修改商品种类
+    * @param category
+    */
+   public void update(Category category) {
+      categoryDao.update(category);
+   }
+
+   /**
+    * 通过id查询商品种类
+    * @param categoryId
+    * @return
+    */
    public Category queryId(Integer categoryId) {
-      // TODO: implement
-      return null;
+      return categoryDao.queryId(categoryId);
    }
-   
 
+   /**
+    * 模糊查询商品种类
+    * @param category
+    * @return
+    */
    public List<Category> queryCondition(Category category) {
-      // TODO: implement
-      return null;
+      return categoryDao.queryCondition(category);
    }
 
 }

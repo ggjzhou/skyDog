@@ -1,6 +1,7 @@
 package com.example.skydog.service.impl;
 
 import com.example.skydog.dao.CartDao;
+import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,28 @@ public class CartServiceImpl implements CartService {
    @Autowired
    CartDao cartDao;
 
-   public void add(Product product) {
-      // TODO: implement
+   /**
+    * 添加购物车
+    * @param cart
+    */
+   public void add(Cart cart) {
+      cartDao.add(cart);
    }
 
-   public void update(Product product) {
-      // TODO: implement
+   public void update(Cart cart) {
+      cartDao.update(cart);
    }
 
-   public void delete(Integer productId) {
-      // TODO: implement
+   public void delete(Integer cartId) {
+      cartDao.delete(cartId);
    }
 
    public List<Product> queryId(Integer cartId) {
-      // TODO: implement
-      return null;
+      return cartDao.queryId(cartId);
    }
 
-   public List<Product> queryCondition(Product product) {
-      // TODO: implement
-      return null;
+   public List<Product> queryCondition(Cart cart) {
+      return cartDao.queryCondition(cart);
    }
 
 }

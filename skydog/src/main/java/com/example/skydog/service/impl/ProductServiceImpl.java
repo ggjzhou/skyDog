@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     * @param productId
     * @return
     */
-   public List<Product> queryId(Integer productId) {
+   public Product queryId(Integer productId) {
       return productDao.queryId(productId);
    }
 

@@ -12,11 +12,11 @@ import java.util.List;
 @Service
 public interface CategoryService {
 
-   Boolean add(Category category);
+   void add(Category category);
 
-   Boolean delete(Integer categoryId);
+   void delete(Integer categoryId);
 
-   Boolean update(Category category);
+   void update(Category category);
 
    Category queryId(Integer categoryId);
 

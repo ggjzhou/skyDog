@@ -21,7 +21,7 @@ public interface ProductDao {
 
    void batchDelete(List list);
 
-   List<Product> queryId(Integer productId);
+   Product queryId(Integer productId);
 
    List<Product> queryCondition(Product product);
 
