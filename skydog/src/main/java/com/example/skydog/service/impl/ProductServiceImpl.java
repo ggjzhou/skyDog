@@ -1,9 +1,11 @@
 package com.example.skydog.service.impl;
 
+import com.example.skydog.dao.ProductDao;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.PageBeans;
 import com.example.skydog.module.vo.Pages;
 import com.example.skydog.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -13,31 +15,49 @@ import java.util.List;
  */
 public class ProductServiceImpl implements ProductService {
 
-   
+   @Autowired
+   ProductDao productDao;
 
+   /**
+    * 添加商品
+    * @param product
+    */
    public void add(Product product) {
-      // TODO: implement
+      productDao.add(product);
    }
-   
 
+   /**
+    * 修改商品
+    * @param product
+    */
    public void update(Product product) {
-      // TODO: implement
+      productDao.update(product);
    }
-   
 
+   /**
+    * 删除商品
+    * @param productId
+    */
    public void delete(Integer productId) {
-      // TODO: implement
-   }
-   
-
-   public List<Product> queryId(Integer productId) {
-      // TODO: implement
-      return null;
+      productDao.delete(productId);
    }
 
+   /**
+    * 通过id查询单个商品
+    * @param productId
+    * @return
+    */
+   public Product queryId(Integer productId) {
+      return productDao.queryId(productId);
+   }
+
+   /**
+    * 动态模糊查询商品
+    * @param product
+    * @return
+    */
    public List<Product> queryCondition(Product product) {
-      // TODO: implement
-      return null;
+      return productDao.queryCondition(product);
    }
    
 

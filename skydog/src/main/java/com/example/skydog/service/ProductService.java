@@ -20,7 +20,7 @@ public interface ProductService {
 
    void delete(Integer productId);
 
-   List<Product> queryId(Integer productId);
+   Product queryId(Integer productId);
 
    List<Product> queryCondition(Product product);
 

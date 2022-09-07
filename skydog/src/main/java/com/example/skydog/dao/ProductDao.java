@@ -13,11 +13,15 @@ public interface ProductDao {
 
    void add(Product product);
 
+   void batchAdd(List<Product> products);
+
    void update(Product product);
 
    void delete(Integer productId);
 
-   List<Product> queryId(Integer productId);
+   void batchDelete(List list);
+
+   Product queryId(Integer productId);
 
    List<Product> queryCondition(Product product);
 
