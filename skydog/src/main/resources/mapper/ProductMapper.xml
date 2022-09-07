@@ -1,5 +1,137 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com/example/skydog/dao/ProductDao.java">
-
+    <!--
+           插入数据
+           id="实现的方法名"
+       -->
+    <insert id="add">
+        insert into tb_product
+        values(#{productId},#{userId},#{adminId},#{categoryId},#{productName},#{productPrice},#{productDec}
+              ,#{productStock},#{productStatus},#{productSale},#{productGrade}
+            )
+    </insert>
+    <!--
+      指量添加数据
+      collection="数组-array,集合-list"
+      item="每一个元素"
+    -->
+    <insert id="batchAdd" >
+        <foreach collection="list" item="product" separator=";">
+            insert into tb_product
+            values(#{productId},#{userId},#{adminId},#{categoryId},#{productName},
+                   #{productPrice},#{productDec},#{productStock},
+                   #{productStatus},#{productSale},#{productGrade}
+            )
+        </foreach>
+    </insert>
+    <!--  删除数据  -->
+    <delete id="delete">
+        DELETE from tb_product
+        where productId = #{productId}
+    </delete>
+    <!--  批量删除  -->
+    <delete id="batchDelete">
+        <foreach collection="list" item="productId" separator=";">
+            DELETE from tb_product
+            where productId = #{productId}
+        </foreach>
+    </delete>
+    <!--    添加，修改if判断-->
+    <sql id="productIf">
+        <if test="productId != null">
+            #{productId},
+        </if>
+        <if test="userId != null">
+            #{userId},
+        </if>
+        <if test="adminId != null">
+            #{adminId},
+        </if>
+        <if test="categoryId != null">
+            #{categoryId},
+        </if>
+        <if test="productName != null">
+            #{productName},
+        </if>
+        <if test="productPrice != null">
+            #{productPrice},
+        </if>
+        <if test="productDec != null">
+            #{productDec},
+        </if>
+        <if test="productStock != null">
+            #{productStock}
+        </if>
+        <if test="productStatus != null">
+            #{productStatus}
+        </if>
+        <if test="productSale != null">
+            #{productSale}
+        </if>
+        <if test="productGrade != null">
+            #{productGrade}
+        </if>
+    </sql>
+    <!--修改数据-->
+    <update id="update">
+        update tb_product
+        <set>
+            <include refid="productIf"></include>
+        </set>
+        where productId = #{productId}
+    </update>
+    <sql id="selectActive">
+        <where>
+            <if test="productId != null">
+                p.productId = #{productId},
+            </if>
+            <if test="userId != null">
+                and p.userId = #{userId},
+            </if>
+            <if test="adminId != null">
+                and adminId = #{adminId},
+            </if>
+            <if test="categoryId != null">
+                and p.categoryId = #{categoryId},
+            </if>
+            <if test="productName != null">
+                and p.productName = #{productName},
+            </if>
+            <if test="productPrice != null">
+                and p.productPrice = #{productPrice},
+            </if>
+            <if test="productDec != null">
+                and p.productDec = #{productDec},
+            </if>
+            <if test="productStock != null">
+                and p.productStock = #{productStock}
+            </if>
+            <if test="productStatus != null">
+                and p.productStatus = #{productStatus}
+            </if>
+            <if test="productSale != null">
+                and p.productSale = #{productSale}
+            </if>
+            <if test="productGrade != null">
+                and p.productGrade = #{productGrade}
+            </if>
+        </where>
+    </sql>
+    <!--    通过id查询-->
+    <select id="queryId">
+        select * from tb_product p
+        where p.productId = #{productId}
+    </select>
+    <!--    动态模糊查询-->
+    <select id="queryCondition">
+        select * from tb_product p
+        <!-- 查询条件 -->
+        <include refid="selectActive"/>
+        <!-- 分页-->
+        <if test="currentPage != null and pageSize != null">
+            <bind name="start" value="(currentPage - 1) * pageSize"/>
+            limit #{start},#{pageSize}
+        </if>
+    </select>
 </mapper>

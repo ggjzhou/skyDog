@@ -1,5 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com/example/skydog/dao/CartDao">
+    <!--插入数据 -->
+    <insert id="add">
+        insert into tb_cart
+        values(#{cartId},#{userId},#{productId},#{productCount},#{joinTime})
+    </insert>
+    <!--指量添加数据 -->
+    <insert id="batchAdd" >
+        <foreach collection="list" item="cart" separator=";">
+            insert into tb_cart
+            values(#{cartId},#{userId},#{productId},#{productCount},#{joinTime})
+        </foreach>
+    </insert>
+    <!--  删除数据  -->
+    <delete id="delete">
+        DELETE from tb_cart
+        where cartId = #{cartId}
+    </delete>
+    <!--  批量删除  -->
+    <delete id="batchDelete">
+        <foreach collection="list" item="cartId" separator=";">
+            DELETE from tb_cart
+            where cartId = #{cartId}
+        </foreach>
+    </delete>
+    <!--    添加，修改if判断-->
+    <sql id="productIf">
+        <if test="cartId != null">
+            #{cartId},
+        </if>
+        <if test="userId != null">
+            #{userId},
+        </if>
+        <if test="productId != null">
+            #{productId},
+        </if>
+        <if test="productCount != null">
+            #{productCount},
+        </if>
+        <if test="joinTime != null">
+            #{joinTime},
+        </if>
 
+    </sql>
+    <!--修改数据-->
+    <update id="update">
+        update tb_cart
+        <set>
+            <include refid="productIf"></include>
+        </set>
+        where cartId = #{cartId}
+    </update>
+    <sql id="selectActive">
+        <where>
+            <if test="cartId != null">
+                r.cartId = #{cartId},
+            </if>
+            <if test="userId != null">
+                and r.userId = #{userId},
+            </if>
+            <if test="productId != null">
+                and r.productId = #{productId},
+            </if>
+            <if test="productCount != null">
+                and r.productCount = #{productCount},
+            </if>
+            <if test="joinTime != null">
+                and r.joinTime = #{joinTime},
+            </if>
+        </where>
+    </sql>
+    <!--    通过id查询-->
+    <select id="queryId">
+        select * from tb_cart r
+        where r.productId = #{productId}
+    </select>
+    <!--    动态模糊查询-->
+    <select id="queryCondition">
+        select * from tb_cart r
+        <!-- 查询条件 -->
+        <include refid="selectActive"/>
+    </select>
 </mapper>
