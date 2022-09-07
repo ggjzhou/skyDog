@@ -1,17 +1,19 @@
-package com.example.skydog.dao;
+package com.example.skydog.service;
+
 
 import com.example.skydog.module.entity.Evaluate;
 
 import java.util.*;
 
 
-public interface EvaluateDao {
+public interface EvaluateService {
 
    void add(Evaluate evaluate);
 
    void delete(int evaluateId);
 
    List<Evaluate> queryId(int evaluateId);
+
 
    List<Evaluate> queryCondition();
 
@@ -22,5 +24,11 @@ public interface EvaluateDao {
    void batchDelete(List list);
 
    List<Evaluate> pageQuery();
+
+   List<Evaluate> queryByGrade(String grade);
+
+   List<Evaluate> queryByImg();
+
+   List<Evaluate> queryByVideo();
 
 }
