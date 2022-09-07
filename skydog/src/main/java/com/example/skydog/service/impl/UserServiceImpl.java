@@ -1,18 +1,19 @@
-/***********************************************************************
- * Module:  UserServiceImpl.java
- * Author:  86159
- * Purpose: Defines the Class UserServiceImpl
- ***********************************************************************/
+package com.example.skydog.service.impl;
+
+import com.example.skydog.dao.UserDao;
+import com.example.skydog.module.entity.Cart;
+import com.example.skydog.module.entity.Order;
+import com.example.skydog.module.entity.User;
+import com.example.skydog.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
-/** @pdOid e5d90e53-2074-4910-944f-0b92f9aac792 */
+
 public class UserServiceImpl implements UserService {
-   /** @pdOid 8002307e-3074-4f21-b300-776ca387717f */
+   @Autowired
    private UserDao userDao;
-   
-   /** @param user
-    * @pdOid 6079159d-dc8f-4587-abb7-42a57321944a */
+
    public void add(User user) {
       // TODO: implement
    }
