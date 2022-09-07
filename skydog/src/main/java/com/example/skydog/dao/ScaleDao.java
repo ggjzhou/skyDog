@@ -1,8 +1,10 @@
-/***********************************************************************
+package com.example.skydog.dao; /***********************************************************************
  * Module:  ScaleDao.java
  * Author:  new
  * Purpose: Defines the Interface ScaleDao
  ***********************************************************************/
+
+import javafx.scene.transform.Scale;
 
 import java.util.*;
 

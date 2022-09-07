@@ -1,8 +1,11 @@
-/***********************************************************************
+package com.example.skydog.service.impl; /***********************************************************************
  * Module:  ScaleServiceImpl.java
  * Author:  new
  * Purpose: Defines the Class ScaleServiceImpl
  ***********************************************************************/
+
+import com.example.skydog.service.ScaleService;
+import javafx.scene.transform.Scale;
 
 import java.util.*;
 

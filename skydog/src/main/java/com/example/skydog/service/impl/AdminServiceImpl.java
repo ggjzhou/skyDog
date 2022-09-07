@@ -4,6 +4,9 @@ package com.example.skydog.service.impl; /**************************************
  * Purpose: Defines the Class AdminServiceImpl
  ***********************************************************************/
 
+import com.example.skydog.module.entity.Admin;
+import com.example.skydog.service.AdminService;
+
 import java.util.*;
 
 /** @pdOid be67da20-ea78-47c7-9f65-85aff7b0bad6 */
@@ -31,14 +34,14 @@ public class AdminServiceImpl implements AdminService {
    
    /** @param id
     * @pdOid 82c50648-5cb0-427a-9d21-ea78bb28c938 */
-   public admin queryId(Integer id) {
+   public Admin queryId(Integer id) {
       // TODO: implement
       return null;
    }
    
    /** @param admin
     * @pdOid 011c5de5-58f9-43a9-9266-2cab039e041a */
-   public List<admin> queryCodition(Admin admin) {
+   public List<Admin> queryCodition(Admin admin) {
       // TODO: implement
       return null;
    }

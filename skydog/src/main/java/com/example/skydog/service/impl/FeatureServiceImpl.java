@@ -1,8 +1,11 @@
-/***********************************************************************
+package com.example.skydog.service.impl; /***********************************************************************
  * Module:  FeatureServiceImpl.java
  * Author:  new
  * Purpose: Defines the Class FeatureServiceImpl
  ***********************************************************************/
+
+import com.example.skydog.module.entity.Feature;
+import com.example.skydog.service.FeatureService;
 
 import java.util.*;
 

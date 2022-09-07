@@ -1,8 +1,12 @@
-/***********************************************************************
+package com.example.skydog.dao; /***********************************************************************
  * Module:  FeatureDao.java
  * Author:  new
  * Purpose: Defines the Interface FeatureDao
  ***********************************************************************/
+
+
+
+import com.example.skydog.module.entity.Feature;
 
 import java.util.*;
 

@@ -4,6 +4,8 @@ package com.example.skydog.service; /*******************************************
  * Purpose: Defines the Interface AdminService
  ***********************************************************************/
 
+import com.example.skydog.module.entity.Admin;
+
 import java.util.*;
 
 /** @pdOid 831d885c-e377-4478-bcf2-3e87647ab272 */
@@ -19,10 +21,10 @@ public interface AdminService {
    Boolean update(Admin admin);
    /** @param id
     * @pdOid b63b3833-f5cf-4186-8ce0-82e23c77e20b */
-   admin queryId(Integer id);
+   Admin queryId(Integer id);
    /** @param admin
     * @pdOid 02b2e231-7522-4685-80b1-a3b03fee32df */
-   List<admin> queryCodition(Admin admin);
+   List<Admin> queryCodition(Admin admin);
    /** @param adminAcc 
     * @param adminPwd
     * @pdOid 212b69c1-dd4f-4a49-b4f0-6619d36ea451 */

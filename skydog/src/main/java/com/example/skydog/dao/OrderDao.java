@@ -1,8 +1,10 @@
-/***********************************************************************
+package com.example.skydog.dao; /***********************************************************************
  * Module:  Interface_OrderDaoImpl.java
  * Author:  86159
  * Purpose: Defines the Interface Interface_OrderDaoImpl
  ***********************************************************************/
+
+import com.example.skydog.module.entity.Order;
 
 import java.util.*;
 

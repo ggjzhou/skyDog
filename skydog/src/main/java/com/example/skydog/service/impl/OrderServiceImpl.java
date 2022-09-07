@@ -1,16 +1,21 @@
-/***********************************************************************
+package com.example.skydog.service.impl; /***********************************************************************
  * Module:  OrderServiceImpl.java
  * Author:  86159
  * Purpose: Defines the Class OrderServiceImpl
  ***********************************************************************/
 
-import java.util.*;
+import com.example.skydog.module.entity.Order;
+import com.example.skydog.service.OrderService;
+import org.springframework.stereotype.Service;
 
+import java.util.*;
+@Service
 /** @pdOid f4feb4b4-8cda-4277-8953-de21c1127b59 */
-public class OrderServiceImpl implements Interface_OrderServiceImpl {
+public class OrderServiceImpl implements OrderService {
    /** @param order
     * @pdOid c66582e5-bafd-4174-84a5-e270c737c507 */
    public void add(Order order) {
+
       // TODO: implement
    }
    

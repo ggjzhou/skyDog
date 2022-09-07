@@ -1,8 +1,10 @@
-/***********************************************************************
+package com.example.skydog.service; /***********************************************************************
  * Module:  FeatureService.java
  * Author:  new
  * Purpose: Defines the Interface FeatureService
  ***********************************************************************/
+
+import com.example.skydog.module.entity.Feature;
 
 import java.util.*;
 

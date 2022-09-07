@@ -1,8 +1,10 @@
-/***********************************************************************
+package com.example.skydog.service; /***********************************************************************
  * Module:  Interface_OrderServiceImpl.java
  * Author:  86159
  * Purpose: Defines the Interface Interface_OrderServiceImpl
  ***********************************************************************/
+
+import com.example.skydog.module.entity.Order;
 
 import java.util.*;
 

@@ -4,6 +4,8 @@ package com.example.skydog.dao; /***********************************************
  * Purpose: Defines the Interface AdminDao
  ***********************************************************************/
 
+import com.example.skydog.module.entity.Admin;
+
 import java.util.*;
 
 /** @pdOid a382e481-db3f-4450-9f39-52bd595aafe0 */
@@ -19,7 +21,7 @@ public interface AdminDao {
    void updata(Admin admin);
    /** @param id
     * @pdOid 266f47bb-5fea-40f4-95b9-2b9b46975f30 */
-   admin queryId(Integer id);
+   Admin queryId(Integer id);
    /** @param admin
     * @pdOid 3f52c7a6-7c3e-48c0-a44e-1c6ddfe846cf */
    List queryCondition(Admin admin);
