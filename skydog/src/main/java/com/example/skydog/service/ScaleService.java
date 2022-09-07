@@ -4,7 +4,9 @@ package com.example.skydog.service; /*******************************************
  * Purpose: Defines the Interface ScaleService
  ***********************************************************************/
 
-import javafx.scene.transform.Scale;
+
+
+import com.example.skydog.module.entity.Scale;
 
 import java.util.*;
 

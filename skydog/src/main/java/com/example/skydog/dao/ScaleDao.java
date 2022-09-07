@@ -4,7 +4,9 @@ package com.example.skydog.dao; /***********************************************
  * Purpose: Defines the Interface ScaleDao
  ***********************************************************************/
 
-import javafx.scene.transform.Scale;
+
+
+import com.example.skydog.module.entity.Scale;
 
 import java.util.*;
 
