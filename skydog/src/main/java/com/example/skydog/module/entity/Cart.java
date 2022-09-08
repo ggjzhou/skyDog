@@ -17,6 +17,8 @@ public class Cart {
     private Integer cartId;
     private Integer userId;
     private Integer productId;
+    private Integer scaleId;
+    private Integer featureId;
     private Integer productCount;
     private Date joinTime;
 }

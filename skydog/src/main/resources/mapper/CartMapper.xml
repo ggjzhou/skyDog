@@ -4,13 +4,13 @@
     <!--插入数据 -->
     <insert id="add">
         insert into tb_cart
-        values(#{cartId},#{userId},#{productId},#{productCount},#{joinTime})
+        values(#{cartId},#{userId},#{productId},#{scaleId},#{featureId},#{productCount},#{joinTime})
     </insert>
     <!--指量添加数据 -->
     <insert id="batchAdd" >
         <foreach collection="list" item="cart" separator=";">
             insert into tb_cart
-            values(#{cartId},#{userId},#{productId},#{productCount},#{joinTime})
+            values(#{cartId},#{userId},#{productId},#{scaleId},#{featureId},#{productCount},#{joinTime})
         </foreach>
     </insert>
     <!--  删除数据  -->
@@ -26,7 +26,7 @@
         </foreach>
     </delete>
     <!--    添加，修改if判断-->
-    <sql id="productIf">
+    <sql id="cartIf">
         <if test="cartId != null">
             #{cartId},
         </if>
@@ -35,6 +35,12 @@
         </if>
         <if test="productId != null">
             #{productId},
+        </if>
+        <if test="scaleId != null">
+            #{scaleId},
+        </if>
+        <if test="featureId != null">
+            #{featureId},
         </if>
         <if test="productCount != null">
             #{productCount},
@@ -48,7 +54,7 @@
     <update id="update">
         update tb_cart
         <set>
-            <include refid="productIf"></include>
+            <include refid="cartIf"></include>
         </set>
         where cartId = #{cartId}
     </update>
@@ -62,6 +68,12 @@
             </if>
             <if test="productId != null">
                 and r.productId = #{productId},
+            </if>
+            <if test="scaleId != null">
+                and r.scaleId = #{scaleId},
+            </if>
+            <if test="featureId != null">
+                and r.featureId = #{featureId},
             </if>
             <if test="productCount != null">
                 and r.productCount = #{productCount},

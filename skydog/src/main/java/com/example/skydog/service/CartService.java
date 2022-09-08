@@ -19,8 +19,8 @@ public interface CartService {
 
    void delete(Integer cartId);
 
-   List<Product> queryId(Integer cartId);
+   Cart queryId(Integer cartId);
 
-   List<Product> queryCondition(Cart cart);
+   List<Cart> queryCondition(Cart cart);
 
 }

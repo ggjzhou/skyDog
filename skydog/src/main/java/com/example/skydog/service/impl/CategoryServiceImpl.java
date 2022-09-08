@@ -19,7 +19,14 @@ public class CategoryServiceImpl implements CategoryService {
     * @param category
     */
    public void add(Category category) {
-      categoryDao.add(category);
+      Category category1 = new Category();
+      category1.setCategoryName(category.getCategoryName());
+      if(categoryDao.queryCondition(category1).isEmpty()){
+         categoryDao.add(category);
+      }else {
+
+      }
+
    }
 
    /**

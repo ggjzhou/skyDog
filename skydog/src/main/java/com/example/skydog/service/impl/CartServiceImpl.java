@@ -34,11 +34,11 @@ public class CartServiceImpl implements CartService {
       cartDao.delete(cartId);
    }
 
-   public List<Product> queryId(Integer cartId) {
+   public Cart queryId(Integer cartId) {
       return cartDao.queryId(cartId);
    }
 
-   public List<Product> queryCondition(Cart cart) {
+   public List<Cart> queryCondition(Cart cart) {
       return cartDao.queryCondition(cart);
    }
 

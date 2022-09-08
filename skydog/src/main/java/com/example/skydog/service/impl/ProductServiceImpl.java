@@ -57,7 +57,13 @@ public class ProductServiceImpl implements ProductService {
     * @return
     */
    public List<Product> queryCondition(Product product) {
-      return productDao.queryCondition(product);
+      List<Product> products = productDao.queryCondition(product);
+      if(products.isEmpty()){
+         return null;
+      }else {
+         return productDao.queryCondition(product);
+      }
+
    }
    
 
@@ -77,8 +83,9 @@ public class ProductServiceImpl implements ProductService {
    }
 
    public List<Product> queryByName(String productName) {
-      // TODO: implement
-      return null;
+      Product product = new Product();
+      product.setProductName(productName);
+      return productDao.queryCondition(product);
    }
 
 }

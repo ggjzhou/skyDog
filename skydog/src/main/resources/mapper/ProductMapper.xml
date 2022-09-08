@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com/example/skydog/dao/ProductDao.java">
+    <!-- 结果集-->
+    <resultMap id="BaseProductMap" type="com/example/skydog/module/entity/Product">
+        <id column="productId" property="productId"/>
+        <result column="userId" property="userId"/>
+        <result column="adminId" property="adminId"/>
+        <result column="categoryId" property="categoryId"/>
+        <result column="productName" property="productName"/>
+        <result column="productPrice" property="productPrice"/>
+        <result column="productDec" property="productDec"/>
+        <result column="productStock" property="productStock"/>
+        <result column="productStatus" property="productStatus"/>
+        <result column="productSale" property="productSale"/>
+        <result column="productGrade" property="productGrade"/>
+    </resultMap>
+    <resultMap id="ProductDtoMap"
+               extends="BaseProductMap"
+               type="com/example/skydog/module/dto/ProductDto">
+        <result column="productScale" property="productScale"/>
+        <result column="productScaleStock" property="productScaleStock"/>
+        <result column="productScalePrice" property="productScalePrice"/>
+    </resultMap>
+
     <!--
            插入数据
            id="实现的方法名"
