@@ -5,9 +5,11 @@ package com.example.skydog.dao; /***********************************************
  ***********************************************************************/
 
 import com.example.skydog.module.entity.Admin;
+import org.mapstruct.Mapper;
 
 import java.util.*;
 
+@Mapper
 /** @pdOid a382e481-db3f-4450-9f39-52bd595aafe0 */
 public interface AdminDao {
    /** @param admin

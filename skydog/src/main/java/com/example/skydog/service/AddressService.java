@@ -1,19 +1,20 @@
 package com.example.skydog.service;
 
 import com.example.skydog.module.entity.Address;
+import com.example.skydog.module.vo.ResultVO;
 
 import java.util.*;
 
 
 public interface AddressService {
 
-    void add(Address address);
+    ResultVO add(Address address);
 
-    void delete(int addressId);
+    ResultVO delete(Integer addressId);
 
-    List<Address> queryId(int addressId);
+    Address queryId(Integer addressId);
 
-    void update(Address address);
+    ResultVO update(Address address);
 
     void batchAdd(List<Address> addressList);
 

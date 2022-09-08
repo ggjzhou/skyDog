@@ -1,53 +1,78 @@
 package com.example.skydog.service.impl;
 
+import com.example.skydog.dao.AddressDao;
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Address;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-
+@Service
+@Transactional
 public class AddressServiceImpl implements AddressService {
 
-   public void add(Address address) {
-      // TODO: implement
-   }
-   
 
-   public void delete(int addressId) {
-      // TODO: implement
-   }
-   
+    @Autowired
+    private AddressDao addressDao;
 
-   public List<Address> queryId(int addressId) {
-      // TODO: implement
-      return null;
-   }
-   
+    public ResultVO add(Address address) {
+        //判断地址是否存在
 
-   public void update(Address address) {
-      // TODO: implement
-   }
-   
+        addressDao.add(address);
+        return new ResultVO(ResultEnum.ADD_SUCCESS);
+    }
 
-   public void batchAdd(List<Address> addressList) {
-      // TODO: implement
-   }
-   
+    @Override
+    public ResultVO delete(Integer addressId) {
+        if (addressDao.queryId(addressId) == null) {
+            return new ResultVO(ResultEnum.DELETE_FAIL, "该地址不存在");
+        } else {
+            addressDao.delete(addressId);
+            return new ResultVO(ResultEnum.DELETE_SUCCESS);
+        }
+    }
 
-   public void batchDelete(List list) {
-      // TODO: implement
-   }
-   
 
-   public List<Address> pageQuery() {
-      // TODO: implement
-      return null;
-   }
-   
+    public Address queryId(Integer addressId) {
+        return addressDao.queryId(addressId);
+    }
 
-   public List<Address> queryCondition() {
-      // TODO: implement
-      return null;
-   }
+
+    public ResultVO update(Address address) {
+        Address address1 = new Address();
+        address1.setAddressId(address.getAddressId());
+        if(addressDao.queryId(address.getAddressId())==null){
+            return new ResultVO(ResultEnum.UPDATE_FAIL,"该地址不存在");
+        }else{
+            addressDao.update(address);
+            return new ResultVO(ResultEnum.UPDATE_SUCCESS);
+        }
+    }
+
+
+    public void batchAdd(List<Address> addressList) {
+        // TODO: implement
+    }
+
+
+    public void batchDelete(List list) {
+        // TODO: implement
+    }
+
+
+    public List<Address> pageQuery() {
+        // TODO: implement
+        return null;
+    }
+
+
+    public List<Address> queryCondition() {
+        // TODO: implement
+        return null;
+    }
 
 }

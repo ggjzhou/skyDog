@@ -7,7 +7,26 @@
 
     <!-- 添加 -->
     <insert id="add" parameterType="Address">
+        insert into tb_address
+        <trim prefix="  values ("
+              suffix=")" suffixOverrides=",">
+            <if test="consigneeName != null">
+                #{consigneeName},
+            </if>
+            <if test="consigneePhone != null">
+                #{consigneePhone},
+            </if>
+            <if test="zone != null">
+                #{zone},
+            </if>
+            <if test="fullAddress != null">
+                #{fullAddress},
+            </if>
+            <if test="isDefault != null">
+                #{isDefault},
+            </if>
 
+        </trim>
     </insert>
 
 
@@ -18,43 +37,47 @@
 
     <!-- 动态修改 -->
     <update id="update" parameterType="Address">
-
+        delete
+        from tb_address a
+        where a.addressId = #{addressId}
     </update>
 
     <!-- Id查询 -->
     <select id="queryId" parameterType="int" resultType="Address">
-
+        select *
+        from tb_address a
+        where a.addressId = #{addressId}
     </select>
 
 
-<!--    <sql id="selectActive">-->
-<!--        <where>-->
-<!--            <if test="userId != null">-->
-<!--                u.userId = #{userId}-->
-<!--            </if>-->
-<!--            <if test="userName != null">-->
-<!--                and u.userName = like-->
-<!--                concat('%',#{userName},'%')-->
-<!--            </if>-->
-<!--            <if test="nick != null">-->
-<!--                and u.nick =like-->
-<!--                concat('%',#{nick},'%')-->
-<!--            </if>-->
-<!--            <if test="phone != null">-->
-<!--                and u.phone = like-->
-<!--                concat('%',#{phone},'%')-->
-<!--            </if>-->
-<!--            <if test="gender != null">-->
-<!--                and u.gender = #{gender}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </sql>-->
+    <!--        <sql id="selectActive">-->
+    <!--            <where>-->
+    <!--                <if test="userId != null">-->
+    <!--                    u.userId = #{userId}-->
+    <!--                </if>-->
+    <!--                <if test="userName != null">-->
+    <!--                    and u.userName = like-->
+    <!--                    concat('%',#{userName},'%')-->
+    <!--                </if>-->
+    <!--                <if test="nick != null">-->
+    <!--                    and u.nick =like-->
+    <!--                    concat('%',#{nick},'%')-->
+    <!--                </if>-->
+    <!--                <if test="phone != null">-->
+    <!--                    and u.phone = like-->
+    <!--                    concat('%',#{phone},'%')-->
+    <!--                </if>-->
+    <!--                <if test="gender != null">-->
+    <!--                    and u.gender = #{gender}-->
+    <!--                </if>-->
+    <!--            </where>-->
+    <!--        </sql>-->
 
     <!-- 动态模糊查询 -->
-    <select id="queryCondition"  resultType="Address">
-        select * from tb_address a
+    <select id="queryCondition" resultType="Address">
+--          select * from tb_address a
         <!-- 查询条件 -->
-<!--        <include refid="selectActive"/>-->
+        <!--        <include refid="selectActive"/>-->
     </select>
 
     <insert id="batchAdd" parameterType="List">
