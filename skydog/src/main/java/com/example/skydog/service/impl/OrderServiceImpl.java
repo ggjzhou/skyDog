@@ -46,9 +46,9 @@ public class OrderServiceImpl implements OrderService {
    
    /** @param orderList
     * @pdOid 0ba49f14-58ae-4304-853a-975d54154028 */
-   public void batchAdd(List<Order> orderList) {
+  /* public void batchAdd(List<Order> orderList) {
       // TODO: implement
-   }
+   }*/
    
    /** @param list
     * @pdOid 8272701e-29bc-4e9b-a04c-4185afc88c76 */

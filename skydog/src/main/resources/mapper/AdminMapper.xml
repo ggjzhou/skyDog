@@ -21,7 +21,7 @@
     delete from tb_admin where adminId=#{id}
     </delete>
 <!--更改账号信息-->
-    <select id="update" parameterType="com.example.skydog.dao.AdminDao">
+    <update id="update" parameterType="com.example.skydog.module.entity.Admin">
     update tb_admin
     <set>
         <if test="adminId != null">
@@ -41,7 +41,7 @@
         </if>
     </set>
 
-    </select>
+    </update>
 
 <!--按主键查询 -->
     <resultMap id="Query" type="com.example.skydog.module.entity.Admin">

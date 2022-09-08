@@ -26,7 +26,7 @@ public interface OrderService {
    void update(Order order);
    /** @param orderList
     * @pdOid 753cdda5-7b27-426f-974e-58939bd8676a */
-   void batchAdd(List<Order> orderList);
+   //void batchAdd(List<Order> orderList);
    /** @param list
     * @pdOid 0ff3eea8-378b-4a4e-a110-f72051f05c52 */
    void batchDelete(List list);

@@ -28,7 +28,7 @@ public interface OrderDao {
    void update(Order order);
    /** @param orderList
     * @pdOid eaa8222a-b111-4c33-bd1e-862d9f350cb3 */
-   void batchAdd(List<Order> orderList);
+   //void batchAdd(List<Order> orderList);
    /** @param list
     * @pdOid de48b18c-198c-414f-a571-c76975583369 */
    void batchDelete(List list);

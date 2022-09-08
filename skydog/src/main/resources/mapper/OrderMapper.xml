@@ -1,13 +1,139 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.skydog.dao.OrderDao">
-    <insert id="add"></insert>
-    <delete id="delete"></delete>
-    <select id="queryId" parameterType="java.lang.Integer"></select>
-    <select id="queryCondition"></select>
-    <select id="update"></select>
-    <insert id="batchAdd"></insert>
-    <delete id="batchDelete"></delete>
+<!--  添加订单  -->
+    <insert id="add">
+        insert tb_order(
+        orderId,
+        cartId,
+        addressId,
+        productId,
+        orderStatus,
+        createTime,
+        payTime,
+        endTime
+        )values(
+        #{orderId},
+        #{cartId},
+        #{addressId},
+        #{productId},
+        #{orderStatus},
+        #{createTime},
+        #{payTime},
+        #{endTime}
+        )
+    </insert>
+<!--  删除订单  -->
+    <delete id="delete" parameterType="java.lang.Integer">
+    delete from tb_order where orderId=#{orderId}
+    </delete>
+<!--  根据id查询  -->
+    <resultMap id="Query" type="com.example.skydog.module.entity.Order">
+        <id column="orderId" property="orderId" jdbcType="int"/>
+        <result column="cartId" property="cartId" jdbcType="int"/>
+        <result column="addressId" property="addressId" jdbcType="int"/>
+        <result column="productId" property="productId" jdbcType="int"/>
+        <result column="orderStatus" property="orderStatus" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createTime" jdbcType="datetime"/>
+        <result column="ordertime" property="ordertime" jdbcType="datetime"/>
+        <result column="endtime" property="endtime" jdbcType="datetime"/>
+    </resultMap>
+    <select id="queryId" parameterType="java.lang.Integer" resultMap="Query">
+    select *from tb_order where orderId=#{orderId}
+    </select>
+<!--  条件查询  -->
+    <sql id="selectActive">
+        <where>
+            <if test="orderId != null">
+                orderId=#{orderId}
+            </if>
+            <if test="cartId !=null">
+                cartId=#{cartId}
+            </if>
+            <if test="addressId !=null">
+                addressId=#{addressId}
+            </if>
+            <if test="productId !=null">
+                productId=#{productId}
+            </if>
+            <if test="orderStatus !=null">
+                orderStatus=#{orderStatus}
+            </if>
+            <if test="createTime !=null">
+                createTime=#{createTime}
+            </if>
+            <if test="payTime !=null">
+                payTime=#{payTime}
+            </if>
+            <if test="endTime !=null">
+                endTime=#{endTime}
+            </if>
+        </where>
+    </sql>
+    <select id="queryCondition" parameterType="Order" resultMap="Query">
+            select *from tb_order
+        <include refid="selectActive"/>
+    </select>
+<!--  修改订单信息  -->
+    <select id="update" parameterType="com.example.skydog.module.entity.Order">
+     update tb_order
+     <set>
+         <if test="orderId != null">
+             orderId=#{orderId}
+         </if>
+         <if test="cartId !=null">
+             cartId=#{cartId}
+         </if>
+         <if test="addressId !=null">
+             addressId=#{addressId}
+         </if>
+         <if test="productId !=null">
+             productId=#{productId}
+         </if>
+         <if test="orderStatus !=null">
+             orderStatus=#{orderStatus}
+         </if>
+         <if test="createTime !=null">
+             createTime=#{createTime}
+         </if>
+         <if test="payTime !=null">
+             payTime=#{payTime}
+         </if>
+         <if test="endTime !=null">
+             endTime=#{endTime}
+         </if>
+     </set>
+    </select>
+
+    <!--<insert id="batchAdd">
+                <foreach collection="list" item="order" separator=";">
+                    insert tb_order(
+                    orderId,
+                    cartId,
+                    addressId,
+                    productId,
+                    orderStatus,
+                    createTime,
+                    payTime,
+                    endTime
+                    )values(
+                    #{orderId},
+                    #{cartId},
+                    #{addressId},
+                    #{productId},
+                    #{orderStatus},
+                    #{createTime},
+                    #{payTime},
+                    #{endTime}
+                    )
+                </foreach>
+    </insert>-->
+    <!--    批量删除-->
+    <delete id="batchDelete">
+        <foreach collection="list" item="order" separator=";">
+            delete from tb_order where orderId=#{orderId}
+        </foreach>
+    </delete>
     <select id="pageQuery"></select>
 
 
