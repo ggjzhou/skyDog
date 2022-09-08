@@ -7,7 +7,7 @@
 
     <!-- 添加 -->
     <insert id="add" parameterType="Evaluate">
-
+        insert into tb_evaluate
     </insert>
 
 
