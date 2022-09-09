@@ -76,21 +76,26 @@ public class OrderServiceImpl implements OrderService {
     * @pdOid 21b1d277-55d6-4c68-aa88-92b500cfb15e */
    public List<Order> queryByBuildTime(Date startTime, Date endTime) {
       // TODO: implement
-      return null;
+      Order order=new Order();
+      order.setCreateTime(startTime);
+      order.setEndTime(endTime);
+      return orderdao.queryCondition(order);
    }
    
    /** @param category
     * @pdOid 4b414a23-f933-4343-83c4-93f982423e16 */
    public List<Order> queryByCategory(String category) {
       // TODO: implement
-      return null;
+    return null;
    }
    
    /** @param status
     * @pdOid 644f0bf7-9ff1-40bb-990d-8ab69c8ccdcc */
    public List<Order> queryByStatus(String status) {
       // TODO: implement
-      return null;
+     Order order=new Order();
+     order.setOrderStatus(status);
+     return  orderdao.queryCondition(order);
    }
 
 }
