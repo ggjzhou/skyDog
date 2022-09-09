@@ -7,9 +7,10 @@ package com.example.skydog.dao; /***********************************************
 
 
 import com.example.skydog.module.entity.Scale;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.*;
-
+@Mapper
 /** @pdOid bab93f3b-d457-47ba-9ae0-613141c84a98 */
 public interface ScaleDao {
    /** @param scale
