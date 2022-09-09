@@ -16,6 +16,7 @@ public class Order {
     private Integer cartId;
     private Integer addressId;
     private Integer productId;
+    private Integer scaleId;
     private String orderStatus;
     private Date   createTime;
     private Date   payTime;

@@ -36,9 +36,9 @@ public interface OrderService {
     * @param endTime
     * @pdOid 90203ded-7f59-4887-a060-24b9727ba269 */
    List<Order> queryByBuildTime(Date startTime, Date endTime);
-   /** @param category
+   /** @param productId
     * @pdOid 12894f9d-0c54-4010-9587-9b8ccc161e11 */
-   List<Order> queryByCategory(String category);
+   List<Order> queryByproductId(Integer productId);
    /** @param status
     * @pdOid ecf6db25-7ad3-4e4f-801c-e8550192f0cd */
    List<Order> queryByStatus(String status);
