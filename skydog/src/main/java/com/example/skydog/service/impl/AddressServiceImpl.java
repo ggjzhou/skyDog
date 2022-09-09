@@ -55,12 +55,6 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
-
-    public void batchAdd(List<Address> addressList) {
-        // TODO: implement
-    }
-
-
     public void batchDelete(List list) {
         // TODO: implement
     }
@@ -70,7 +64,6 @@ public class AddressServiceImpl implements AddressService {
         // TODO: implement
         return null;
     }
-
 
     public List<Address> queryCondition() {
         // TODO: implement

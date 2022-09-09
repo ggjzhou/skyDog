@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * @description: 数据返回封装
- * @author: EXPECT
+ * @author: 张振彬
  * @create: 2022-09-08
  * @version: 1.0
  */

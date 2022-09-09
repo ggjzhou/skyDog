@@ -128,9 +128,7 @@
         <include refid="selectActive"/>
     </select>
 
-    <insert id="batchAdd" parameterType="List">
 
-    </insert>
 
     <delete id="batchDelete" parameterType="List">
 

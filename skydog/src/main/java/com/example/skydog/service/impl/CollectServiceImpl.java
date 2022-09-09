@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.enterprise.inject.New;
+
 import java.util.List;
 
 /**
@@ -30,6 +30,13 @@ public class CollectServiceImpl implements CollectService {
     @Autowired
     private CollectDao collectDao;
 
+
+    /**
+     * 添加收藏
+     *
+     * @param collect
+     * @return
+     */
     @Override
     public ResultVO add(Collect collect) {
         Collect collect1 = new Collect();
@@ -45,6 +52,13 @@ public class CollectServiceImpl implements CollectService {
         }
     }
 
+    /**
+     * 删除收藏
+     *
+     * @param userId
+     * @param productId
+     * @return ResultVO
+     */
     @Override
     public ResultVO delete(Integer userId, Integer productId) {
         Collect collect1 = new Collect();
@@ -60,11 +74,24 @@ public class CollectServiceImpl implements CollectService {
 
     }
 
+    /**
+     * 根据Id查询
+     *
+     * @param userId
+     * @return
+     */
     @Override
     public ResultVO queryAll(Integer userId) {
         return new ResultVO(collectDao.queryAll(userId));
     }
 
+
+    /**
+     * 动态查询列表商品
+     *
+     * @param collect
+     * @return
+     */
     @Override
     public ResultVO queryCondition(Collect collect) {
         return new ResultVO(collectDao.queryCondition(collect));

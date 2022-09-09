@@ -75,22 +75,15 @@
 
     <!-- 动态模糊查询 -->
     <select id="queryCondition" resultType="Address">
---          select * from tb_address a
+         /*select * from tb_address a*/
         <!-- 查询条件 -->
         <!--        <include refid="selectActive"/>-->
     </select>
 
-    <insert id="batchAdd" parameterType="List">
-
-    </insert>
 
     <delete id="batchDelete" parameterType="List">
 
     </delete>
-
-    <select id="pageQuery" parameterType="List">
-
-    </select>
 
 
 </mapper>

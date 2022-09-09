@@ -19,7 +19,7 @@ public interface UserDao {
 
     List<User> queryCondition(User user);
 
-    void batchAdd(List<User> userList);
+
 
     void batchDelete(List list);
 
