@@ -1,6 +1,5 @@
 package com.example.skydog.service.impl;
 
-import com.example.skydog.dao.CartDao;
 import com.example.skydog.dao.UserDao;
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Cart;
@@ -21,18 +20,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-
-    private CartDao cartDao;
-
     public void add(User user) {
         userDao.add(user);
     }
 
 
-
     /**
-     * */
+     *
+     */
     public ResultVO delete(Integer userId) {
         User u = new User();
         u.setUserId(userId);
