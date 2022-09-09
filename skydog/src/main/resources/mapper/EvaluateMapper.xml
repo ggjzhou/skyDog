@@ -34,12 +34,13 @@
         delete
         from tb_evaluate e
         where e.evaluateId = #{evaluateId}
+          and e.userId = #{userId}
     </delete>
 
-<!--    &lt;!&ndash; 动态修改 &ndash;&gt;-->
-<!--    <update id="update" parameterType="Evaluate">-->
+    <!--    &lt;!&ndash; 动态修改 &ndash;&gt;-->
+    <!--    <update id="update" parameterType="Evaluate">-->
 
-<!--    </update>-->
+    <!--    </update>-->
 
     <!-- Id查询 -->
     <select id="queryId" parameterType="int" resultType="Evaluate">
@@ -73,21 +74,20 @@
     <!--    </sql>-->
 
     <!-- 动态模糊查询 -->
-    <select id="queryCondition">
+    <select id="queryCondition" parameterType="Evaluate">
         select * from tb_evaluate e
         <!-- 查询条件 -->
         <!--        <include refid="selectActive"/>-->
     </select>
 
 
+    <!--    <delete id="batchDelete" parameterType="List">-->
 
-<!--    <delete id="batchDelete" parameterType="List">-->
+    <!--    </delete>-->
 
-<!--    </delete>-->
+    <!--    <select id="pageQuery" parameterType="List">-->
 
-<!--    <select id="pageQuery" parameterType="List">-->
-
-<!--    </select>-->
+    <!--    </select>-->
 
 
 </mapper>

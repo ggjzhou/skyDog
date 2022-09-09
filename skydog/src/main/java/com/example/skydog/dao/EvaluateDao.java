@@ -11,11 +11,11 @@ public interface EvaluateDao {
 
     void add(Evaluate evaluate);
 
-    void delete(Integer evaluateId);
+    void delete(Integer userId,Integer evaluateId);
 
     Evaluate queryId(Integer evaluateId);
 
-    List<Evaluate> queryCondition();
+    List<Evaluate> queryCondition(Evaluate evaluate);
 
 //    void update(Evaluate evaluate);
 

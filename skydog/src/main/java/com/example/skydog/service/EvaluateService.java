@@ -11,7 +11,7 @@ public interface EvaluateService {
 
     ResultVO add(Evaluate evaluate);
 
-    ResultVO delete(Integer evaluateId);
+    ResultVO delete(Integer userId,Integer evaluateId);
 
     Evaluate queryId(Integer evaluateId);
 

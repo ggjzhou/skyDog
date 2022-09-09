@@ -23,28 +23,28 @@ public class ScaleServiceImpl implements ScaleService {
       // TODO: implement
        scaledao.add(scale);
    }
-   
+
    /** @param scaleId
     * @pdOid 32a4d703-3ac4-420a-8014-2f2718e2061a */
    public void delete(Integer scaleId) {
       // TODO: implement
       scaledao.delete(scaleId);
    }
-   
+
    /** @param scale
     * @pdOid 753ce19f-326b-4bc1-b31c-ef3734a636fe */
    public void update(Scale scale) {
       // TODO: implement
      scaledao.update(scale);
    }
-   
+
    /** @param scaleId
     * @pdOid 310eb683-033a-40a0-a0fd-83943f18f565 */
    public Scale queryId(Integer scaleId) {
       // TODO: implement
      return scaledao.queryId(scaleId);
    }
-   
+
    /** @param scale
     * @pdOid edb6c6d1-37e5-45e1-a2c3-51f65b31f68b */
    public List<Scale> queryCondition(Scale scale) {
