@@ -9,20 +9,19 @@ import java.util.*;
 @Mapper
 public interface EvaluateDao {
 
-   ResultVO add(Evaluate evaluate);
+    void add(Evaluate evaluate);
 
-   ResultVO delete(Integer evaluateId);
+    void delete(Integer evaluateId);
 
-   Evaluate queryId(Integer evaluateId);
+    Evaluate queryId(Integer evaluateId);
 
-   List<Evaluate> queryCondition();
+    List<Evaluate> queryCondition();
 
-   ResultVO update(Evaluate evaluate);
+    void update(Evaluate evaluate);
 
-   void batchAdd(List<Evaluate> evaluateList);
 
-   void batchDelete(List list);
+    void batchDelete(List list);
 
-   List<Evaluate> pageQuery();
+    List<Evaluate> pageQuery();
 
 }

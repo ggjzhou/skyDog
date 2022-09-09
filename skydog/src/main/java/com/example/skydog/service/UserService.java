@@ -24,13 +24,12 @@ public interface UserService {
 
    ResultVO queryCondition(User user);
 
-   void batchAdd(List<User> userList);
 
    void batchDelete(List list);
 
    List<User> pageQuery();
 
-   void updatePassword(String oldPassword, String newPassword);
+   ResultVO updatePassword(String oldPassword, String newPassword,Integer userId);
 
    void updateAvatar();//更新头像
 

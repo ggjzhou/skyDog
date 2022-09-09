@@ -1,5 +1,6 @@
 package com.example.skydog.service.impl;
 
+import com.example.skydog.dao.CartDao;
 import com.example.skydog.dao.UserDao;
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Cart;
@@ -20,11 +21,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+
+    private CartDao cartDao;
+
     public void add(User user) {
         userDao.add(user);
     }
 
 
+
+    /**
+     * */
     public ResultVO delete(Integer userId) {
         User u = new User();
         u.setUserId(userId);
@@ -63,9 +71,9 @@ public class UserServiceImpl implements UserService {
         List<User> list = userDao.queryCondition(u);
         if (list.isEmpty()) {
             userDao.add(u);
-            return new ResultVO(ResultEnum.SUCCESS,"注册成功");
+            return new ResultVO(ResultEnum.SUCCESS, "注册成功");
         } else {
-            return new ResultVO(ResultEnum.FAIL,"该账号已存在");
+            return new ResultVO(ResultEnum.FAIL, "该账号已存在");
         }
     }
 
@@ -75,11 +83,11 @@ public class UserServiceImpl implements UserService {
         u.setUserName(user.getUserName());
         List<User> list = userDao.queryCondition(u);
         if (list == null || list.isEmpty()) {
-            return new ResultVO(ResultEnum.FAIL,"该账号不存在");
+            return new ResultVO(ResultEnum.FAIL, "该账号不存在");
         } else if (list.get(0).getPassword().equals(u.getPassword())) {
-            return new ResultVO(ResultEnum.FAIL,"密码错误");
+            return new ResultVO(list.get(0));
         } else
-            return new ResultVO(ResultEnum.SUCCESS,"登陆成功");
+            return new ResultVO(ResultEnum.FAIL, "密码错误");
     }
 
     @Override
@@ -103,8 +111,17 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public void updatePassword(String oldPassword, String newPassword) {
-        // TODO: implement
+    public ResultVO updatePassword(String oldPassword, String newPassword, Integer userId) {
+        User u = userDao.queryId(userId);
+        if (u == null) {
+            return new ResultVO(ResultEnum.UPDATE_FAIL, "该用户不存在");
+        } else if (u.getPassword().equals(oldPassword)) {
+            u.setPassword(newPassword);
+            userDao.update(u);
+            return new ResultVO(ResultEnum.UPDATE_SUCCESS);
+        } else {
+            return new ResultVO(ResultEnum.UPDATE_FAIL, "密码错误");
+        }
     }
 
 
@@ -114,13 +131,13 @@ public class UserServiceImpl implements UserService {
 
 
     public List<Cart> getCart() {
-        // TODO: implement
+        /**调用*/
         return null;
     }
 
 
     public List<Order> getOrder() {
-        // TODO: implement
+        /**调用*/
         return null;
     }
 

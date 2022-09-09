@@ -9,19 +9,15 @@ import java.util.*;
 @Mapper
 public interface AddressDao {
 
-   ResultVO add(Address address);
+   void add(Address address);
 
-   ResultVO delete(Integer addressId);
+   void delete(Integer addressId);
 
    Address queryId(Integer addressId);
 
-   ResultVO update(Address address);
-
-   void batchAdd(List<Address> addressList);
+   void update(Address address);
 
    void batchDelete(List list);
-
-   List<Address> pageQuery();
 
    List<Address> queryCondition();
 

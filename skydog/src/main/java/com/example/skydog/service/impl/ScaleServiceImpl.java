@@ -8,10 +8,11 @@ import com.example.skydog.dao.ScaleDao;
 import com.example.skydog.module.entity.Scale;
 import com.example.skydog.service.ScaleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.*;
-
+@Service
 /** @pdOid d0de55f6-d1e4-43be-8c98-20c03e75263d */
 public class ScaleServiceImpl implements ScaleService {
    /** @param scale

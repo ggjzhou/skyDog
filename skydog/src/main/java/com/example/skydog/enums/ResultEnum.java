@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 public enum ResultEnum {
-    SUCCESS(200, "操作成功"),
-    FAIL(201, "操作失败"),
+    SUCCESS(200, "成功"),
+    FAIL(201, "失败"),
     ADD_SUCCESS(202, "添加成功"),
     ADD_FAIL(203, "添加失败"),
     UPDATE_SUCCESS(204, "修改成功"),

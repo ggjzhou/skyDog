@@ -8,6 +8,7 @@
         cartId,
         addressId,
         productId,
+        scaleId,
         orderStatus,
         createTime,
         payTime,
@@ -17,6 +18,7 @@
         #{cartId},
         #{addressId},
         #{productId},
+        #{scaleId},
         #{orderStatus},
         #{createTime},
         #{payTime},
@@ -33,6 +35,7 @@
         <result column="cartId" property="cartId" jdbcType="int"/>
         <result column="addressId" property="addressId" jdbcType="int"/>
         <result column="productId" property="productId" jdbcType="int"/>
+        <result column="scaleId" property="scaleId" jdbcType="int"/>
         <result column="orderStatus" property="orderStatus" jdbcType="VARCHAR"/>
         <result column="createTime" property="createTime" jdbcType="datetime"/>
         <result column="ordertime" property="ordertime" jdbcType="datetime"/>
@@ -55,6 +58,9 @@
             </if>
             <if test="productId !=null">
                 productId=#{productId}
+            </if>
+            <if test="scaleId !=null">
+                scaleId=#{scaleId}
             </if>
             <if test="orderStatus !=null">
                 orderStatus=#{orderStatus}
@@ -89,6 +95,9 @@
          </if>
          <if test="productId !=null">
              productId=#{productId}
+         </if>
+         <if test="scaleId !=null">
+             scaleId=#{scaleId}
          </if>
          <if test="orderStatus !=null">
              orderStatus=#{orderStatus}
