@@ -22,6 +22,4 @@ public class Evaluate {
     private String grade;
     private String comment;
     private Date evaluateDate;
-
-
 }
