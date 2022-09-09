@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com/example/skydog/dao/ProductDao">
+<mapper namespace="com.example.skydog.dao.ProductDao">
     <!-- 结果集-->
     <resultMap id="BaseProductMap" type="com/example/skydog/module/entity/Product">
         <id column="productId" property="productId"/>

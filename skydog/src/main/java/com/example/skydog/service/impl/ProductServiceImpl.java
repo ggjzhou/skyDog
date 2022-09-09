@@ -9,6 +9,7 @@ import com.example.skydog.module.vo.Pages;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * Author:甘舟
  * Data:2022/9/7
  */
+@Service
 public class ProductServiceImpl implements ProductService {
 
    @Autowired

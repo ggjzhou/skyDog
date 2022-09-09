@@ -13,7 +13,7 @@ import java.util.List;
  * Author:甘舟
  * Data:2022/9/7
  */
-@Service
+
 public interface ProductService {
 
    ResultVO add(Product product);
