@@ -18,7 +18,7 @@
         )
     </insert>
 <!--    删除商品规格-->
-    <delete id="delete" parameterType="java.lang.Integer">
+    <delete id="delete" parameterType="int">
     delete from tb_scale where scaleId=#{scaleid}
     </delete>
 <!--  更改商品规格-->
@@ -48,11 +48,11 @@
     select *from tb_scale where scaleId=#{scaleId}
     </select>
     <resultMap id="Query" type="com.example.skydog.module.entity.Scale">
-        <id column="scaleId" property="scaleId" jdbcType="int"/>
-        <result column="productId" property="productId" jdbcType="int"/>
-        <result column="productScale" property="productScale"  jdbcType="VARCHAR"/>
-        <result column="productScaleStock" property="productScaleStock" jdbcType="int"/>
-        <result column="productScalePrice" property="productScalePrice" jdbcType="double"/>
+        <id column="scaleId" property="scaleId" />
+        <result column="productId" property="productId" />
+        <result column="productScale" property="productScale"  />
+        <result column="productScaleStock" property="productScaleStock" />
+        <result column="productScalePrice" property="productScalePrice" />
     </resultMap>
 
 <!--    按条件查询-->

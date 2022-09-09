@@ -27,6 +27,6 @@ public interface AdminDao {
    Admin queryId(Integer id);
    /** @param admin
     * @pdOid 3f52c7a6-7c3e-48c0-a44e-1c6ddfe846cf */
-   List queryCondition(Admin admin);
+   List<Admin> queryCondition(Admin admin);
 
 }
