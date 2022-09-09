@@ -1,10 +1,10 @@
 #连接数据库
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_skyDog?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/db_skydog?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
     username: root
-    password: 123456
+    password: root
     type: com.zaxxer.hikari.HikariDataSource # 数据池
     hikari:
       # 池中维护的最小连接数
@@ -60,7 +60,7 @@ spring:
 #整合mybatis
 mybatis:
   #加载实体类
-  type-aliases-package: com.example.springdemo.module.entity
+  type-aliases-package: com.example.skydog.module.entity
   #映射文件
   mapper-locations: mapper/*Mapper.xml
   #输出日志
@@ -68,7 +68,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 server:
-  port: 8888
+  port: 8088
 
 
 
