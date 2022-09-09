@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com/example/skydog/dao/ProductDao.java">
+<mapper namespace="com/example/skydog/dao/ProductDao">
     <!-- 结果集-->
     <resultMap id="BaseProductMap" type="com/example/skydog/module/entity/Product">
         <id column="productId" property="productId"/>
@@ -18,6 +18,7 @@
     <resultMap id="ProductDtoMap"
                extends="BaseProductMap"
                type="com/example/skydog/module/dto/ProductDto">
+        <result column="categoryName" property="categoryName"/>
         <result column="productScale" property="productScale"/>
         <result column="productScaleStock" property="productScaleStock"/>
         <result column="productScalePrice" property="productScalePrice"/>
@@ -30,7 +31,7 @@
     <insert id="add">
         insert into tb_product
         values(#{productId},#{userId},#{adminId},#{categoryId},#{productName},#{productPrice},#{productDec}
-              ,#{productStock},#{productStatus},#{productSale},#{productGrade}
+              ,#{productStatus},#{productSale},#{productGrade}
             )
     </insert>
     <!--
@@ -42,7 +43,7 @@
         <foreach collection="list" item="product" separator=";">
             insert into tb_product
             values(#{productId},#{userId},#{adminId},#{categoryId},#{productName},
-                   #{productPrice},#{productDec},#{productStock},
+                   #{productPrice},#{productDec},
                    #{productStatus},#{productSale},#{productGrade}
             )
         </foreach>
@@ -81,9 +82,6 @@
         </if>
         <if test="productDec != null">
             #{productDec},
-        </if>
-        <if test="productStock != null">
-            #{productStock}
         </if>
         <if test="productStatus != null">
             #{productStatus}
@@ -126,9 +124,6 @@
             <if test="productDec != null">
                 and p.productDec = #{productDec},
             </if>
-            <if test="productStock != null">
-                and p.productStock = #{productStock}
-            </if>
             <if test="productStatus != null">
                 and p.productStatus = #{productStatus}
             </if>
@@ -156,4 +151,13 @@
             limit #{start},#{pageSize}
         </if>
     </select>
+    <!--    通过种类查询-->
+    <select id="queryByCategory" resultMap="ProductDtoMap">
+        select p.*,c.categoryName from tb_product p
+        LEFT JOIN tb_category c
+        ON(p.categoryId = c.categoryId)
+        where c.categoryName = #{categoryName}
+    </select>
+
+
 </mapper>

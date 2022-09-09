@@ -1,9 +1,12 @@
 package com.example.skydog.service.impl;
 
 import com.example.skydog.dao.ProductDao;
+import com.example.skydog.enums.ResultEnum;
+import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.PageBeans;
 import com.example.skydog.module.vo.Pages;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,24 +25,47 @@ public class ProductServiceImpl implements ProductService {
     * 添加商品
     * @param product
     */
-   public void add(Product product) {
+   public ResultVO add(Product product) {
+
       productDao.add(product);
+      List<Product> products = productDao.queryCondition(product);
+      //判断下是否添加成功
+      if(products.isEmpty()){
+         return new ResultVO(ResultEnum.ADD_FAIL);
+      }else {
+         return new ResultVO(ResultEnum.ADD_SUCCESS,products.get(0));
+      }
    }
 
    /**
     * 修改商品
     * @param product
     */
-   public void update(Product product) {
+   public ResultVO update(Product product) {
       productDao.update(product);
+      List<Product> products = productDao.queryCondition(product);
+      //判断下是否修改成功
+      if(products.isEmpty()){
+         return new ResultVO(ResultEnum.UPDATE_FAIL);
+      }else {
+         //成功就把修改后的数据返回
+         return new ResultVO(ResultEnum.UPDATE_SUCCESS,products.get(0));
+      }
+
    }
 
    /**
     * 删除商品
     * @param productId
     */
-   public void delete(Integer productId) {
+   public ResultVO delete(Integer productId) {
       productDao.delete(productId);
+      //判断是否删除成功
+      if(productDao.queryId(productId).getProductId()==null){
+         return new ResultVO(ResultEnum.DELETE_SUCCESS);
+      }else {
+         return new ResultVO(ResultEnum.DELETE_SUCCESS);
+      }
    }
 
    /**
@@ -47,8 +73,14 @@ public class ProductServiceImpl implements ProductService {
     * @param productId
     * @return
     */
-   public Product queryId(Integer productId) {
-      return productDao.queryId(productId);
+   public ResultVO queryId(Integer productId) {
+      Product product = productDao.queryId(productId);
+      if(product.getProductId()==null){
+         return new ResultVO(ResultEnum.FAIL);
+      }else {
+         return new ResultVO(ResultEnum.SUCCESS,product);
+      }
+
    }
 
    /**
@@ -56,12 +88,12 @@ public class ProductServiceImpl implements ProductService {
     * @param product
     * @return
     */
-   public List<Product> queryCondition(Product product) {
+   public ResultVO queryCondition(Product product) {
       List<Product> products = productDao.queryCondition(product);
       if(products.isEmpty()){
-         return null;
+         return new ResultVO(ResultEnum.SUCCESS,"未找到相关商品");
       }else {
-         return productDao.queryCondition(product);
+         return new ResultVO(ResultEnum.SUCCESS,products);
       }
 
    }
@@ -72,7 +104,7 @@ public class ProductServiceImpl implements ProductService {
    }
    
 
-   public List<Product> queryByCategory(Integer categoryId) {
+   public List<Product> queryByCategory(Category category) {
       // TODO: implement
       return null;
    }
