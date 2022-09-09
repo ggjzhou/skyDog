@@ -56,19 +56,19 @@ public class AddressServiceImpl implements AddressService {
         return null;
     }
 
-    public void batchDelete(List list) {
-        // TODO: implement
-    }
-
-
-    public List<Address> pageQuery() {
-        // TODO: implement
-        return null;
-    }
-
-    public List<Address> queryCondition() {
-        // TODO: implement
-        return null;
-    }
+//    public void batchDelete(List list) {
+//        // TODO: implement
+//    }
+//
+//
+//    public List<Address> pageQuery() {
+//        // TODO: implement
+//        return null;
+//    }
+//
+//    public List<Address> queryCondition() {
+//        // TODO: implement
+//        return null;
+//    }
 
 }

@@ -34,10 +34,10 @@ public class AddressController {
         return addressService.delete(addressId);
     }
 
-    @PostMapping("/update")
-    public ResultVO updateAddress(@RequestBody Address address){
-        return addressService.update((address));
-    }
+//    @PostMapping("/update")
+//    public ResultVO updateAddress(@RequestBody Address address){
+//        return addressService.update((address));
+//    }
 
 
     @GetMapping("/queryId/{addressId}")
