@@ -40,6 +40,7 @@ public class CollectController {
             @ApiImplicitParam(name = "collect", value = "收藏对象", dataType = "Collect"),
     })
     public ResultVO addProduct(@RequestBody Collect collect) {
+
         return collectService.add(collect);
     }
 

@@ -8,13 +8,13 @@ import java.util.*;
 
 public interface AddressService {
 
-    void add(Address address);
+    ResultVO add(Address address);
 
-    void delete(Integer addressId);
+    ResultVO delete(Integer addressId);
 
     Address queryId(Integer addressId);
 
-    void update(Address address);
+    ResultVO update(Address address);
 
 
     void batchDelete(List list);
