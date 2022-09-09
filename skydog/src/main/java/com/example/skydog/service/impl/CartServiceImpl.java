@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CartServiceImpl implements CartService {
    @Autowired
-   CartDao cartDao;
+   private CartDao cartDao;
 
    /**
     * 添加购物车

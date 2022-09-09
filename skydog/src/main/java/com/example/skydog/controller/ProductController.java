@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
  * Data:2022/9/7
  */
 
+@Api(tags = "商品管理控制器")
 @RestController
 @RequestMapping("/product")
-@Api(tags = "商品管理控制器")
 public class ProductController {
     @Autowired
     ProductService productService;
@@ -89,7 +89,7 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId", value = "产品id", dataType = "Int"),
     })
-    public ResultVO queryById(@RequestBody Product product) {
+    public ResultVO queryCondition(@RequestBody Product product) {
         return productService.queryCondition(product);
     }
 
@@ -98,7 +98,7 @@ public class ProductController {
      * @param productName
      * @return
      */
-    @GetMapping("/queryByName/{productName}")
+    @PostMapping("/queryByName/{productName}")
     @ApiOperation("商品名查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productName", value = "商品名", dataType = "String"),

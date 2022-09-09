@@ -1,5 +1,6 @@
 package com.example.skydog.service.impl;
 
+
 import com.example.skydog.dao.ProductDao;
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Category;
@@ -10,6 +11,7 @@ import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,10 +20,11 @@ import java.util.List;
  * Data:2022/9/7
  */
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
    @Autowired
-   ProductDao productDao;
+   private ProductDao productDao;
 
    /**
     * 添加商品
