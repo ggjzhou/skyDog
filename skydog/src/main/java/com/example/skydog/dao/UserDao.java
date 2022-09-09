@@ -21,9 +21,9 @@ public interface UserDao {
 
 
 
-    void batchDelete(List list);
+//    void batchDelete(List list);
 
-    List<User> pageQuery();
+//    List<User> pageQuery();
 
 
 }

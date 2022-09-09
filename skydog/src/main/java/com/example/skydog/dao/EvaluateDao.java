@@ -17,11 +17,11 @@ public interface EvaluateDao {
 
     List<Evaluate> queryCondition();
 
-    void update(Evaluate evaluate);
+//    void update(Evaluate evaluate);
 
 
-    void batchDelete(List list);
-
-    List<Evaluate> pageQuery();
+//    void batchDelete(List list);
+//
+//    List<Evaluate> pageQuery();
 
 }

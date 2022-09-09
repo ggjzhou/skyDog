@@ -17,8 +17,8 @@ public interface AddressService {
     ResultVO update(Address address);
 
 
-    void batchDelete(List list);
+//    void batchDelete(List list);
 
-    List<Address> queryCondition();
+//    List<Address> queryCondition();
 
 }

@@ -38,9 +38,9 @@
     </delete>
 
     <!-- 动态修改 -->
-    <update id="update" parameterType="Address">
+<!--    <update id="update" parameterType="Address">-->
 
-    </update>
+<!--    </update>-->
 
     <!-- Id查询 -->
     <select id="queryId" parameterType="int" resultType="Address">
@@ -74,16 +74,16 @@
     <!--        </sql>-->
 
     <!-- 动态模糊查询 -->
-    <select id="queryCondition" resultType="Address">
-         /*select * from tb_address a*/
-        <!-- 查询条件 -->
-        <!--        <include refid="selectActive"/>-->
-    </select>
+<!--    <select id="queryCondition" resultType="Address">-->
+<!--         /*select * from tb_address a*/-->
+<!--        &lt;!&ndash; 查询条件 &ndash;&gt;-->
+<!--        &lt;!&ndash;        <include refid="selectActive"/>&ndash;&gt;-->
+<!--    </select>-->
 
 
-    <delete id="batchDelete" parameterType="List">
+<!--    <delete id="batchDelete" parameterType="List">-->
 
-    </delete>
+<!--    </delete>-->
 
 
 </mapper>

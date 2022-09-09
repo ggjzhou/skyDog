@@ -130,12 +130,12 @@
 
 
 
-    <delete id="batchDelete" parameterType="List">
+<!--    <delete id="batchDelete" parameterType="List">-->
 
-    </delete>
+<!--    </delete>-->
 
-    <select id="pageQuery" parameterType="List">
+<!--    <select id="pageQuery" parameterType="List">-->
 
-    </select>
+<!--    </select>-->
 
 </mapper>

@@ -19,11 +19,11 @@ public interface EvaluateService {
 
     ResultVO update(Evaluate evaluate);
 
-    void batchAdd(List<Evaluate> evaluateList);
+//    void batchAdd(List<Evaluate> evaluateList);
+//
+//    void batchDelete(List list);
 
-    void batchDelete(List list);
-
-    List<Evaluate> pageQuery();
+//    List<Evaluate> pageQuery();
 
     List<Evaluate> queryByGrade(String grade);
 

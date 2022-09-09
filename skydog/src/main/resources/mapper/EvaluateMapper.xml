@@ -36,10 +36,10 @@
         where e.evaluateId = #{evaluateId}
     </delete>
 
-    <!-- 动态修改 -->
-    <update id="update" parameterType="Evaluate">
+<!--    &lt;!&ndash; 动态修改 &ndash;&gt;-->
+<!--    <update id="update" parameterType="Evaluate">-->
 
-    </update>
+<!--    </update>-->
 
     <!-- Id查询 -->
     <select id="queryId" parameterType="int" resultType="Evaluate">
@@ -81,13 +81,13 @@
 
 
 
-    <delete id="batchDelete" parameterType="List">
+<!--    <delete id="batchDelete" parameterType="List">-->
 
-    </delete>
+<!--    </delete>-->
 
-    <select id="pageQuery" parameterType="List">
+<!--    <select id="pageQuery" parameterType="List">-->
 
-    </select>
+<!--    </select>-->
 
 
 </mapper>
