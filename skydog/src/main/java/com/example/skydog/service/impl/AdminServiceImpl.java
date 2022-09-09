@@ -37,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
     * @pdOid 05095324-c8cc-4485-b1dd-ca67b4c213f7 */
    public void update(Admin admin) {
       // TODO: implement
-      admindao.updata(admin);
+      admindao.update(admin);
    }
    
    /** @param id

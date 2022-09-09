@@ -20,7 +20,7 @@ public interface AdminDao {
    void delete(Integer id);
    /** @param admin
     * @pdOid 48b96991-c4b4-4a0b-ac6b-f16cc54e3896 */
-   void updata(Admin admin);
+   void update(Admin admin);
    /** @param id
     * @pdOid 266f47bb-5fea-40f4-95b9-2b9b46975f30 */
    Admin queryId(Integer id);

@@ -143,7 +143,7 @@
             delete from tb_order where orderId=#{orderId}
         </foreach>
     </delete>
-    <select id="pageQuery"></select>
+
 
 
 </mapper>

@@ -33,6 +33,6 @@ public interface OrderDao {
     * @pdOid de48b18c-198c-414f-a571-c76975583369 */
    void batchDelete(List list);
    /** @pdOid c9624d96-7ed3-49d8-9219-7babaad47be8 */
-   List<Order> pageQuery();
+
 
 }
