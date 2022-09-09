@@ -3,11 +3,8 @@ package com.example.skydog.service;
 import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.PageBeans;
-import com.example.skydog.module.vo.Pages;
+import com.example.skydog.module.vo.ProductVo;
 import com.example.skydog.module.vo.ResultVO;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Author:甘舟
@@ -30,7 +27,7 @@ public interface ProductService {
 
    ResultVO queryByCategory(Category category);
 
-   ResultVO queryByPrice(Double productPrice);
+   ResultVO queryByPrice(ProductVo productVo);
 
    ResultVO queryByName(String productName);
 

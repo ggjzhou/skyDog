@@ -1,12 +1,10 @@
 package com.example.skydog.dao;
 
-import com.example.skydog.module.dto.ProductDto;
 import com.example.skydog.module.entity.Cart;
-import com.example.skydog.module.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Author:甘舟

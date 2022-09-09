@@ -2,18 +2,14 @@ package com.example.skydog.controller;
 
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Cart;
-import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.CartService;
-//import com.example.skydog.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Author:甘舟

@@ -1,8 +1,6 @@
 package com.example.skydog.controller;
 
 import com.example.skydog.module.entity.Category;
-import com.example.skydog.module.entity.Product;
-import com.example.skydog.service.CartService;
 import com.example.skydog.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -20,7 +18,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/category")
 @Api(tags = "商品种类管理控制器")
 public class CategoryController {
 
@@ -76,7 +74,7 @@ public class CategoryController {
      * @param category
      * @return
      */
-    @GetMapping("/add")
+    @GetMapping("/update")
     @ApiOperation("修改商品")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "product", value = "产品", dataType = "Product"),

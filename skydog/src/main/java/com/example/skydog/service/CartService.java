@@ -1,11 +1,7 @@
 package com.example.skydog.service;
 
 import com.example.skydog.module.entity.Cart;
-import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.ResultVO;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 /**
  * Author:甘舟
