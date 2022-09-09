@@ -9,7 +9,7 @@
         <result property="productCount" column="productCount"></result>
         <result property="joinTime" column="joinTime"></result>
 
-        <association property="productDto" column="productId" javaType="ProductDto"
+        <association property="productDto" column="productId" javaType="com.example.skydog.module.dto.ProductDto"
                      resultMap="com.example.skydog.module.entity.Product.ProductDtoMap"></association>
     </resultMap>
 

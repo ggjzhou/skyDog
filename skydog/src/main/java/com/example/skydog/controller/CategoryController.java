@@ -21,9 +21,9 @@ import java.util.List;
 @RequestMapping("/category")
 @Api(tags = "商品种类管理控制器")
 public class CategoryController {
-
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
+
 
     /**
      * 根据Id查询
@@ -36,7 +36,7 @@ public class CategoryController {
             @ApiImplicitParam(name = "categoryId", value = "商品种类id", dataType = "Int"),
     })
     public Category queryById(@PathVariable Integer categoryId) {
-        Category category =categoryService.queryId(categoryId);
+        Category category = categoryService.queryId(categoryId);
         return category;
     }
 
@@ -93,7 +93,7 @@ public class CategoryController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
     })
-    public Object queryById(@RequestBody Category category) {
+    public Object queryCondition(@RequestBody Category category) {
         List<Category> products =categoryService.queryCondition(category);
         return products;
     }

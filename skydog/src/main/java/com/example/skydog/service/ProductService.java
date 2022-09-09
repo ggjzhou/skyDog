@@ -5,12 +5,12 @@ import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.PageBeans;
 import com.example.skydog.module.vo.ProductVo;
 import com.example.skydog.module.vo.ResultVO;
+import org.springframework.stereotype.Service;
 
 /**
  * Author:甘舟
  * Data:2022/9/7
  */
-
 public interface ProductService {
 
    ResultVO add(Product product);

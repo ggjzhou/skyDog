@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "购物车管理控制器")
 public class CartController {
     @Autowired
-    CartService cartService;
+    private CartService cartService;
 
     /**
      * 根据Id查询
