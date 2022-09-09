@@ -5,7 +5,7 @@ import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.PageBeans;
-import com.example.skydog.module.vo.Pages;
+import com.example.skydog.module.vo.ProductVo;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,19 +99,20 @@ public class ProductServiceImpl implements ProductService {
       }
 
    }
-   
+
 
    public ResultVO queryByPage(PageBeans pageBeans){
       return null;
    }
-   
+
 
    public ResultVO queryByCategory(Category category) {
       productDao.queryByCategory(category);
       return null;
    }
 
-   public ResultVO queryByPrice(Double productPrice) {
+   public ResultVO queryByPrice(ProductVo productVo) {
+      productDao.queryCondition(productVo);
       // TODO: implement
       return null;
    }

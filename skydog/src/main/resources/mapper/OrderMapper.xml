@@ -31,15 +31,15 @@
     </delete>
 <!--  根据id查询  -->
     <resultMap id="Query" type="com.example.skydog.module.entity.Order">
-        <id column="orderId" property="orderId" jdbcType="int"/>
-        <result column="cartId" property="cartId" jdbcType="int"/>
-        <result column="addressId" property="addressId" jdbcType="int"/>
-        <result column="productId" property="productId" jdbcType="int"/>
-        <result column="scaleId" property="scaleId" jdbcType="int"/>
-        <result column="orderStatus" property="orderStatus" jdbcType="VARCHAR"/>
-        <result column="createTime" property="createTime" jdbcType="datetime"/>
-        <result column="ordertime" property="ordertime" jdbcType="datetime"/>
-        <result column="endtime" property="endtime" jdbcType="datetime"/>
+        <id column="orderId" property="orderId" />
+        <result column="cartId" property="cartId" />
+        <result column="addressId" property="addressId" />
+        <result column="productId" property="productId" />
+        <result column="scaleId" property="scaleId" />
+        <result column="orderStatus" property="orderStatus" />
+        <result column="createTime" property="createTime" />
+        <result column="ordertime" property="ordertime"/>
+        <result column="endtime" property="endtime"/>
     </resultMap>
     <select id="queryId" parameterType="java.lang.Integer" resultMap="Query">
     select *from tb_order where orderId=#{orderId}

@@ -3,13 +3,10 @@ package com.example.skydog.service.impl;
 import com.example.skydog.dao.CartDao;
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Cart;
-import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Author:甘舟

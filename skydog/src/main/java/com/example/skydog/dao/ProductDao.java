@@ -4,13 +4,14 @@ import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.*;
+import java.util.List;
+
 /**
  * Author:甘舟
  * Data:2022/9/7
  */
 @Mapper
-public interface ProductDao {
+public interface ProductDao<E> {
 
    void add(Product product);
 
@@ -24,7 +25,7 @@ public interface ProductDao {
 
    Product queryId(Integer productId);
 
-   List<Product> queryCondition(Product product);
+   List<Product> queryCondition(E query);
 
    List<Product> queryByCategory(Category category);
 }

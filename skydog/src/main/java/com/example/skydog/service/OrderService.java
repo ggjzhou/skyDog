@@ -32,7 +32,7 @@ public interface OrderService {
    void batchDelete(List list);
    /** @pdOid b4440b87-c799-4676-9130-526f9176d8df */
    List<Order> pageQuery();
-   /** @param startTime 
+   /** @param startTime
     * @param endTime
     * @pdOid 90203ded-7f59-4887-a060-24b9727ba269 */
    List<Order> queryByBuildTime(Date startTime, Date endTime);

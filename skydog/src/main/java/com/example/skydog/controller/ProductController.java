@@ -116,7 +116,7 @@ public class ProductController {
         return productService.queryByCategory(category);
     }
     @GetMapping("/queryByPrice")
-    @ApiOperation("商品种类查询")
+    @ApiOperation("商品价格查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
     })

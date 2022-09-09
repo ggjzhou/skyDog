@@ -25,7 +25,7 @@ public interface AdminService {
    /** @param admin
     * @pdOid 02b2e231-7522-4685-80b1-a3b03fee32df */
    List<Admin> queryCodition(Admin admin);
-   /** @param adminAcc 
+   /** @param adminAcc
     * @param adminPwd
     * @pdOid 212b69c1-dd4f-4a49-b4f0-6619d36ea451 */
    Admin login(String adminAcc, String adminPwd);

@@ -45,10 +45,10 @@
 
 <!--按主键查询 -->
     <resultMap id="Query" type="com.example.skydog.module.entity.Admin">
-        <id column="adminId" property="adminId" jdbcType="int"/>
-        <result column="adminName" property="adminName" jdbcType="VARCHAR"/>
-        <result column="adminAcc" property="adminAcc"  jdbcType="VARCHAR"/>
-        <result column="adminPwd" property="adminPwd" jdbcType="VARCHAR"/>
+        <id column="adminId" property="adminId" />
+        <result column="adminName" property="adminName"/>
+        <result column="adminAcc" property="adminAcc"  />
+        <result column="adminPwd" property="adminPwd" />
     </resultMap>
 
 
