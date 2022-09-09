@@ -11,7 +11,6 @@ import java.util.List;
  * Data:2022/9/7
  */
 @Mapper
-@Repository
 public interface CartDao {
 
    void add(Cart cart);
