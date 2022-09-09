@@ -5,7 +5,8 @@ package com.example.skydog.dao; /***********************************************
  ***********************************************************************/
 
 import com.example.skydog.module.entity.Admin;
-import org.mapstruct.Mapper;
+import org.apache.ibatis.annotations.Mapper;
+
 
 import java.util.*;
 
