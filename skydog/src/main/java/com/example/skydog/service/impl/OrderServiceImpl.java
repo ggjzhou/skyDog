@@ -82,11 +82,13 @@ public class OrderServiceImpl implements OrderService {
       return orderdao.queryCondition(order);
    }
    
-   /** @param category
+   /** @param productId
     * @pdOid 4b414a23-f933-4343-83c4-93f982423e16 */
-   public List<Order> queryByCategory(String category) {
+   public List<Order> queryByproductId(Integer productId) {
       // TODO: implement
-    return null;
+      Order order=new Order();
+      order.setProductId(productId);
+      return orderdao.queryCondition(order);
    }
    
    /** @param status
