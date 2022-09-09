@@ -1,5 +1,6 @@
 package com.example.skydog.dao;
 
+import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,4 +26,5 @@ public interface ProductDao {
 
    List<Product> queryCondition(Product product);
 
+   List<Product> queryByCategory(Category category);
 }

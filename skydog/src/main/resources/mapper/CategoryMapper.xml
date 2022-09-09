@@ -51,7 +51,7 @@
     </update>
     <sql id="selectActive">
         <where>
-            <if test="productId != null">
+            <if test="categoryId != null">
                 c.categoryId = #{categoryId},
             </if>
             <if test="categoryName != null">
