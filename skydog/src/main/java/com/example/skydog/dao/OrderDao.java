@@ -22,7 +22,7 @@ public interface OrderDao {
     * @pdOid 308c98fb-2b49-4c26-86ab-a748ebc246fc */
    List<Order> queryId(int userId);
    /** @pdOid 4ca20190-d99a-454a-bc87-0b7f1172bbcd */
-   List<Order> queryCondition();
+   List<Order> queryCondition(Order order);
    /** @param order
     * @pdOid 7872ca4d-7fea-4be9-be00-9c354d6e07d6 */
    void update(Order order);

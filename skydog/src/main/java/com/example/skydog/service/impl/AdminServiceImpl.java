@@ -6,6 +6,7 @@ package com.example.skydog.service.impl; /**************************************
 
 import com.example.skydog.dao.AdminDao;
 import com.example.skydog.module.entity.Admin;
+import com.example.skydog.module.entity.User;
 import com.example.skydog.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -52,19 +53,17 @@ public class AdminServiceImpl implements AdminService {
      return admindao.queryCondition(admin);
    }
    
-   /** @param adminAcc 
-    * @param adminPwd
-    * @pdOid c378a6a3-a1c5-47c7-a457-9c6ff0774c45 */
-   public Boolean login(String adminAcc, String adminPwd) {
-      // TODO: implement
-      Admin admin=new Admin();
-      admin.setAdminAcc(adminAcc);
-      admin.setAdminPwd(adminPwd);
-    if(admindao.queryCondition(admin)==null){
-       return false;
-    }else{
-       return true;
-    }
+   /*登录模块*/
+   public Admin login(String adminAcc, String adminPwd) {
+      Admin a = new Admin();
+      a.setAdminName(adminAcc);
+      List<Admin> list = admindao.queryCondition(a);
+      if (list == null || list.isEmpty()) {
+         return null;
+      } else if(list.get(0).getAdminPwd().equals(adminPwd)) {
+         return a;
+      }else
+         return null;
    }
 
 }
