@@ -8,12 +8,32 @@
     <!-- 添加 -->
     <insert id="add" parameterType="Evaluate">
         insert into tb_evaluate
+        <trim prefix="  values ("
+              suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="productId != null">
+                #{productId},
+            </if>
+            <if test="grade != null">
+                #{grade},
+            </if>
+            <if test="comment != null">
+                #{comment},
+            </if>
+            <if test="evaluateDate != null">
+                #{evaluateDate},
+            </if>
+        </trim>
     </insert>
 
 
     <!-- 删除 -->
     <delete id="delete" parameterType="int">
-
+        delete
+        from tb_evaluate e
+        where e.evaluateId = #{evaluateId}
     </delete>
 
     <!-- 动态修改 -->
@@ -23,7 +43,9 @@
 
     <!-- Id查询 -->
     <select id="queryId" parameterType="int" resultType="Evaluate">
-
+        select *
+        from tb_evaluate e
+        where e.evaluateId = #{evaluateId}
     </select>
 
 
@@ -51,8 +73,8 @@
     <!--    </sql>-->
 
     <!-- 动态模糊查询 -->
-    <select id="queryCondition"  >
-        select * from tb_address a
+    <select id="queryCondition">
+        select * from tb_evaluate e
         <!-- 查询条件 -->
         <!--        <include refid="selectActive"/>-->
     </select>

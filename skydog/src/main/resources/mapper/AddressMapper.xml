@@ -32,14 +32,14 @@
 
     <!-- 删除 -->
     <delete id="delete" parameterType="int">
-
+        delete
+        from tb_address a
+        where a.addressId = #{addressId}
     </delete>
 
     <!-- 动态修改 -->
     <update id="update" parameterType="Address">
-        delete
-        from tb_address a
-        where a.addressId = #{addressId}
+
     </update>
 
     <!-- Id查询 -->

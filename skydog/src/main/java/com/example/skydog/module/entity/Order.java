@@ -15,6 +15,7 @@ public class Order {
     private Integer orderId;
     private Integer cartId;
     private Integer addressId;
+    private Integer productId;
     private String orderStatus;
     private Date   createTime;
     private Date   payTime;

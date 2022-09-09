@@ -1,24 +1,37 @@
 package com.example.skydog.service.impl;
 
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Evaluate;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.EvaluateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-
+@Service
+@Transactional
 public class EvaluateServiceImpl implements EvaluateService {
 
-   public void add(Evaluate evaluate) {
-      // TODO: implement
+
+   @Autowired
+   private EvaluateService evaluateService;
+
+   public ResultVO add(Evaluate evaluate) {
+//      evaluateService.add(evaluate);
+//      return new ResultVO(ResultEnum.ADD_SUCCESS);
+      return null;
    }
    
 
-   public void delete(int evaluateId) {
+   public ResultVO delete(Integer evaluateId) {
       // TODO: implement
+      return null;
    }
    
 
-   public List<Evaluate> queryId(int evaluateId) {
+   public Evaluate queryId(Integer evaluateId) {
       // TODO: implement
       return null;
    }
@@ -30,8 +43,9 @@ public class EvaluateServiceImpl implements EvaluateService {
    }
    
 
-   public void update(Evaluate evaluate) {
+   public ResultVO update(Evaluate evaluate) {
       // TODO: implement
+      return null;
    }
    
 

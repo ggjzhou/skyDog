@@ -28,6 +28,6 @@ public interface AdminService {
    /** @param adminAcc 
     * @param adminPwd
     * @pdOid 212b69c1-dd4f-4a49-b4f0-6619d36ea451 */
-   Boolean login(String adminAcc, String adminPwd);
+   Admin login(String adminAcc, String adminPwd);
 
 }

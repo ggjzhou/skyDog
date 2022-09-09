@@ -20,7 +20,7 @@ public interface OrderService {
     * @pdOid de0e132f-e3cb-44f3-80fa-020604713e0b */
    List<Order> queryId(int userId);
    /** @pdOid 37033ed7-8209-4654-adf6-d30bdcd25685 */
-   List<Order> queryCondition();
+   List<Order> queryCondition(Order order);
    /** @param order
     * @pdOid 98580a56-cbcb-4be9-a579-c2a935d56d52 */
    void update(Order order);
@@ -36,9 +36,9 @@ public interface OrderService {
     * @param endTime
     * @pdOid 90203ded-7f59-4887-a060-24b9727ba269 */
    List<Order> queryByBuildTime(Date startTime, Date endTime);
-   /** @param category
+   /** @param productId
     * @pdOid 12894f9d-0c54-4010-9587-9b8ccc161e11 */
-   List<Order> queryByCategory(String category);
+   List<Order> queryByproductId(Integer productId);
    /** @param status
     * @pdOid ecf6db25-7ad3-4e4f-801c-e8550192f0cd */
    List<Order> queryByStatus(String status);

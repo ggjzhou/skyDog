@@ -3,6 +3,7 @@ package com.example.skydog.service;
 import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.entity.User;
+import com.example.skydog.module.vo.ResultVO;
 
 import java.util.*;
 
@@ -11,15 +12,17 @@ public interface UserService {
 
    void add(User user);
 
-   void delete(Integer userId);
+   ResultVO delete(Integer userId);
 
-   void update(User user);
+   ResultVO update(User user);
 
-   User queryId(Integer userId);
+   ResultVO queryId(Integer userId);
 
-   User register(User user);
+   ResultVO register(User user);
 
-   User login(User user);
+   ResultVO login(User user);
+
+   ResultVO queryCondition(User user);
 
    void batchAdd(List<User> userList);
 
@@ -29,7 +32,7 @@ public interface UserService {
 
    void updatePassword(String oldPassword, String newPassword);
 
-   void updateAvatar();
+   void updateAvatar();//更新头像
 
    List<Cart> getCart();
 
