@@ -1,7 +1,9 @@
 package com.example.skydog.controller;
 
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Category;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.CartService;
 import com.example.skydog.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -29,14 +31,13 @@ public class CartController {
      * @param cartId
      * @return
      */
-    @GetMapping("/queryById/{categoryId}")
+    @GetMapping("/queryById/{cartId}")
     @ApiOperation("id查询购物车")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "categoryId", value = "商品种类id", dataType = "Int"),
+            @ApiImplicitParam(name = "cartId", value = "购物车id", dataType = "Int"),
     })
-    public Cart queryById(@PathVariable Integer cartId) {
-        Cart cart =cartService.queryId(cartId);
-        return cart;
+    public ResultVO queryById(@PathVariable Integer cartId) {
+        return cartService.queryId(cartId);
     }
 
     /**
@@ -47,21 +48,21 @@ public class CartController {
     @GetMapping("/add")
     @ApiOperation("添加购物车")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
+            @ApiImplicitParam(name = "cart", value = "购物车", dataType = "cart"),
     })
-    public Cart add(@RequestBody Cart cart) {
+    public ResultVO add(@RequestBody Cart cart) {
         cartService.add(cart);
-        return cart;
+        return new ResultVO(ResultEnum.ADD_SUCCESS);
     }
     /**
-     * 删除商品
+     * 删除购物车
      * @param cartId
      * @return
      */
-    @GetMapping("/delete/{categoryId}")
+    @GetMapping("/delete/{cartId}")
     @ApiOperation("删除购物车")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "categoryId", value = "商品种类id", dataType = "Int"),
+            @ApiImplicitParam(name = "cartId", value = "购物车id", dataType = "Int"),
     })
     public Object delete(@PathVariable Integer cartId) {
         cartService.delete(cartId);
@@ -96,4 +97,17 @@ public class CartController {
 //        List<Cart> carts =cartService.queryCondition(cart);
 //        return carts;
 //    }
+    /**
+     * 获取用户购物车
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getMyCart/{userId}")
+    @ApiOperation("获取用户购物车")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Int"),
+    })
+    public ResultVO getMyCart(@PathVariable Integer userId) {
+        return cartService.getMyCart(userId);
+    }
 }

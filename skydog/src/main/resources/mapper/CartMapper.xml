@@ -107,7 +107,10 @@
         <include refid="selectActive"/>
     </select>
     <!--    查询自己购物车-->
-    <select id="getMyCart">
-
+    <select id="getMyCart" resultMap="cartMap">
+        select c.*,p.*,s.* from tb_user u
+        LEFT JOIN tb_cart c ON (u.userId = c.userId)
+        LEFT JOIN tb_product p ON (c.productId = p.productId)
+        LEFT JOIN tb_scale s ON (c.scaleId = s.scaleId)
     </select>
 </mapper>

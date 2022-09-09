@@ -1,8 +1,10 @@
 package com.example.skydog.service.impl;
 
 import com.example.skydog.dao.CartDao;
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Product;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,16 +32,35 @@ public class CartServiceImpl implements CartService {
       cartDao.update(cart);
    }
 
+   /**
+    * 删除购物车
+    * @param cartId
+    */
    public void delete(Integer cartId) {
       cartDao.delete(cartId);
    }
 
-   public Cart queryId(Integer cartId) {
-      return cartDao.queryId(cartId);
+   /**
+    * id查询购物车
+    * @param cartId
+    * @return
+    */
+   public ResultVO queryId(Integer cartId) {
+
+      return new ResultVO(ResultEnum.SUCCESS,cartDao.queryId(cartId));
    }
 
-   public List<Cart> queryCondition(Cart cart) {
-      return cartDao.queryCondition(cart);
+   public ResultVO queryCondition(Cart cart) {
+
+      return new ResultVO(ResultEnum.SUCCESS,cartDao.queryCondition(cart));
    }
 
+   /**
+    * 查询用户的购物车
+    * @param userId
+    * @return
+    */
+   public ResultVO getMyCart(Integer userId){
+      return new ResultVO(ResultEnum.SUCCESS,cartDao.getMyCart(userId));
+   }
 }

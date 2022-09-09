@@ -99,25 +99,34 @@ public class ProductServiceImpl implements ProductService {
    }
    
 
-   public Pages<Product> queryByPage(PageBeans pageBeans){
+   public ResultVO queryByPage(PageBeans pageBeans){
       return null;
    }
    
 
-   public List<Product> queryByCategory(Category category) {
+   public ResultVO queryByCategory(Category category) {
+      productDao.queryByCategory(category);
+      return null;
+   }
+
+   public ResultVO queryByPrice(Double productPrice) {
       // TODO: implement
       return null;
    }
 
-   public List<Product> queryByPrice(Double productPrice) {
-      // TODO: implement
-      return null;
-   }
-
-   public List<Product> queryByName(String productName) {
+   /**
+    * 根据商品名查询
+    * @param productName
+    * @return
+    */
+   public ResultVO queryByName(String productName) {
       Product product = new Product();
       product.setProductName(productName);
-      return productDao.queryCondition(product);
+      if(productDao.queryCondition(product).isEmpty()){
+         return new ResultVO(ResultEnum.FAIL,"未查询到商品");
+      }else{
+         return new ResultVO(ResultEnum.SUCCESS,productDao.queryCondition(product));
+      }
    }
 
 }

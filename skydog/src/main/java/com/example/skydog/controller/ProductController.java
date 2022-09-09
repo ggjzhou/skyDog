@@ -1,5 +1,6 @@
 package com.example.skydog.controller;
 
+import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.ProductService;
@@ -10,9 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Author:甘舟
@@ -45,7 +43,7 @@ public class ProductController {
      * @param product
      * @return
      */
-    @GetMapping("/add")
+    @PostMapping("/add")
     @ApiOperation("添加商品")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "product", value = "产品", dataType = "Product"),
@@ -72,7 +70,7 @@ public class ProductController {
      * @param product
      * @return
      */
-    @GetMapping("/add")
+    @PostMapping("/update")
     @ApiOperation("修改商品")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "product", value = "产品", dataType = "Product"),
@@ -95,4 +93,34 @@ public class ProductController {
         return productService.queryCondition(product);
     }
 
+    /**
+     * 商品名查询
+     * @param productName
+     * @return
+     */
+    @GetMapping("/queryByName/{productName}")
+    @ApiOperation("商品名查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "productName", value = "商品名", dataType = "String"),
+    })
+    public ResultVO queryByName(@PathVariable String productName) {
+        return productService.queryByName(productName);
+    }
+
+    @GetMapping("/queryByCategory")
+    @ApiOperation("商品种类查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
+    })
+    public ResultVO queryByCategory(@RequestBody Category category) {
+        return productService.queryByCategory(category);
+    }
+    @GetMapping("/queryByPrice")
+    @ApiOperation("商品种类查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
+    })
+    public ResultVO queryByPrice(@RequestBody Category category) {
+        return productService.queryByCategory(category);
+    }
 }

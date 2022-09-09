@@ -26,12 +26,12 @@ public interface ProductService {
 
    ResultVO queryCondition(Product product);
 
-   Pages<Product> queryByPage(PageBeans pageBeans);
+   ResultVO queryByPage(PageBeans pageBeans);
 
-   List<Product> queryByCategory(Category category);
+   ResultVO queryByCategory(Category category);
 
-   List<Product> queryByPrice(Double productPrice);
+   ResultVO queryByPrice(Double productPrice);
 
-   List<Product> queryByName(String productName);
+   ResultVO queryByName(String productName);
 
 }

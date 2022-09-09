@@ -2,6 +2,7 @@ package com.example.skydog.service;
 
 import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Product;
+import com.example.skydog.module.vo.ResultVO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,8 +20,9 @@ public interface CartService {
 
    void delete(Integer cartId);
 
-   Cart queryId(Integer cartId);
+   ResultVO queryId(Integer cartId);
 
-   List<Cart> queryCondition(Cart cart);
+   ResultVO queryCondition(Cart cart);
 
+   ResultVO getMyCart(Integer userId);
 }
