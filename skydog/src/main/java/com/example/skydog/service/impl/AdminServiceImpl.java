@@ -9,10 +9,11 @@ import com.example.skydog.module.entity.Admin;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-
+@Service
 /** @pdOid be67da20-ea78-47c7-9f65-85aff7b0bad6 */
 public class AdminServiceImpl implements AdminService {
    /** @param admin
