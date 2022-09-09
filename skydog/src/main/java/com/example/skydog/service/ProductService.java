@@ -1,8 +1,10 @@
 package com.example.skydog.service;
 
+import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.PageBeans;
 import com.example.skydog.module.vo.Pages;
+import com.example.skydog.module.vo.ResultVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,19 +16,19 @@ import java.util.List;
 @Service
 public interface ProductService {
 
-   void add(Product product);
+   ResultVO add(Product product);
 
-   void update(Product product);
+   ResultVO update(Product product);
 
-   void delete(Integer productId);
+   ResultVO delete(Integer productId);
 
-   Product queryId(Integer productId);
+   ResultVO queryId(Integer productId);
 
-   List<Product> queryCondition(Product product);
+   ResultVO queryCondition(Product product);
 
    Pages<Product> queryByPage(PageBeans pageBeans);
 
-   List<Product> queryByCategory(Integer categoryId);
+   List<Product> queryByCategory(Category category);
 
    List<Product> queryByPrice(Double productPrice);
 

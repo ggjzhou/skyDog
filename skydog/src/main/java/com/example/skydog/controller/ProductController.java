@@ -1,6 +1,7 @@
 package com.example.skydog.controller;
 
 import com.example.skydog.module.entity.Product;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,9 +36,8 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId", value = "产品id", dataType = "Int"),
     })
-    public Product queryById(@PathVariable Integer productId) {
-        Product product =productService.queryId(productId);
-        return product;
+    public ResultVO queryById(@PathVariable Integer productId) {
+        return productService.queryId(productId);
     }
 
     /**
@@ -50,9 +50,8 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "product", value = "产品", dataType = "Product"),
     })
-    public Product add(@RequestBody Product product) {
-        productService.add(product);
-        return product;
+    public ResultVO add(@RequestBody Product product) {
+        return productService.add(product);
     }
     /**
      * 删除商品
@@ -64,9 +63,8 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId", value = "产品id", dataType = "Int"),
     })
-    public Object delete(@PathVariable Integer productId) {
-        productService.delete(productId);
-        return true;
+    public ResultVO delete(@PathVariable Integer productId) {
+        return productService.delete(productId);
     }
 
     /**
@@ -79,9 +77,8 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "product", value = "产品", dataType = "Product"),
     })
-    public Product update(@RequestBody Product product) {
-        productService.update(product);
-        return product;
+    public ResultVO update(@RequestBody Product product) {
+        return productService.update(product);
     }
 
     /**
@@ -94,9 +91,8 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId", value = "产品id", dataType = "Int"),
     })
-    public Object queryById(@RequestBody Product product) {
-        List<Product> products =productService.queryCondition(product);
-        return products;
+    public ResultVO queryById(@RequestBody Product product) {
+        return productService.queryCondition(product);
     }
 
 }

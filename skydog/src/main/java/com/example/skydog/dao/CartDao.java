@@ -1,5 +1,6 @@
 package com.example.skydog.dao;
 
+import com.example.skydog.module.dto.ProductDto;
 import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,5 +29,7 @@ public interface CartDao {
    Cart queryId(Integer cartId);
 
    List<Cart> queryCondition(Cart cart);
+
+   List<Cart> getMyCart(Integer userId);
 
 }
