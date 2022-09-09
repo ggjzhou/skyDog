@@ -54,7 +54,7 @@ public class ScaleController {
             @ApiImplicitParam(name = "scale", value = "规格", dataType = "Scale"),
     })
     public Scale update(@RequestBody Scale scale) {
-        scaleService.updata(scale);
+        scaleService.update(scale);
         return scale;
     }
     /*
