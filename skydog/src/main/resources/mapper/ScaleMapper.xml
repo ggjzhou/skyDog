@@ -1,5 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
+<mapper namespace="com.example.skydog.dao.ScaleDao">
+<!--   添加商品规格-->
+    <insert id="add">
+        insert into table_scale{
+        scaleId,
+        productId,
+        productScale,
+        productScaleStock,
+        productScalePrice,
+        }values(
+        #{scaleId},
+         #{productId},
+          #{productScale},
+           #{productScaleStock},
+            #{ productScalePrice},
+        )
+    </insert>
+<!--    删除商品规格-->
+    <delete id="delete" parameterType="java.lang.Integer">
+    delete from tb_scale where scaleId=#{scaleid}
+    </delete>
+<!--  更改商品规格-->
+    <update id="update" parameterType="com.example.skydog.module.entity.Scale">
+        update tb_scale
+        <set>
+            <if test="scaleId != null">
+                scaleId=#{scaleId,jdbcType=int}
+            </if>
+            <if test="productId != null">
+                productId=#{productId,jdbcType=int}
+            </if>
+            <if test="productScale != null">
+                productScale=#{productScale,jdbcType=varchar}
+            </if>
+            <if test="productScaleStock != null">
+                productScaleStock=#{productScaleStock,jdbcType=int}
+            </if>
+            <if test="productScalePrice != null">
+                productScalePrice=#{productScalePrice,jdbcType=double}
+            </if>
+        </set>
+    </update>
+
+<!--    按id查询-->
+    <select id="queryId" parameterType="java.lang.Integer" resultMap="Query">
+    select *from tb_scale where scaleId=#{scaleId}
+    </select>
+    <resultMap id="Query" type="com.example.skydog.module.entity.Scale">
+        <id column="scaleId" property="scaleId" jdbcType="int"/>
+        <result column="productId" property="productId" jdbcType="int"/>
+        <result column="productScale" property="productScale"  jdbcType="VARCHAR"/>
+        <result column="productScaleStock" property="productScaleStock" jdbcType="int"/>
+        <result column="productScalePrice" property="productScalePrice" jdbcType="double"/>
+    </resultMap>
+
+<!--    按条件查询-->
+    <sql id="selectActive">
+        <where>
+            <if test="scaleId != null">
+                scaleId=#{scaleId}
+            </if>
+            <if test="productId !=null">
+                productId=#{productId}
+            </if>
+            <if test="productScale !=null">
+                productScale=#{productScale}
+            </if>
+            <if test="productScaleStock !=null">
+                productScaleStock=#{productScaleStock}
+            </if>
+            <if test="productScalePrice !=null">
+                productScalePrice=#{productScalePrice}
+            </if>
+
+        </where>
+    </sql>
+
+
+    <select id="queryCondition" parameterType="Scale" resultMap="Query">
+        select *from tb_scale
+        <include refid="selectActive"/>
+    </select>
+
 
 </mapper>
