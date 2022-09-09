@@ -24,17 +24,4 @@ public class User {
     private String gender;
     private String IDCard;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", nick='" + nick + '\'' +
-                ", phone='" + phone + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", gender='" + gender + '\'' +
-                ", IDCard='" + IDCard + '\'' +
-                '}';
-    }
 }

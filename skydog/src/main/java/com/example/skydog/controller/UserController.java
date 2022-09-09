@@ -24,15 +24,13 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public User login(@RequestBody User user) {
-//        ResultVO resultVO = new ResultVO();
-//        resultVO.ResultVOa();
+    public ResultVO login(@RequestBody User user) {
         return userService.login(user);
     }
 
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
+    public ResultVO register(@RequestBody User user) {
         return userService.register(user);
     }
 

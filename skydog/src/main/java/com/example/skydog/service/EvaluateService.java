@@ -2,33 +2,33 @@ package com.example.skydog.service;
 
 
 import com.example.skydog.module.entity.Evaluate;
+import com.example.skydog.module.vo.ResultVO;
 
 import java.util.*;
 
 
 public interface EvaluateService {
 
-   void add(Evaluate evaluate);
+    ResultVO add(Evaluate evaluate);
 
-   void delete(int evaluateId);
+    ResultVO delete(Integer evaluateId);
 
-   List<Evaluate> queryId(int evaluateId);
+    Evaluate queryId(Integer evaluateId);
 
+    List<Evaluate> queryCondition();
 
-   List<Evaluate> queryCondition();
+    ResultVO update(Evaluate evaluate);
 
-   void update(Evaluate evaluate);
+    void batchAdd(List<Evaluate> evaluateList);
 
-   void batchAdd(List<Evaluate> evaluateList);
+    void batchDelete(List list);
 
-   void batchDelete(List list);
+    List<Evaluate> pageQuery();
 
-   List<Evaluate> pageQuery();
+    List<Evaluate> queryByGrade(String grade);
 
-   List<Evaluate> queryByGrade(String grade);
+    List<Evaluate> queryByImg();
 
-   List<Evaluate> queryByImg();
-
-   List<Evaluate> queryByVideo();
+    List<Evaluate> queryByVideo();
 
 }

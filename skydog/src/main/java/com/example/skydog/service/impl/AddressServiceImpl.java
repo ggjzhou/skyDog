@@ -45,9 +45,11 @@ public class AddressServiceImpl implements AddressService {
     public ResultVO update(Address address) {
         Address address1 = new Address();
         address1.setAddressId(address.getAddressId());
-        if(addressDao.queryId(address.getAddressId())==null){
-            return new ResultVO(ResultEnum.UPDATE_FAIL,"该地址不存在");
-        }else{
+        /**  判断语句错误 */
+        if (addressDao.queryId(address.getAddressId()) == null) {
+
+            return new ResultVO(ResultEnum.UPDATE_FAIL, "该地址不存在");
+        } else {
             addressDao.update(address);
             return new ResultVO(ResultEnum.UPDATE_SUCCESS);
         }
