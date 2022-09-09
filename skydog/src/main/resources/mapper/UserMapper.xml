@@ -18,7 +18,6 @@
 
 
 
-
     <!-- 添加 -->
     <insert id="add" parameterType="User">
         insert into tb_user
@@ -102,19 +101,19 @@
                 u.userId = #{userId}
             </if>
             <if test="userName != null">
-                and u.userName = like
+                and u.userName  like
                 concat('%',#{userName},'%')
             </if>
             <if test="nick != null">
-                and u.nick =like
+                and u.nick like
                 concat('%',#{nick},'%')
             </if>
             <if test="password != null">
-                and u.password =like
+                and u.password like
                 concat('%',#{password},'%')
             </if>
             <if test="phone != null">
-                and u.phone = like
+                and u.phone  like
                 concat('%',#{phone},'%')
             </if>
             <if test="gender != null">

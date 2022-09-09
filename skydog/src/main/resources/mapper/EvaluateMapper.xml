@@ -4,7 +4,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.skydog.dao.EvaluateDao">
+<!--    <resultMap id="evaluateMap" type="Evaluate">-->
 
+<!--    </resultMap>-->
     <!-- 添加 -->
     <insert id="add" parameterType="Evaluate">
         insert into tb_evaluate

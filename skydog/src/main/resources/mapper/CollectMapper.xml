@@ -5,7 +5,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.skydog.dao.CollectDao">
 
-    
+    <!--    <resultMap id="collectMap" type="Collect">-->
+
+
+    <!--    </resultMap>-->
+
 
     <insert id="add" parameterType="Collect">
         insert into tb_collect
@@ -20,18 +24,16 @@
     </delete>
 
     <!--    通过id查询-->
-    <select id="queryId">
+    <select id="queryId" parameterType="int">
         select *
         from tb_collect c
-        where c.productId = #{productId}
+        where c.collectId = #{collectId}
     </select>
 
     <select id="queryAll" parameterType="int">
-        select p.*
-        from tb_user u
-                 left join
-             tb_collect c on (u.userId = c.userId)
-                 left join tb_product p on (u.productId = p.productId)
+        select u.*, c.*, p.*
+        from tb_user u left join tb_collect c on (u.userId = c.userId)
+                    left join tb_product p on (u.productId = p.productId)
         where c.userId = #{userId}
     </select>
 
