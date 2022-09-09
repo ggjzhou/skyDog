@@ -33,9 +33,9 @@ public class ScaleServiceImpl implements ScaleService {
    
    /** @param scale
     * @pdOid 753ce19f-326b-4bc1-b31c-ef3734a636fe */
-   public void updata(Scale scale) {
+   public void update(Scale scale) {
       // TODO: implement
-     scaledao.updata(scale);
+     scaledao.update(scale);
    }
    
    /** @param scaleId

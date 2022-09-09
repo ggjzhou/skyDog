@@ -20,7 +20,7 @@ public interface ScaleDao {
    void delete(Integer scaleId);
    /** @param scale
     * @pdOid 5a14adeb-a9ca-4b36-a2ba-81940a2c03f2 */
-   void updata(Scale scale);
+   void update(Scale scale);
    /** @param scaleId
     * @pdOid b05277d6-2722-4d44-996d-b0e380b6d92a */
    Scale queryId(Integer scaleId);
