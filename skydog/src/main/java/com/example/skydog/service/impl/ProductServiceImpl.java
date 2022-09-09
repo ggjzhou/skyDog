@@ -99,12 +99,12 @@ public class ProductServiceImpl implements ProductService {
       }
 
    }
-   
+
 
    public ResultVO queryByPage(PageBeans pageBeans){
       return null;
    }
-   
+
 
    public ResultVO queryByCategory(Category category) {
       productDao.queryByCategory(category);
