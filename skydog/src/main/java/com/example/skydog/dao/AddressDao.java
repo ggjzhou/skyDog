@@ -15,10 +15,9 @@ public interface AddressDao {
 
    Address queryId(Integer addressId);
 
-//   void update(Address address);
+   void update(Address address);
 
 //   void batchDelete(List list);
 
-//   List<Address> queryCondition();
 
 }

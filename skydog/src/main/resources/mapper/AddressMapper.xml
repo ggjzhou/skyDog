@@ -4,7 +4,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.skydog.dao.AddressDao">
+    <resultMap id="addressMap" type="Address">
 
+        <id property="addressId" column="addressId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="consigneeName" column="consigneeName"></result>
+        <result property="consigneePhone" column="consigneePhone"></result>
+        <result property="zone" column="zone"></result>
+        <result property="fullAddress" column="fullAddress"></result>
+        <result property="isDefault" column="isDefault"></result>
+
+    </resultMap>
     <!-- 添加 -->
     <insert id="add" parameterType="Address">
         insert into tb_address
@@ -25,7 +35,6 @@
             <if test="isDefault != null">
                 #{isDefault},
             </if>
-
         </trim>
     </insert>
 
@@ -37,13 +46,34 @@
         where a.addressId = #{addressId}
     </delete>
 
-    <!-- 动态修改 -->
-<!--    <update id="update" parameterType="Address">-->
+    <!-- 动态更新 -->
+    <update id="update" parameterType="Address">
+        update tb_address a
+        <set>
+            <if test="addressId!=null">
+                a.addressId=#{addressId},
+            </if>
+            <if test="userId!=null">
+                a.userId=#{userId},
+            </if>
+            <if test="consigneeName!=null">
+                a.consigneeName=#{consigneeName},
+            </if>
+            <if test="zone!=null">
+                a.zone=#{zone},
+            </if>
+            <if test="fullAddress!=null">
+                a.fullAddress=#{fullAddress},
+            </if>
+            <if test="isDefault!=null">
+                a.isDefault=#{isDefault},
+            </if>
+        </set>
+        where a.addressId = #{addressId}
+    </update>
 
-<!--    </update>-->
-
-    <!-- Id查询 -->
-    <select id="queryId" parameterType="int" resultType="Address">
+    <!-- 查询所有地址 -->
+    <select id="queryId" parameterType="int" >
         select *
         from tb_address a
         where a.addressId = #{addressId}
@@ -74,16 +104,16 @@
     <!--        </sql>-->
 
     <!-- 动态模糊查询 -->
-<!--    <select id="queryCondition" resultType="Address">-->
-<!--         /*select * from tb_address a*/-->
-<!--        &lt;!&ndash; 查询条件 &ndash;&gt;-->
-<!--        &lt;!&ndash;        <include refid="selectActive"/>&ndash;&gt;-->
-<!--    </select>-->
+    <!--    <select id="queryCondition" resultType="Address">-->
+    <!--         /*select * from tb_address a*/-->
+    <!--        &lt;!&ndash; 查询条件 &ndash;&gt;-->
+    <!--        &lt;!&ndash;        <include refid="selectActive"/>&ndash;&gt;-->
+    <!--    </select>-->
 
 
-<!--    <delete id="batchDelete" parameterType="List">-->
+    <!--    <delete id="batchDelete" parameterType="List">-->
 
-<!--    </delete>-->
+    <!--    </delete>-->
 
 
 </mapper>

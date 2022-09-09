@@ -17,6 +17,8 @@
     </resultMap>
 
 
+
+
     <!-- 添加 -->
     <insert id="add" parameterType="User">
         insert into tb_user

@@ -5,6 +5,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.skydog.dao.CollectDao">
 
+    
+
     <insert id="add" parameterType="Collect">
         insert into tb_collect
         values (#{userId}, #{productId}, #{collectTime})
@@ -14,31 +16,27 @@
         delete
         from tb_collect c
         where c.userId = #{uerId}
-        and c.productId = #{productId}
+          and c.productId = #{productId}
     </delete>
 
-    <select id="queryAll" parameterType="int">
-        select p.*
-        from tb_user u,
-             tb_collect c,
-             tb_product p
-        where c.userId = u.userId
-          and c.productId = p.productId
-          and c.userId = #{userId}
+    <!--    通过id查询-->
+    <select id="queryId">
+        select *
+        from tb_collect c
+        where c.productId = #{productId}
     </select>
 
     <select id="queryAll" parameterType="int">
         select p.*
-        from tb_user u,
-             tb_collect c,
-             tb_product p
-        where c.userId = u.userId
-          and c.productId = p.productId
-          and c.userId = #{userId}
+        from tb_user u
+                 left join
+             tb_collect c on (u.userId = c.userId)
+                 left join tb_product p on (u.productId = p.productId)
+        where c.userId = #{userId}
     </select>
 
 
-    <select id="queryCondition" parameterType="Collect" >
+    <select id="queryCondition" parameterType="Collect">
         select * from tb_collect c
         <where>
             <if test="userId!=null">

@@ -75,7 +75,7 @@ public class CollectServiceImpl implements CollectService {
     }
 
     /**
-     * 根据Id查询
+     * 个人收藏查询
      *
      * @param userId
      * @return
@@ -95,6 +95,18 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public ResultVO queryCondition(Collect collect) {
         return new ResultVO(collectDao.queryCondition(collect));
+    }
+
+
+    /**
+     * id查询
+     *
+     * @param collectId
+     * @return
+     */
+    @Override
+    public ResultVO queryId(Integer collectId) {
+        return new ResultVO(collectDao.queryId(collectId));
     }
 
 }

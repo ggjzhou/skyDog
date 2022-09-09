@@ -17,4 +17,7 @@ public interface CollectService {
 
     ResultVO queryCondition(Collect collect);
 
+    ResultVO queryId(Integer collectId);
+
+
 }

@@ -20,7 +20,9 @@ public interface CollectDao {
 
     void delete(Integer userId,Integer productId);
 
-    List<Product> queryAll(Integer userId);
+    List<Collect> queryAll (Integer userId);
+
+    Collect queryId(Integer collectId);
 
     List<Collect> queryCondition(Collect collect);
 

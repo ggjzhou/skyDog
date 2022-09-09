@@ -56,7 +56,8 @@ public class CollectController {
     }
 
     /**
-     * 根据Id查询
+     * 查询收藏列表
+     *
      * @param userId
      * @return
      */
@@ -72,6 +73,7 @@ public class CollectController {
 
     /**
      * 动态查询列表商品
+     *
      * @param collect
      * @return
      */
@@ -84,4 +86,22 @@ public class CollectController {
         collectService.queryCondition(collect);
         return new ResultVO(collectService.queryCondition(collect));
     }
+
+
+    /**
+     * 查询收藏列表
+     *
+     * @param collectId
+     * @return
+     */
+    @GetMapping("/queryId/{collectId}")
+    @ApiOperation("查询用户收藏列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "collectId", value = "收藏Id", dataType = "Integer"),
+    })
+    public ResultVO queryId(@PathVariable Integer collectId) {
+        return collectService.queryId((collectId));
+    }
+
+
 }
