@@ -107,6 +107,10 @@
                 and u.nick =like
                 concat('%',#{nick},'%')
             </if>
+            <if test="password != null">
+                and u.password =like
+                concat('%',#{password},'%')
+            </if>
             <if test="phone != null">
                 and u.phone = like
                 concat('%',#{phone},'%')
