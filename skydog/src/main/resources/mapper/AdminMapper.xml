@@ -24,21 +24,18 @@
     <update id="update" parameterType="com.example.skydog.module.entity.Admin">
     update tb_admin
     <set>
-        <if test="adminId != null">
-        adminId=#{adminId,jdbcType=int}
-        </if>
-
         <if test="adminName != null">
-        adminName=#{adminName,jdbc=varchar}
+        adminName=#{adminName}
         </if>
 
         <if test="adminAcc != null">
-        adminAcc=#{adminAcc,jdbc=varchar}
+        adminAcc=#{adminAcc}
         </if>
 
         <if test="adminPwd !=null">
-        adminPwd=#{adminAcc,jdbc=varchar}
+        adminPwd=#{adminAcc}
         </if>
+        where adminId=#{adminId}
     </set>
 
     </update>
