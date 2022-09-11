@@ -32,8 +32,9 @@
 
     <select id="queryAll" parameterType="int">
         select u.*, c.*, p.*
-        from tb_user u left join tb_collect c on (u.userId = c.userId)
-                    left join tb_product p on (u.productId = p.productId)
+        from tb_user u
+                 LEFT JOIN tb_collect c ON (u.userId = c.userId)
+                 LEFT JOIN tb_product p ON (u.productId = p.productId)
         where c.userId = #{userId}
     </select>
 
