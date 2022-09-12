@@ -84,9 +84,6 @@
     <select id="update" parameterType="com.example.skydog.module.entity.Order">
      update tb_order
      <set>
-         <if test="orderId != null">
-             orderId=#{orderId}
-         </if>
          <if test="cartId !=null">
              cartId=#{cartId}
          </if>
@@ -111,6 +108,7 @@
          <if test="endTime !=null">
              endTime=#{endTime}
          </if>
+         where orderId=#{orderId}
      </set>
     </select>
 
