@@ -1,5 +1,6 @@
 package com.example.skydog.module.entity;
 
+import com.example.skydog.module.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,5 @@ public class Cart {
     private Integer scaleId;
     private Integer productCount;
     private Date joinTime;
+    private ProductDto productDto;
 }

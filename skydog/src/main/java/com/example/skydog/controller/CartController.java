@@ -41,7 +41,7 @@ public class CartController {
      * @param cart
      * @return
      */
-    @GetMapping("/add")
+    @PostMapping("/add")
     @ApiOperation("添加购物车")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "cart", value = "购物车", dataType = "cart"),

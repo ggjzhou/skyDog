@@ -2,6 +2,7 @@ package com.example.skydog.controller;
 
 import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
+import com.example.skydog.module.vo.ProductVo;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.ProductService;
 import io.swagger.annotations.Api;
@@ -107,7 +108,7 @@ public class ProductController {
         return productService.queryByName(productName);
     }
 
-    @GetMapping("/queryByCategory")
+    @PostMapping("/queryByCategory")
     @ApiOperation("商品种类查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
@@ -115,12 +116,20 @@ public class ProductController {
     public ResultVO queryByCategory(@RequestBody Category category) {
         return productService.queryByCategory(category);
     }
-    @GetMapping("/queryByPrice")
+    @PostMapping("/queryByPrice")
     @ApiOperation("商品价格查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
     })
-    public ResultVO queryByPrice(@RequestBody Category category) {
-        return productService.queryByCategory(category);
+    public ResultVO queryByPrice(@RequestBody ProductVo productVo) {
+        return productService.queryByPrice(productVo);
+    }
+    @PostMapping("/search")
+    @ApiOperation("商品搜索")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
+    })
+    public ResultVO search(@RequestBody String keyword) {
+        return productService.search(keyword);
     }
 }

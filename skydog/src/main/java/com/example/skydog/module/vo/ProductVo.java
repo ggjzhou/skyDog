@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Author:甘舟
  * Data:2022/9/7
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductVo extends Product {
+public class ProductVo extends Product implements Serializable {
     private Double lowPrice;
     private Double highPrice;
     private Integer currentPage;

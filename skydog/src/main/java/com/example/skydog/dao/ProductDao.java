@@ -2,6 +2,7 @@ package com.example.skydog.dao;
 
 import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
+import com.example.skydog.module.vo.ProductVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -28,4 +29,8 @@ public interface ProductDao<E> {
    List<Product> queryCondition(E query);
 
    List<Product> queryByCategory(Category category);
+
+   List<Product> queryBySelectActive(ProductVo productVo);
+
+   List<Product> search(String keyword);
 }
