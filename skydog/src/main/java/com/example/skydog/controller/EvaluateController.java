@@ -46,10 +46,10 @@ public class EvaluateController {
         return evaluateService.delete(userId, productId);
     }
 
-    @GetMapping("/queryAll/{evaluateId}")
-    @ApiOperation("查询用户评价列表")
+    @GetMapping("/queryId/{evaluateId}")
+    @ApiOperation("Id查询评价")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "evaluateId", value = "评论Id", dataType = "Integer"),
+            @ApiImplicitParam(name = "evaluateId", value = "评价Id", dataType = "Integer"),
     })
     public ResultVO queryId(@PathVariable Integer evaluateId) {
 
