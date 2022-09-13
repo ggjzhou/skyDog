@@ -31,4 +31,5 @@ public interface ProductService {
 
    ResultVO queryByName(String productName);
 
+   ResultVO search(String keyword);
 }

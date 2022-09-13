@@ -110,14 +110,12 @@ public class ProductServiceImpl implements ProductService {
 
 
    public ResultVO queryByCategory(Category category) {
-      productDao.queryByCategory(category);
-      return null;
+      System.out.println(category);
+      return new ResultVO(ResultEnum.SUCCESS,productDao.queryByCategory(category));
    }
 
    public ResultVO queryByPrice(ProductVo productVo) {
-      productDao.queryCondition(productVo);
-      // TODO: implement
-      return null;
+      return new ResultVO(ResultEnum.SUCCESS,productDao.queryBySelectActive(productVo));
    }
 
    /**
@@ -133,6 +131,9 @@ public class ProductServiceImpl implements ProductService {
       }else{
          return new ResultVO(ResultEnum.SUCCESS,productDao.queryCondition(product));
       }
+   }
+   public ResultVO search(String keyword){
+      return new ResultVO(ResultEnum.SUCCESS,productDao.search(keyword));
    }
 
 }

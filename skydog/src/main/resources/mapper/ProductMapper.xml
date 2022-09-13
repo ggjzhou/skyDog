@@ -104,25 +104,25 @@
     <sql id="selectActive">
         <where>
             <if test="productId != null">
-                p.productId = #{productId},
+                p.productId = #{productId}
             </if>
             <if test="userId != null">
-                and p.userId = #{userId},
+                and p.userId = #{userId}
             </if>
             <if test="adminId != null">
-                and adminId = #{adminId},
+                and p.adminId = #{adminId}
             </if>
             <if test="categoryId != null">
-                and p.categoryId = #{categoryId},
+                and p.categoryId = #{categoryId}
             </if>
             <if test="productName != null">
-                and p.productName = #{productName},
+                and p.productName = #{productName}
             </if>
             <if test="productPrice != null">
-                and p.productPrice = #{productPrice},
+                and p.productPrice = #{productPrice}
             </if>
             <if test="productDec != null">
-                and p.productDec = #{productDec},
+                and p.productDec = #{productDec}
             </if>
             <if test="productStatus != null">
                 and p.productStatus = #{productStatus}
@@ -133,39 +133,98 @@
             <if test="productGrade != null">
                 and p.productGrade = #{productGrade}
             </if>
-            <if test="lowSal != null">
-                and p.productPrice >= #{lowPrice}
-            </if>
-            <if test="highSal != null">
-                <![CDATA[
-                    and p.productPrice <= #{highPrice}
-                ]]>
-            </if>
+
         </where>
     </sql>
+    <sql id="price">
+        <if test="lowPrice != null">
+            and p.productPrice >= #{lowPrice}
+        </if>
+        <if test="highPrice != null">
+            <![CDATA[
+                    and p.productPrice <= #{highPrice}
+                ]]>
+        </if>
+    </sql>
     <!--    通过id查询-->
-    <select id="queryId">
+    <select id="queryId" parameterType="int" resultType="Product">
         select * from tb_product p
         where p.productId = #{productId}
     </select>
     <!--    动态模糊查询-->
-    <select id="queryCondition">
+    <select id="queryCondition" resultMap="BaseProductMap">
         select * from tb_product p
         <!-- 查询条件 -->
         <include refid="selectActive"/>
+    </select>
+    <!--    通过种类查询-->
+    <select id="queryByCategory" parameterType="Category" resultMap="ProductDtoMap">
+        select p.*,c.categoryName from tb_product p
+        LEFT JOIN tb_category c
+        ON(p.categoryId = c.categoryId)
+        where c.categoryName = #{categoryName}
+    </select>
+<!--    条件查询分页-->
+    <select id="queryBySelectActive" resultMap="BaseProductMap">
+        select * from tb_product p
+        <!-- 查询条件 -->
+        <include refid="selectActive"/>
+        <where>
+            <if test="lowPrice != null">
+                p.productPrice >= #{lowPrice}
+            </if>
+            <if test="highPrice != null">
+                <![CDATA[
+                and p.productPrice <= #{highPrice}
+                ]]>
+            </if>
+        </where>
         <!-- 分页-->
         <if test="currentPage != null and pageSize != null">
             <bind name="start" value="(currentPage - 1) * pageSize"/>
             limit #{start},#{pageSize}
         </if>
     </select>
-    <!--    通过种类查询-->
-    <select id="queryByCategory" resultMap="ProductDtoMap">
+
+    <select id="search" parameterType="String" resultType="Product">
         select p.*,c.categoryName from tb_product p
         LEFT JOIN tb_category c
         ON(p.categoryId = c.categoryId)
-        where c.categoryName = #{categoryName}
+        where c.categoryName = #{keyword}
+        OR p.productName = #{keyword}
+        OR p.productName = #{keyword}
+        <where>
+            <if test="productId != null">
+                p.productId = #{productId}
+            </if>
+            <if test="userId != null">
+                and p.userId = #{userId}
+            </if>
+            <if test="adminId != null">
+                and p.adminId = #{adminId}
+            </if>
+            <if test="categoryId != null">
+                and p.categoryId = #{categoryId}
+            </if>
+            <if test="productName != null">
+                and p.productName = #{productName}
+            </if>
+            <if test="productPrice != null">
+                and p.productPrice = #{productPrice}
+            </if>
+            <if test="productDec != null">
+                and p.productDec = #{productDec}
+            </if>
+            <if test="productStatus != null">
+                and p.productStatus = #{productStatus}
+            </if>
+            <if test="productSale != null">
+                and p.productSale = #{productSale}
+            </if>
+            <if test="productGrade != null">
+                and p.productGrade = #{productGrade}
+            </if>
+
+        </where>
     </select>
-
-
 </mapper>

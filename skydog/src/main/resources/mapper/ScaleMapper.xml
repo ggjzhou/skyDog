@@ -26,20 +26,21 @@
         update tb_scale
         <set>
             <if test="scaleId != null">
-                scaleId=#{scaleId,jdbcType=int}
+                scaleId=#{scaleId}
             </if>
             <if test="productId != null">
-                productId=#{productId,jdbcType=int}
+                productId=#{productId}
             </if>
             <if test="productScale != null">
-                productScale=#{productScale,jdbcType=varchar}
+                productScale=#{productScale}
             </if>
             <if test="productScaleStock != null">
-                productScaleStock=#{productScaleStock,jdbcType=int}
+                productScaleStock=#{productScaleStock}
             </if>
             <if test="productScalePrice != null">
-                productScalePrice=#{productScalePrice,jdbcType=double}
+                productScalePrice=#{productScalePrice}
             </if>
+            where  scaleId=#{scaleId}
         </set>
     </update>
 

@@ -9,8 +9,8 @@
         <result property="productCount" column="productCount"></result>
         <result property="joinTime" column="joinTime"></result>
 
-        <association property="productDto" column="productId" javaType="com.example.skydog.module.dto.ProductDto"
-                     resultMap="com.example.skydog.module.entity.Product.ProductDtoMap"></association>
+        <association property="productDto" column="productId"
+                     resultMap="com.example.skydog.dao.ProductDao.ProductDtoMap"></association>
     </resultMap>
 
     <!--插入数据 -->
@@ -108,9 +108,10 @@
     </select>
     <!--    查询自己购物车-->
     <select id="getMyCart" resultMap="cartMap">
-        select c.*,p.*,s.* from tb_user u
+        select p.*,c.*,s.* from tb_user u
         LEFT JOIN tb_cart c ON (u.userId = c.userId)
         LEFT JOIN tb_product p ON (c.productId = p.productId)
         LEFT JOIN tb_scale s ON (c.scaleId = s.scaleId)
+        where u.userId = #{userId}
     </select>
 </mapper>
