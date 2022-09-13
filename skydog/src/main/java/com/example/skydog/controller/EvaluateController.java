@@ -47,7 +47,7 @@ public class EvaluateController {
     }
 
     @GetMapping("/queryAll/{evaluateId}")
-    @ApiOperation("查询用户收藏列表")
+    @ApiOperation("查询用户评价列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "evaluateId", value = "评论Id", dataType = "Integer"),
     })
