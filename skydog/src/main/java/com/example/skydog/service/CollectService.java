@@ -11,13 +11,15 @@ public interface CollectService {
 
     ResultVO add(Collect collect);
 
-    ResultVO delete(Integer userId,Integer productId);
+    ResultVO delete(Integer userId, Integer productId);
 
-    ResultVO queryAll(Integer userId);
+    ResultVO getMyCollect(Integer userId);
 
     ResultVO queryCondition(Collect collect);
 
     ResultVO queryId(Integer collectId);
+
+    ResultVO batchDelete(Integer userId, List list);
 
 
 }

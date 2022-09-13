@@ -81,8 +81,8 @@ public class CollectServiceImpl implements CollectService {
      * @return
      */
     @Override
-    public ResultVO queryAll(Integer userId) {
-        return new ResultVO(collectDao.queryAll(userId));
+    public ResultVO getMyCollect(Integer userId) {
+        return new ResultVO(collectDao.getMyCollect(userId));
     }
 
 
@@ -107,6 +107,20 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public ResultVO queryId(Integer collectId) {
         return new ResultVO(collectDao.queryId(collectId));
+    }
+
+
+    /**
+     * 批量删除
+     *
+     * @param userId
+     * @param list
+     * @return
+     */
+    @Override
+    public ResultVO batchDelete(Integer userId, List list) {
+        collectDao.batchDelete(userId, list);
+        return new ResultVO(ResultEnum.DELETE_SUCCESS);
     }
 
 }

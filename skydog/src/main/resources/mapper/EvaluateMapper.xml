@@ -4,9 +4,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.skydog.dao.EvaluateDao">
-<!--    <resultMap id="evaluateMap" type="Evaluate">-->
-
-<!--    </resultMap>-->
+    <resultMap id="evaluateMap" type="Evaluate">
+        <id property="evaluateId" column="evaluateId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="productId" column="productId"></result>
+        <result property="grade" column="grade"></result>
+        <result property="comment" column="comment"></result>
+        <result property="evaluateDate" column="evaluateDate"></result>
+    </resultMap>
     <!-- 添加 -->
     <insert id="add" parameterType="Evaluate">
         insert into tb_evaluate
@@ -39,11 +44,6 @@
           and e.userId = #{userId}
     </delete>
 
-    <!--    &lt;!&ndash; 动态修改 &ndash;&gt;-->
-    <!--    <update id="update" parameterType="Evaluate">-->
-
-    <!--    </update>-->
-
     <!-- Id查询 -->
     <select id="queryId" parameterType="int" resultType="Evaluate">
         select *
@@ -52,44 +52,52 @@
     </select>
 
 
-    <!--    <sql id="selectActive">-->
-    <!--        <where>-->
-    <!--            <if test="userId != null">-->
-    <!--                u.userId = #{userId}-->
-    <!--            </if>-->
-    <!--            <if test="userName != null">-->
-    <!--                and u.userName = like-->
-    <!--                concat('%',#{userName},'%')-->
-    <!--            </if>-->
-    <!--            <if test="nick != null">-->
-    <!--                and u.nick =like-->
-    <!--                concat('%',#{nick},'%')-->
-    <!--            </if>-->
-    <!--            <if test="phone != null">-->
-    <!--                and u.phone = like-->
-    <!--                concat('%',#{phone},'%')-->
-    <!--            </if>-->
-    <!--            <if test="gender != null">-->
-    <!--                and u.gender = #{gender}-->
-    <!--            </if>-->
-    <!--        </where>-->
-    <!--    </sql>-->
+        <sql id="selectActive">
+            <where>
+                <if test="evaluateId != null">
+                    e.evaluateId = #{evaluateId}
+                </if>
+                <if test="userId != null">
+                    and e.userId  = #{userId}
+                </if>
+                <if test="productId != null">
+                    and e.productId = #{productId}
+                </if>
+                <if test="grade != null">
+                    and e.grade  =#{grade}
+                </if>
+                <if test="comment != null">
+                    and e.comment = #{comment}
+                </if>
+                <if test="evaluateDate != null">
+                    and e.evaluateDate = #{evaluateDate}
+                </if>
+            </where>
+        </sql>
 
     <!-- 动态模糊查询 -->
     <select id="queryCondition" parameterType="Evaluate">
         select * from tb_evaluate e
         <!-- 查询条件 -->
-        <!--        <include refid="selectActive"/>-->
+                <include refid="selectActive"/>
     </select>
 
+    <!-- 查询用户所有评论 -->
+    <select id="getMyEvaluate" parameterType="int">
+        select u.*, e.*,
+        from tb_user u
+                 LEFT JOIN tb_evaluate e ON (u.userId = e.userId)
+        where e.userId = #{userId}
+    </select>
 
-    <!--    <delete id="batchDelete" parameterType="List">-->
+    <!-- 查询商品所有评论 -->
+    <select id="getProductEvaluate" parameterType="int">
+        select p.*, e.*,
+        from tb_product p
+                 LEFT JOIN tb_evaluate e ON (p.productId = e.productId)
+        where e.productId = #{produtId}
+    </select>
 
-    <!--    </delete>-->
-
-    <!--    <select id="pageQuery" parameterType="List">-->
-
-    <!--    </select>-->
 
 
 </mapper>

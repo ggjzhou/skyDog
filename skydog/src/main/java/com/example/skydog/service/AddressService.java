@@ -16,6 +16,7 @@ public interface AddressService {
 
     ResultVO update(Address address);
 
+    ResultVO getMyAddress(Integer userId);
 
 //    void batchDelete(List list);
 

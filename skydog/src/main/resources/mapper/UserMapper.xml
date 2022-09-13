@@ -19,33 +19,34 @@
     <!-- 添加 -->
     <insert id="add" parameterType="User">
         insert into tb_user
-        <trim prefix="  values ("
-              suffix=")" suffixOverrides=",">
-            <if test="userId != null">
-                #{userId},
-            </if>
-            <if test="userName != null">
-                #{userName},
-            </if>
-            <if test="password != null">
-                #{password},
-            </if>
-            <if test="nick != null">
-                #{nick},
-            </if>
-            <if test="phone != null">
-                #{phone},
-            </if>
-            <if test="avatar != null">
-                #{avatar},
-            </if>
-            <if test="gender != null">
-                #{gender}
-            </if>
-            <if test="IDCard != null">
-                #{IDCard}
-            </if>
-        </trim>
+<!--        <trim prefix="  values ("-->
+<!--              suffix=")" suffixOverrides=",">-->
+<!--            <if test="userId != null">-->
+<!--                #{userId},-->
+<!--            </if>-->
+<!--            <if test="userName != null">-->
+<!--                #{userName},-->
+<!--            </if>-->
+<!--            <if test="password != null">-->
+<!--                #{password},-->
+<!--            </if>-->
+<!--            <if test="nick != null">-->
+<!--                #{nick},-->
+<!--            </if>-->
+<!--            <if test="phone != null">-->
+<!--                #{phone},-->
+<!--            </if>-->
+<!--            <if test="avatar != null">-->
+<!--                #{avatar},-->
+<!--            </if>-->
+<!--            <if test="gender != null">-->
+<!--                #{gender}-->
+<!--            </if>-->
+<!--            <if test="IDCard != null">-->
+<!--                #{IDCard}-->
+<!--            </if>-->
+<!--        </trim>-->
+        values (#{userId},#{userName},#{password},#{nick},#{phone},#{avatar},#{gender},#{IDCard})
     </insert>
 
 
@@ -121,7 +122,7 @@
     </sql>
 
     <!-- 动态模糊查询 -->
-    <select id="queryCondition" parameterType="User" >
+    <select id="queryCondition" parameterType="User" resultMap="userMap">
         select * from tb_user u
         <!-- 查询条件 -->
         <include refid="selectActive"/>
@@ -130,7 +131,7 @@
 
 
 <!--    <delete id="batchDelete" parameterType="List">-->
-
+<!--        -->
 <!--    </delete>-->
 
 <!--    <select id="pageQuery" parameterType="List">-->

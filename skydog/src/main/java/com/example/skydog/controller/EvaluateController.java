@@ -46,14 +46,34 @@ public class EvaluateController {
         return evaluateService.delete(userId, productId);
     }
 
-    @GetMapping("/queryAll/{evaluateId}")
-    @ApiOperation("查询用户收藏列表")
+    @GetMapping("/queryId/{evaluateId}")
+    @ApiOperation("Id查询评价")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "evaluateId", value = "评论Id", dataType = "Integer"),
+            @ApiImplicitParam(name = "evaluateId", value = "评价Id", dataType = "Integer"),
     })
     public ResultVO queryId(@PathVariable Integer evaluateId) {
 
         return new ResultVO(evaluateService.queryId((evaluateId)));
+    }
+
+    @GetMapping("/getMyEvaluate/{userId}")
+    @ApiOperation("获取用户所有评价")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
+    })
+    public ResultVO getMyEvaluate(@PathVariable Integer userId) {
+
+        return new ResultVO(evaluateService.getMyEvaluate((userId)));
+    }
+
+    @GetMapping("/getProductEvaluate/{productId}")
+    @ApiOperation("获取商品所有评价")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "productId", value = "产品Id", dataType = "Integer"),
+    })
+    public ResultVO getProductEvaluate(@PathVariable Integer productId) {
+
+        return new ResultVO(evaluateService.getProductEvaluate((productId)));
     }
 
 }

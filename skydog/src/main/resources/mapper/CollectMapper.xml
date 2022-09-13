@@ -5,17 +5,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.skydog.dao.CollectDao">
 
-    <!--    <resultMap id="collectMap" type="Collect">-->
+    <resultMap id="collectMap" type="Collect">
+        <id property="collectId" column="collectId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="productId" column="productId"></result>
+        <result property="collectTime" column="collectTime"></result>
 
+        <association property="productDto" column="productId" javaType="com.example.skydog.module.dto.ProductDto"
+                     resultMap="com.example.skydog.module.entity.Product.ProductDtoMap"></association>
+    </resultMap>
 
-    <!--    </resultMap>-->
-
-
+    <!-- 添加 -->
     <insert id="add" parameterType="Collect">
         insert into tb_collect
-        values (#{userId}, #{productId}, #{collectTime})
+        values (#{collectId},#{userId}, #{productId}, #{collectTime})
     </insert>
 
+    <!-- 删除 -->
     <delete id="delete" parameterType="int">
         delete
         from tb_collect c
@@ -30,7 +36,8 @@
         where c.collectId = #{collectId}
     </select>
 
-    <select id="queryAll" parameterType="int">
+    <!-- 获取用户收藏 -->
+    <select id="getMyCollect" parameterType="int" resultMap="collectMap">
         select u.*, c.*, p.*
         from tb_user u
                  LEFT JOIN tb_collect c ON (u.userId = c.userId)
@@ -38,7 +45,7 @@
         where c.userId = #{userId}
     </select>
 
-
+    <!-- 条件查询 -->
     <select id="queryCondition" parameterType="Collect">
         select * from tb_collect c
         <where>
@@ -53,5 +60,13 @@
             </if>
         </where>
     </select>
+
     <!-- 批量删除 -->
+    <delete id="batchDelete">
+        <foreach collection="list" item="productId" separator=";">
+            DELETE from tb_collect c
+            where c.userId = #{userId}
+            and c.productId = #{productId}
+        </foreach>
+    </delete>
 </mapper>

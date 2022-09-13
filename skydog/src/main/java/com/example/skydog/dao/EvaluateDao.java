@@ -9,6 +9,7 @@ import java.util.*;
 @Mapper
 public interface EvaluateDao {
 
+
     void add(Evaluate evaluate);
 
     void delete(Integer userId,Integer evaluateId);
@@ -17,11 +18,12 @@ public interface EvaluateDao {
 
     List<Evaluate> queryCondition(Evaluate evaluate);
 
-//    void update(Evaluate evaluate);
+    List<Evaluate> getMyEvaluate(Integer userId);
+
+    List<Evaluate> getProductEvaluate(Integer productId);
 
 
 //    void batchDelete(List list);
-//
-//    List<Evaluate> pageQuery();
+
 
 }

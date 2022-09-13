@@ -17,6 +17,8 @@ public interface AddressDao {
 
    void update(Address address);
 
+   List<Address> getMyAddress(Integer userId);
+
 //   void batchDelete(List list);
 
 

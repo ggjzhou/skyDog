@@ -15,20 +15,15 @@ public interface EvaluateService {
 
     Evaluate queryId(Integer evaluateId);
 
-    List<Evaluate> queryCondition();
+    List<Evaluate> queryCondition(Evaluate evaluate);
 
-    ResultVO update(Evaluate evaluate);
+    ResultVO getMyEvaluate(Integer userId);
 
-//    void batchAdd(List<Evaluate> evaluateList);
-//
+    ResultVO getProductEvaluate(Integer productId);
+
 //    void batchDelete(List list);
-
-//    List<Evaluate> pageQuery();
 
     List<Evaluate> queryByGrade(String grade);
 
-    List<Evaluate> queryByImg();
-
-    List<Evaluate> queryByVideo();
 
 }

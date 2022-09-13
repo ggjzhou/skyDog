@@ -33,8 +33,14 @@ public interface UserService {
 
    void updateAvatar();//更新头像
 
-   List<Cart> getCart();
+   ResultVO getCart(Integer userId);
 
-   List<Order> getOrder();
+   ResultVO getOrder(Integer userId);
+
+   ResultVO getCollect(Integer userId);
+
+   ResultVO getEvaluate(Integer uerId);
+
+
 
 }

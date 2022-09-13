@@ -19,6 +19,11 @@ public class AddressServiceImpl implements AddressService {
     @Autowired
     private AddressDao addressDao;
 
+
+    /**
+     * 添加地址
+     */
+    @Override
     public ResultVO add(Address address) {
         //判断地址是否存在
 
@@ -26,6 +31,9 @@ public class AddressServiceImpl implements AddressService {
         return new ResultVO(ResultEnum.ADD_SUCCESS);
     }
 
+    /**
+     * 删除操作
+     */
     @Override
     public ResultVO delete(Integer addressId) {
         if (addressDao.queryId(addressId) == null) {
@@ -36,16 +44,21 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
-
+    /**
+     * Id查询
+     */
+    @Override
     public Address queryId(Integer addressId) {
         return addressDao.queryId(addressId);
     }
 
-
+    /**
+     * 更新地址
+     */
+    @Override
     public ResultVO update(Address address) {
         Address address1 = new Address();
         address1.setAddressId(address.getAddressId());
-        /**  判断语句错误 */
         if (addressDao.queryId(address.getAddressId()) == null) {
 
             return new ResultVO(ResultEnum.UPDATE_FAIL, "该地址不存在");
@@ -53,6 +66,14 @@ public class AddressServiceImpl implements AddressService {
             addressDao.update(address);
             return new ResultVO(ResultEnum.UPDATE_SUCCESS);
         }
+    }
+
+    /**
+     * 获取用户所有地址
+     */
+    @Override
+    public ResultVO getMyAddress(Integer userId) {
+        return new ResultVO(addressDao.getMyAddress(userId));
     }
 
 //    public void batchDelete(List list) {
