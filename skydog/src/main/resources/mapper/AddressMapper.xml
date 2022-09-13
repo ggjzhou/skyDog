@@ -15,6 +15,7 @@
         <result property="isDefault" column="isDefault"></result>
 
     </resultMap>
+
     <!-- 添加 -->
     <insert id="add" parameterType="Address">
         insert into tb_address
@@ -72,48 +73,24 @@
         where a.addressId = #{addressId}
     </update>
 
-    <!-- 查询所有地址 -->
-    <select id="queryId" parameterType="int" >
+    <!-- Id查询 -->
+    <select id="queryId" parameterType="int">
         select *
         from tb_address a
         where a.addressId = #{addressId}
     </select>
 
-
-    <!--        <sql id="selectActive">-->
-    <!--            <where>-->
-    <!--                <if test="userId != null">-->
-    <!--                    u.userId = #{userId}-->
-    <!--                </if>-->
-    <!--                <if test="userName != null">-->
-    <!--                    and u.userName = like-->
-    <!--                    concat('%',#{userName},'%')-->
-    <!--                </if>-->
-    <!--                <if test="nick != null">-->
-    <!--                    and u.nick =like-->
-    <!--                    concat('%',#{nick},'%')-->
-    <!--                </if>-->
-    <!--                <if test="phone != null">-->
-    <!--                    and u.phone = like-->
-    <!--                    concat('%',#{phone},'%')-->
-    <!--                </if>-->
-    <!--                <if test="gender != null">-->
-    <!--                    and u.gender = #{gender}-->
-    <!--                </if>-->
-    <!--            </where>-->
-    <!--        </sql>-->
-
-    <!-- 动态模糊查询 -->
-    <!--    <select id="queryCondition" resultType="Address">-->
-    <!--         /*select * from tb_address a*/-->
-    <!--        &lt;!&ndash; 查询条件 &ndash;&gt;-->
-    <!--        &lt;!&ndash;        <include refid="selectActive"/>&ndash;&gt;-->
-    <!--    </select>-->
+    <!-- 查询用户所有地址 -->
+    <select id="getMyAddress" parameterType="int" resultType="Address">
+        select u.*, a.*
+        from tb_user u
+                 LEFT JOIN tb_address a ON (u.userId = a.userId)
+        where a.userId = #{userId}
+    </select>
 
 
+    <!-- 批量删除 -->
     <!--    <delete id="batchDelete" parameterType="List">-->
-
-    <!--    </delete>-->
 
 
 </mapper>

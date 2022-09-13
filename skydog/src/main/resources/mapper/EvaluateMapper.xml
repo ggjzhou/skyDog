@@ -4,9 +4,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.skydog.dao.EvaluateDao">
-<!--    <resultMap id="evaluateMap" type="Evaluate">-->
+    <resultMap id="evaluateMap" type="Evaluate">
 
-<!--    </resultMap>-->
+
+    </resultMap>
     <!-- 添加 -->
     <insert id="add" parameterType="Evaluate">
         insert into tb_evaluate
@@ -38,11 +39,6 @@
         where e.evaluateId = #{evaluateId}
           and e.userId = #{userId}
     </delete>
-
-    <!--    &lt;!&ndash; 动态修改 &ndash;&gt;-->
-    <!--    <update id="update" parameterType="Evaluate">-->
-
-    <!--    </update>-->
 
     <!-- Id查询 -->
     <select id="queryId" parameterType="int" resultType="Evaluate">
@@ -79,17 +75,27 @@
     <select id="queryCondition" parameterType="Evaluate">
         select * from tb_evaluate e
         <!-- 查询条件 -->
-        <!--        <include refid="selectActive"/>-->
+                <include refid="selectActive"/>
+    </select>
+
+    <!-- 查询用户所有评论 -->
+    <select id="getMyEvaluate" parameterType="int">
+        select u.*, e.*,
+        from tb_user u
+                 LEFT JOIN tb_evaluate e ON (u.userId = e.userId)
+        where e.userId = #{userId}
+    </select>
+
+    <!-- 查询商品所有评论 -->
+    <select id="getProductEvaluate" parameterType="int">
+        select p.*, e.*,
+        from tb_product p
+                 LEFT JOIN tb_evaluate e ON (p.productId = e.productId)
+        where e.productId = #{produtId}
     </select>
 
 
-    <!--    <delete id="batchDelete" parameterType="List">-->
 
-    <!--    </delete>-->
-
-    <!--    <select id="pageQuery" parameterType="List">-->
-
-    <!--    </select>-->
 
 
 </mapper>

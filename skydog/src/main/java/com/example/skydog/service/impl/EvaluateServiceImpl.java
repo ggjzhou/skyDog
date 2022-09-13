@@ -19,65 +19,69 @@ public class EvaluateServiceImpl implements EvaluateService {
     @Autowired
     private EvaluateDao evaluateDao;
 
+    /**
+     * 添加评价
+     */
+    @Override
     public ResultVO add(Evaluate evaluate) {
         evaluateDao.add(evaluate);
         return new ResultVO(ResultEnum.ADD_SUCCESS);
     }
 
-
+    /**
+     * 删除评价
+     */
+    @Override
     public ResultVO delete(Integer userId, Integer evaluateId) {
         evaluateDao.delete(userId, evaluateId);
         return new ResultVO(ResultEnum.DELETE_SUCCESS);
     }
 
 
+    /**
+     * Id查询
+     */
+    @Override
     public Evaluate queryId(Integer evaluateId) {
         evaluateDao.queryId(evaluateId);
         return evaluateDao.queryId(evaluateId);
     }
 
-
-    public List<Evaluate> queryCondition() {
-        // TODO: implement
-        return null;
+    /**
+     * 条件查询
+     */
+    @Override
+    public List<Evaluate> queryCondition(Evaluate evaluate) {
+        return evaluateDao.queryCondition(evaluate);
     }
 
-
-    public ResultVO update(Evaluate evaluate) {
-        // TODO: implement
-        return null;
+    /**
+     * 获取用户评价
+     */
+    @Override
+    public ResultVO getMyEvaluate(Integer userId) {
+        return new ResultVO(evaluateDao.getMyEvaluate(userId));
     }
 
-
-    public void batchAdd(List<Evaluate> evaluateList) {
-        // TODO: implement
+    /**
+     * 获取商品评价
+     */
+    @Override
+    public ResultVO getProductEvaluate(Integer productId) {
+        return new ResultVO(evaluateDao.getProductEvaluate(productId));
     }
 
-
+    /**
+     * 批量删除
+     */
     public void batchDelete(List list) {
         // TODO: implement
     }
 
-
-    public List<Evaluate> pageQuery() {
-        // TODO: implement
-        return null;
-    }
-
-
+    /**
+     * 评价等级查询
+     */
     public List<Evaluate> queryByGrade(String grade) {
-        // TODO: implement
-        return null;
-    }
-
-
-    public List<Evaluate> queryByImg() {
-        // TODO: implement
-        return null;
-    }
-
-
-    public List<Evaluate> queryByVideo() {
         // TODO: implement
         return null;
     }

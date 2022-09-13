@@ -20,10 +20,12 @@ public interface CollectDao {
 
     void delete(Integer userId,Integer productId);
 
-    List<Collect> queryAll (Integer userId);
+    List<Collect> getMyCollect (Integer userId);
 
     Collect queryId(Integer collectId);
 
     List<Collect> queryCondition(Collect collect);
+
+    void batchDelete(Integer userId,List list);
 
 }

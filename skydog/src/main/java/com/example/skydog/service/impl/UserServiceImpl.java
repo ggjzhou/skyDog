@@ -1,5 +1,6 @@
 package com.example.skydog.service.impl;
 
+import com.example.skydog.dao.CartDao;
 import com.example.skydog.dao.UserDao;
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Cart;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private CartDao cartDao;
 
     public void add(User user) {
         userDao.add(user);
@@ -59,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     public ResultVO register(User user) {
         User u = new User();
-        String nick = "User" + new Date().toString();
+        String nick = "User " + new Date();
         u.setNick(nick);
         u.setUserName(user.getUserName());
         u.setPassword(user.getPassword());
@@ -76,6 +80,7 @@ public class UserServiceImpl implements UserService {
     public ResultVO login(User user) {
         User u = new User();
         u.setUserName(user.getUserName());
+        u.setPassword(user.getPassword());
         List<User> list = userDao.queryCondition(u);
         if (list == null || list.isEmpty()) {
             return new ResultVO(ResultEnum.FAIL, "该账号不存在");
@@ -125,14 +130,23 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public List<Cart> getCart() {
+    public ResultVO getCart(Integer userId) {
+        return new ResultVO(ResultEnum.SUCCESS,cartDao.getMyCart(userId));
+    }
+
+
+    public ResultVO getOrder(Integer userId) {
         /**调用*/
         return null;
     }
 
+    @Override
+    public ResultVO getCollect(Integer userId) {
+        return null;
+    }
 
-    public List<Order> getOrder() {
-        /**调用*/
+    @Override
+    public ResultVO getEvaluate(Integer uerId) {
         return null;
     }
 

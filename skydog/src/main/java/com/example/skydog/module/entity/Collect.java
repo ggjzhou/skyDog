@@ -16,6 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Collect {
+    private Integer collectId;
     private Integer userId;
     private Integer productId;
     private Date collectTime;

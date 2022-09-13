@@ -61,13 +61,13 @@ public class CollectController {
      * @param userId
      * @return
      */
-    @GetMapping("/queryAll/{userId}")
+    @GetMapping("/getMyCollect/{userId}")
     @ApiOperation("查询用户收藏列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
     })
-    public ResultVO queryAll(@PathVariable Integer userId) {
-        return collectService.queryAll((userId));
+    public ResultVO getMyCollect(@PathVariable Integer userId) {
+        return collectService.getMyCollect((userId));
     }
 
 

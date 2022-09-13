@@ -3,6 +3,7 @@ package com.example.skydog.controller;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.UserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/user")
+@Api(tags = "用户前端控制器")
 public class UserController {
 
     @Autowired
