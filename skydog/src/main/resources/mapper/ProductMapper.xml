@@ -14,6 +14,8 @@
         <result column="productStatus" property="productStatus"/>
         <result column="productSale" property="productSale"/>
         <result column="productGrade" property="productGrade"/>
+        <association property="img" column="imgId"
+                     resultMap="com.example.skydog.dao.ImgDao.ImgMap"></association>
     </resultMap>
     <resultMap id="ProductDtoMap"
                extends="BaseProductMap"
@@ -96,6 +98,9 @@
         <if test="productGrade != null">
             productGrade = #{productGrade}
         </if>
+        <if test="imgId != null">
+            imgId = #{imgId}
+        </if>
     </sql>
     <!--修改数据-->
     <update id="update">
@@ -137,6 +142,9 @@
             <if test="productGrade != null">
                 and p.productGrade = #{productGrade}
             </if>
+            <if test="imgId != null">
+                and p.imgId = #{imgId}
+            </if>
 
         </where>
     </sql>
@@ -151,26 +159,32 @@
         </if>
     </sql>
     <!--    通过id查询-->
-    <select id="queryId" parameterType="int" resultType="Product">
-        select * from tb_product p
+    <select id="queryId" parameterType="int" resultMap="BaseProductMap">
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where p.productId = #{productId}
     </select>
     <!--    动态模糊查询-->
     <select id="queryCondition" resultMap="BaseProductMap">
-        select * from tb_product p
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
     </select>
     <!--    通过种类查询-->
     <select id="queryByCategory" parameterType="Category" resultMap="ProductDtoMap">
-        select p.*,c.categoryName from tb_product p
-        LEFT JOIN tb_category c
-        ON(p.categoryId = c.categoryId)
-        where c.categoryName = #{categoryName}
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        where g.categoryName = #{categoryName}
     </select>
 <!--    条件查询分页-->
     <select id="queryBySelectActive" resultMap="BaseProductMap">
-        select * from tb_product p
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
         <where>
@@ -190,11 +204,11 @@
         </if>
     </select>
 
-    <select id="search" parameterType="String" resultType="Product">
-        select p.*,c.categoryName from tb_product p
-        LEFT JOIN tb_category c
-        ON(p.categoryId = c.categoryId)
-        where c.categoryName like concat('%',#{keyword},'%')
+    <select id="search" parameterType="String" resultMap="BaseProductMap">
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        where g.categoryName like concat('%',#{keyword},'%')
         OR p.productName like concat('%',#{keyword},'%')
         OR p.productDec like concat('%',#{keyword},'%')
     </select>
