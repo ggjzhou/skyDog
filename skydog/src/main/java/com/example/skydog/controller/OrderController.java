@@ -1,22 +1,25 @@
 package com.example.skydog.controller;
 
-import com.example.skydog.dao.OrderDao;
-import com.example.skydog.module.entity.Admin;
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Order;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.OrderService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+/**
+ * Author:付贵平，甘舟
+ * Data:2022/9/7
+ */
+@Api(tags = "订单管理控制器")
+@RestController
 @RequestMapping("/order")
 public class OrderController {
     @Autowired
@@ -45,6 +48,20 @@ public class OrderController {
     public List<Order> queryById(@PathVariable Integer orderId) {
         return orderService.queryId(orderId);
 
+    }
+
+    /**
+     * 获取用户订单
+     * @param order
+     * @return
+     */
+    @PostMapping("/getMyOrder")
+    @ApiOperation("获取用户订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "order", value = "订单对象", dataType = "Order"),
+    })
+    public ResultVO getMyOrder(@RequestBody Order order) {
+        return new ResultVO(ResultEnum.SUCCESS,orderService.getMyOrder(order));
     }
 
 }

@@ -60,37 +60,41 @@
             where productId = #{productId}
         </foreach>
     </delete>
+
+<!--    <update id="batchUpdate">-->
+<!--        <foreach collection="list" item="product" separator=";">-->
+<!--            DELETE from tb_product-->
+<!--            where productId = #{productId}-->
+<!--        </foreach>-->
+<!--    </update>-->
     <!--    添加，修改if判断-->
     <sql id="productIf">
-        <if test="productId != null">
-            #{productId},
-        </if>
         <if test="userId != null">
-            #{userId},
+            userId = #{userId},
         </if>
         <if test="adminId != null">
-            #{adminId},
+            adminId = #{adminId},
         </if>
         <if test="categoryId != null">
-            #{categoryId},
+            categoryId = #{categoryId},
         </if>
         <if test="productName != null">
-            #{productName},
+            productName = #{productName},
         </if>
         <if test="productPrice != null">
-            #{productPrice},
+            productPrice = #{productPrice},
         </if>
         <if test="productDec != null">
-            #{productDec},
+            productDec = #{productDec},
         </if>
         <if test="productStatus != null">
-            #{productStatus}
+            productStatus = #{productStatus}
         </if>
         <if test="productSale != null">
-            #{productSale}
+            productSale = #{productSale}
         </if>
         <if test="productGrade != null">
-            #{productGrade}
+            productGrade = #{productGrade}
         </if>
     </sql>
     <!--修改数据-->
@@ -190,41 +194,8 @@
         select p.*,c.categoryName from tb_product p
         LEFT JOIN tb_category c
         ON(p.categoryId = c.categoryId)
-        where c.categoryName = #{keyword}
-        OR p.productName = #{keyword}
-        OR p.productName = #{keyword}
-        <where>
-            <if test="productId != null">
-                p.productId = #{productId}
-            </if>
-            <if test="userId != null">
-                and p.userId = #{userId}
-            </if>
-            <if test="adminId != null">
-                and p.adminId = #{adminId}
-            </if>
-            <if test="categoryId != null">
-                and p.categoryId = #{categoryId}
-            </if>
-            <if test="productName != null">
-                and p.productName = #{productName}
-            </if>
-            <if test="productPrice != null">
-                and p.productPrice = #{productPrice}
-            </if>
-            <if test="productDec != null">
-                and p.productDec = #{productDec}
-            </if>
-            <if test="productStatus != null">
-                and p.productStatus = #{productStatus}
-            </if>
-            <if test="productSale != null">
-                and p.productSale = #{productSale}
-            </if>
-            <if test="productGrade != null">
-                and p.productGrade = #{productGrade}
-            </if>
-
-        </where>
+        where c.categoryName like concat('%',#{keyword},'%')
+        OR p.productName like concat('%',#{keyword},'%')
+        OR p.productDec like concat('%',#{keyword},'%')
     </select>
 </mapper>

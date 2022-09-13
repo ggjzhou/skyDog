@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.skydog.dao.OrderDao">
+    <resultMap id="orderMap" type="com.example.skydog.module.entity.Order">
+        <id column="orderId" property="orderId" />
+        <result column="cartId" property="cartId" />
+        <result column="addressId" property="addressId" />
+        <result column="productId" property="productId" />
+        <result column="scaleId" property="scaleId" />
+        <result column="orderStatus" property="orderStatus" />
+        <result column="createTime" property="createTime" />
+        <result column="payTime" property="payTime"/>
+        <result column="endTime" property="endTime"/>
+        <association property="productDto" column="productId"
+                     resultMap="com.example.skydog.dao.ProductDao.ProductDtoMap"></association>
+        <association property="address" column="addressId"
+                     resultMap="com.example.skydog.dao.AddressDao.addressMap"></association>
+    </resultMap>
 <!--  添加订单  -->
     <insert id="add">
         insert tb_order(
         orderId,
+        userId
         cartId,
         addressId,
         productId,
@@ -15,6 +31,7 @@
         endTime
         )values(
         #{orderId},
+        #{userId},
         #{cartId},
         #{addressId},
         #{productId},
@@ -29,19 +46,8 @@
     <delete id="delete" parameterType="java.lang.Integer">
     delete from tb_order where orderId=#{orderId}
     </delete>
-<!--  根据id查询  -->
-    <resultMap id="Query" type="com.example.skydog.module.entity.Order">
-        <id column="orderId" property="orderId" />
-        <result column="cartId" property="cartId" />
-        <result column="addressId" property="addressId" />
-        <result column="productId" property="productId" />
-        <result column="scaleId" property="scaleId" />
-        <result column="orderStatus" property="orderStatus" />
-        <result column="createTime" property="createTime" />
-        <result column="ordertime" property="ordertime"/>
-        <result column="endtime" property="endtime"/>
-    </resultMap>
-    <select id="queryId" parameterType="java.lang.Integer" resultMap="Query">
+
+    <select id="queryId" parameterType="java.lang.Integer" resultMap="orderMap">
     select *from tb_order where orderId=#{orderId}
     </select>
 <!--  条件查询  -->
@@ -49,6 +55,9 @@
         <where>
             <if test="orderId != null">
                 orderId=#{orderId}
+            </if>
+            <if test="userId !=null">
+                userId=#{userId}
             </if>
             <if test="cartId !=null">
                 cartId=#{cartId}
@@ -76,7 +85,7 @@
             </if>
         </where>
     </sql>
-    <select id="queryCondition" parameterType="Order" resultMap="Query">
+    <select id="queryCondition" parameterType="Order" resultMap="orderMap">
             select *from tb_order
         <include refid="selectActive"/>
     </select>
@@ -84,6 +93,9 @@
     <select id="update" parameterType="com.example.skydog.module.entity.Order">
      update tb_order
      <set>
+         <if test="userId !=null">
+             userId=#{userId}
+         </if>
          <if test="cartId !=null">
              cartId=#{cartId}
          </if>
@@ -141,7 +153,25 @@
             delete from tb_order where orderId=#{orderId}
         </foreach>
     </delete>
-
+    <select id="getMyOrder" parameterType="Order" resultMap="orderMap">
+        select o.*,a.*,p.*,g.*,s.* from tb_user u
+        LEFT JOIN tb_order o ON (u.userId = o.userId)
+        LEFT JOIN tb_address a ON (o.addressId = a.addressId)
+        LEFT JOIN tb_product p ON (o.productId = p.productId)
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_scale s ON (o.scaleId = s.scaleId)
+        <where>
+            <if test="orderId != null">
+                o.orderId=#{orderId}
+            </if>
+            <if test="userId !=null">
+                and o.userId=#{userId}
+            </if>
+            <if test="orderStatus !=null">
+                and o.orderStatus=#{orderStatus}
+            </if>
+        </where>
+    </select>
 
 
 </mapper>
