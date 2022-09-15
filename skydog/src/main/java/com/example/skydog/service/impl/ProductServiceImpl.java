@@ -133,7 +133,15 @@ public class ProductServiceImpl implements ProductService {
       }
    }
    public ResultVO search(String keyword){
-      return new ResultVO(ResultEnum.SUCCESS,productDao.search(keyword));
+      ProductVo productVo = new ProductVo();
+      productVo.setCurrentPage(1);
+      productVo.setPageSize(30);
+      if(keyword == null || keyword.equals("") || keyword.length()==0){
+         return new ResultVO(ResultEnum.SUCCESS,productDao.queryBySelectActive(productVo));
+      }else {
+         return new ResultVO(ResultEnum.SUCCESS,productDao.search(keyword));
+      }
+
    }
 
 }

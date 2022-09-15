@@ -16,6 +16,8 @@
         <result column="productGrade" property="productGrade"/>
         <association property="img" column="imgId"
                      resultMap="com.example.skydog.dao.ImgDao.ImgMap"></association>
+        <collection property="scaleList" ofType="Scale"
+                    resultMap="com.example.skydog.dao.ScaleDao.ScaleMap"></collection>
     </resultMap>
     <resultMap id="ProductDtoMap"
                extends="BaseProductMap"
@@ -160,34 +162,71 @@
     </sql>
     <!--    通过id查询-->
     <select id="queryId" parameterType="int" resultMap="BaseProductMap">
-        select p.*,g.*,i.* from tb_product p
+        select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         where p.productId = #{productId}
     </select>
     <!--    动态模糊查询-->
     <select id="queryCondition" resultMap="BaseProductMap">
-        select p.*,g.*,i.* from tb_product p
+        select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
     </select>
     <!--    通过种类查询-->
     <select id="queryByCategory" parameterType="Category" resultMap="ProductDtoMap">
-        select p.*,g.*,i.* from tb_product p
+        select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         where g.categoryName = #{categoryName}
     </select>
 <!--    条件查询分页-->
     <select id="queryBySelectActive" resultMap="BaseProductMap">
-        select p.*,g.*,i.* from tb_product p
+        select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
         <where>
+            <if test="productId != null">
+                p.productId = #{productId}
+            </if>
+            <if test="userId != null">
+                and p.userId = #{userId}
+            </if>
+            <if test="adminId != null">
+                and p.adminId = #{adminId}
+            </if>
+            <if test="categoryId != null">
+                and p.categoryId = #{categoryId}
+            </if>
+            <if test="productName != null">
+                and p.productName = #{productName}
+            </if>
+            <if test="productPrice != null">
+                and p.productPrice = #{productPrice}
+            </if>
+            <if test="productDec != null">
+                and p.productDec = #{productDec}
+            </if>
+            <if test="productStatus != null">
+                and p.productStatus = #{productStatus}
+            </if>
+            <if test="productSale != null">
+                and p.productSale = #{productSale}
+            </if>
+            <if test="productGrade != null">
+                and p.productGrade = #{productGrade}
+            </if>
+            <if test="imgId != null">
+                and p.imgId = #{imgId}
+            </if>
             <if test="lowPrice != null">
                 p.productPrice >= #{lowPrice}
             </if>
@@ -204,10 +243,11 @@
         </if>
     </select>
 
-    <select id="search" parameterType="String" resultMap="BaseProductMap">
-        select p.*,g.*,i.* from tb_product p
+    <select id="search" resultMap="BaseProductMap">
+        select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         where g.categoryName like concat('%',#{keyword},'%')
         OR p.productName like concat('%',#{keyword},'%')
         OR p.productDec like concat('%',#{keyword},'%')
