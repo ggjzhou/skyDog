@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Scale {
     private Integer scaleId;
     private Integer productId;
-    private String productScale;
+    private Object productScale;
     private Integer productScaleStock;
     private Double productScalePrice;
 

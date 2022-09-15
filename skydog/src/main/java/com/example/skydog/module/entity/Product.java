@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Author:甘舟
@@ -27,4 +28,5 @@ public class Product implements Serializable {
     private Double productGrade;//商品评分
     private Integer imgId;
     private Img img;
+    private List<Scale> scaleList;
 }

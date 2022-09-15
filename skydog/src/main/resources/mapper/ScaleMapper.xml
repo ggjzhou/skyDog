@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.skydog.dao.ScaleDao">
+    <resultMap id="ScaleMap" type="com.example.skydog.module.entity.Scale">
+        <id column="scaleId" property="scaleId" />
+        <result column="productId" property="productId" />
+        <result column="productScale" property="productScale"  />
+        <result column="productScaleStock" property="productScaleStock" />
+        <result column="productScalePrice" property="productScalePrice" />
+    </resultMap>
 <!--   添加商品规格-->
     <insert id="add">
         insert into table_scale{
@@ -45,16 +52,10 @@
     </update>
 
 <!--    按id查询-->
-    <select id="queryId" parameterType="java.lang.Integer" resultMap="Query">
+    <select id="queryId" parameterType="java.lang.Integer" resultMap="ScaleMap">
     select *from tb_scale where scaleId=#{scaleId}
     </select>
-    <resultMap id="Query" type="com.example.skydog.module.entity.Scale">
-        <id column="scaleId" property="scaleId" />
-        <result column="productId" property="productId" />
-        <result column="productScale" property="productScale"  />
-        <result column="productScaleStock" property="productScaleStock" />
-        <result column="productScalePrice" property="productScalePrice" />
-    </resultMap>
+
 
 <!--    按条件查询-->
     <sql id="selectActive">
@@ -79,7 +80,7 @@
     </sql>
 
 
-    <select id="queryCondition" parameterType="Scale" resultMap="Query">
+    <select id="queryCondition" parameterType="Scale" resultMap="ScaleMap">
         select *from tb_scale
         <include refid="selectActive"/>
     </select>
