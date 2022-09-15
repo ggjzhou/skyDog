@@ -228,7 +228,7 @@
                 and p.imgId = #{imgId}
             </if>
             <if test="lowPrice != null">
-                p.productPrice >= #{lowPrice}
+                and p.productPrice >= #{lowPrice}
             </if>
             <if test="highPrice != null">
                 <![CDATA[
@@ -248,8 +248,53 @@
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         LEFT JOIN tb_scale s ON (p.productId = s.productId)
-        where g.categoryName like concat('%',#{keyword},'%')
-        OR p.productName like concat('%',#{keyword},'%')
-        OR p.productDec like concat('%',#{keyword},'%')
+        <where>
+            <if test="1 == 1">
+                p.productStatus = "在售"
+            </if>
+            <if test="lowPrice != null">
+                and p.productPrice >= #{lowPrice}
+            </if>
+            <if test="highPrice != null">
+                <![CDATA[
+                    and p.productPrice <= #{highPrice}
+                    ]]>
+            </if>
+            <if test="keyword != null">
+                and (g.categoryName like concat('%',#{keyword},'%')
+                OR p.productName like concat('%',#{keyword},'%')
+                OR p.productDec like concat('%',#{keyword},'%'))
+            </if>
+        </where>
+        <!-- 分页-->
+        <if test="currentPage != null and pageSize != null">
+            <bind name="start" value="(currentPage - 1) * pageSize"/>
+            limit #{start},#{pageSize}
+        </if>
+
     </select>
+    <select id="searchCount" resultType="int">
+        select count(1) from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
+        <where>
+            <if test="lowPrice != null">
+                p.productPrice >= #{lowPrice}
+            </if>
+            <if test="highPrice != null">
+                <![CDATA[
+                    and p.productPrice <= #{highPrice}
+                    ]]>
+            </if>
+            <if test="keyword != null">
+                and (g.categoryName like concat('%',#{keyword},'%')
+                OR p.productName like concat('%',#{keyword},'%')
+                OR p.productDec like concat('%',#{keyword},'%'))
+            </if>
+        </where>
+    </select>
+<!--    &#45;&#45;         where g.categoryName like concat('%',#{keyword},'%')-->
+<!--    &#45;&#45;         OR p.productName like concat('%',#{keyword},'%')-->
+<!--    &#45;&#45;         OR p.productDec like concat('%',#{keyword},'%')-->
 </mapper>

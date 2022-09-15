@@ -7,6 +7,7 @@
         <result column="addressId" property="addressId" />
         <result column="productId" property="productId" />
         <result column="scaleId" property="scaleId" />
+        <result column="productCount" property="scaleId" />
         <result column="orderStatus" property="orderStatus" />
         <result column="createTime" property="createTime" />
         <result column="payTime" property="payTime"/>
@@ -25,6 +26,7 @@
         addressId,
         productId,
         scaleId,
+        productCount,
         orderStatus,
         createTime,
         payTime,
@@ -36,6 +38,7 @@
         #{addressId},
         #{productId},
         #{scaleId},
+        #{productCount}
         #{orderStatus},
         #{createTime},
         #{payTime},
@@ -70,6 +73,9 @@
             </if>
             <if test="scaleId !=null">
                 scaleId=#{scaleId}
+            </if>
+            <if test="productCount !=null">
+                productCount=#{productCount}
             </if>
             <if test="orderStatus !=null">
                 orderStatus=#{orderStatus}
@@ -107,6 +113,9 @@
          </if>
          <if test="scaleId !=null">
              scaleId=#{scaleId}
+         </if>
+         <if test="productCount !=null">
+             productCount=#{productCount}
          </if>
          <if test="orderStatus !=null">
              orderStatus=#{orderStatus}

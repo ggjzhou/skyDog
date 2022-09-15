@@ -124,12 +124,12 @@ public class ProductController {
     public ResultVO queryByPrice(@RequestBody ProductVo productVo) {
         return productService.queryByPrice(productVo);
     }
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ApiOperation("商品搜索")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "keyword", value = "关键词", dataType = "String"),
+            @ApiImplicitParam(name = "productVo", value = "", dataType = "ProductVo"),
     })
-    public ResultVO search(String keyword) {
-        return productService.search(keyword);
+    public ResultVO search(@RequestBody ProductVo productVo) {
+        return productService.search(productVo);
     }
 }

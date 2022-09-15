@@ -16,6 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductVo extends Product implements Serializable {
+    private String keyword;
     private Double lowPrice;
     private Double highPrice;
     private Integer currentPage;

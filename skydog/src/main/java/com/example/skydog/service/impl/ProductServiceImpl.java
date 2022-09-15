@@ -132,16 +132,17 @@ public class ProductServiceImpl implements ProductService {
          return new ResultVO(ResultEnum.SUCCESS,productDao.queryCondition(product));
       }
    }
-   public ResultVO search(String keyword){
-      ProductVo productVo = new ProductVo();
-      productVo.setCurrentPage(1);
-      productVo.setPageSize(30);
-      if(keyword == null || keyword.equals("") || keyword.length()==0){
-         return new ResultVO(ResultEnum.SUCCESS,productDao.queryBySelectActive(productVo));
-      }else {
-         return new ResultVO(ResultEnum.SUCCESS,productDao.search(keyword));
+   public ResultVO search(ProductVo productVo){
+      if(productVo.getKeyword()==null || productVo.getKeyword().equals("") || productVo.getKeyword().length()==0){
+         productVo.setPageSize(30);
+         productVo.setCurrentPage(1);
       }
-
+      PageBeans pageBeans = new PageBeans();
+      pageBeans.setCurrentPage(productVo.getCurrentPage());
+      pageBeans.setPageSize(productVo.getPageSize());
+      pageBeans.setCount(productDao.searchCount(productVo));
+      pageBeans.setData(productDao.search(productVo));
+      return new ResultVO(ResultEnum.SUCCESS,pageBeans);
    }
 
 }
