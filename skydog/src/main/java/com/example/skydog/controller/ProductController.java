@@ -99,7 +99,7 @@ public class ProductController {
      * @param productName
      * @return
      */
-    @PostMapping("/queryByName/{productName}")
+    @GetMapping("/queryByName/{productName}")
     @ApiOperation("商品名查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productName", value = "商品名", dataType = "String"),
@@ -124,12 +124,12 @@ public class ProductController {
     public ResultVO queryByPrice(@RequestBody ProductVo productVo) {
         return productService.queryByPrice(productVo);
     }
-    @PostMapping("/search")
+    @GetMapping("/search/{keyword}")
     @ApiOperation("商品搜索")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
+            @ApiImplicitParam(name = "keyword", value = "关键词", dataType = "String"),
     })
-    public ResultVO search(@RequestBody String keyword) {
+    public ResultVO search(@PathVariable String keyword) {
         return productService.search(keyword);
     }
 }

@@ -108,9 +108,11 @@
     </select>
     <!--    查询自己购物车-->
     <select id="getMyCart" resultMap="cartMap">
-        select p.*,c.*,s.* from tb_user u
+        select c.*,p.*,g.*,i.*,s.* from tb_user u
         LEFT JOIN tb_cart c ON (u.userId = c.userId)
         LEFT JOIN tb_product p ON (c.productId = p.productId)
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         LEFT JOIN tb_scale s ON (c.scaleId = s.scaleId)
         where u.userId = #{userId}
     </select>

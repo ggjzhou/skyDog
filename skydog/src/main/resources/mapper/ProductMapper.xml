@@ -14,6 +14,8 @@
         <result column="productStatus" property="productStatus"/>
         <result column="productSale" property="productSale"/>
         <result column="productGrade" property="productGrade"/>
+        <association property="img" column="imgId"
+                     resultMap="com.example.skydog.dao.ImgDao.ImgMap"></association>
     </resultMap>
     <resultMap id="ProductDtoMap"
                extends="BaseProductMap"
@@ -60,37 +62,44 @@
             where productId = #{productId}
         </foreach>
     </delete>
+
+<!--    <update id="batchUpdate">-->
+<!--        <foreach collection="list" item="product" separator=";">-->
+<!--            DELETE from tb_product-->
+<!--            where productId = #{productId}-->
+<!--        </foreach>-->
+<!--    </update>-->
     <!--    添加，修改if判断-->
     <sql id="productIf">
-        <if test="productId != null">
-            #{productId},
-        </if>
         <if test="userId != null">
-            #{userId},
+            userId = #{userId},
         </if>
         <if test="adminId != null">
-            #{adminId},
+            adminId = #{adminId},
         </if>
         <if test="categoryId != null">
-            #{categoryId},
+            categoryId = #{categoryId},
         </if>
         <if test="productName != null">
-            #{productName},
+            productName = #{productName},
         </if>
         <if test="productPrice != null">
-            #{productPrice},
+            productPrice = #{productPrice},
         </if>
         <if test="productDec != null">
-            #{productDec},
+            productDec = #{productDec},
         </if>
         <if test="productStatus != null">
-            #{productStatus}
+            productStatus = #{productStatus}
         </if>
         <if test="productSale != null">
-            #{productSale}
+            productSale = #{productSale}
         </if>
         <if test="productGrade != null">
-            #{productGrade}
+            productGrade = #{productGrade}
+        </if>
+        <if test="imgId != null">
+            imgId = #{imgId}
         </if>
     </sql>
     <!--修改数据-->
@@ -133,6 +142,9 @@
             <if test="productGrade != null">
                 and p.productGrade = #{productGrade}
             </if>
+            <if test="imgId != null">
+                and p.imgId = #{imgId}
+            </if>
 
         </where>
     </sql>
@@ -147,26 +159,32 @@
         </if>
     </sql>
     <!--    通过id查询-->
-    <select id="queryId" parameterType="int" resultType="Product">
-        select * from tb_product p
+    <select id="queryId" parameterType="int" resultMap="BaseProductMap">
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where p.productId = #{productId}
     </select>
     <!--    动态模糊查询-->
     <select id="queryCondition" resultMap="BaseProductMap">
-        select * from tb_product p
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
     </select>
     <!--    通过种类查询-->
     <select id="queryByCategory" parameterType="Category" resultMap="ProductDtoMap">
-        select p.*,c.categoryName from tb_product p
-        LEFT JOIN tb_category c
-        ON(p.categoryId = c.categoryId)
-        where c.categoryName = #{categoryName}
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        where g.categoryName = #{categoryName}
     </select>
 <!--    条件查询分页-->
     <select id="queryBySelectActive" resultMap="BaseProductMap">
-        select * from tb_product p
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
         <where>
@@ -186,45 +204,12 @@
         </if>
     </select>
 
-    <select id="search" parameterType="String" resultType="Product">
-        select p.*,c.categoryName from tb_product p
-        LEFT JOIN tb_category c
-        ON(p.categoryId = c.categoryId)
-        where c.categoryName = #{keyword}
-        OR p.productName = #{keyword}
-        OR p.productName = #{keyword}
-        <where>
-            <if test="productId != null">
-                p.productId = #{productId}
-            </if>
-            <if test="userId != null">
-                and p.userId = #{userId}
-            </if>
-            <if test="adminId != null">
-                and p.adminId = #{adminId}
-            </if>
-            <if test="categoryId != null">
-                and p.categoryId = #{categoryId}
-            </if>
-            <if test="productName != null">
-                and p.productName = #{productName}
-            </if>
-            <if test="productPrice != null">
-                and p.productPrice = #{productPrice}
-            </if>
-            <if test="productDec != null">
-                and p.productDec = #{productDec}
-            </if>
-            <if test="productStatus != null">
-                and p.productStatus = #{productStatus}
-            </if>
-            <if test="productSale != null">
-                and p.productSale = #{productSale}
-            </if>
-            <if test="productGrade != null">
-                and p.productGrade = #{productGrade}
-            </if>
-
-        </where>
+    <select id="search" parameterType="String" resultMap="BaseProductMap">
+        select p.*,g.*,i.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        where g.categoryName like concat('%',#{keyword},'%')
+        OR p.productName like concat('%',#{keyword},'%')
+        OR p.productDec like concat('%',#{keyword},'%')
     </select>
 </mapper>
