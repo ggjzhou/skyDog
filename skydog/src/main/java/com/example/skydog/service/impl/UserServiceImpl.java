@@ -3,7 +3,6 @@ package com.example.skydog.service.impl;
 import com.example.skydog.dao.CartDao;
 import com.example.skydog.dao.UserDao;
 import com.example.skydog.enums.ResultEnum;
-import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.module.vo.ResultVO;
@@ -80,14 +79,15 @@ public class UserServiceImpl implements UserService {
     public ResultVO login(User user) {
         User u = new User();
         u.setUserName(user.getUserName());
-        u.setPassword(user.getPassword());
+//        u.setPassword(user.getPassword());
         List<User> list = userDao.queryCondition(u);
         if (list == null || list.isEmpty()) {
             return new ResultVO(ResultEnum.FAIL, "该账号不存在");
         } else if (list.get(0).getPassword().equals(u.getPassword())) {
             return new ResultVO(list.get(0));
-        } else
+        } else {
             return new ResultVO(ResultEnum.FAIL, "密码错误");
+        }
     }
 
     @Override
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
 
 
     public ResultVO getCart(Integer userId) {
-        return new ResultVO(ResultEnum.SUCCESS,cartDao.getMyCart(userId));
+        return new ResultVO(ResultEnum.SUCCESS, cartDao.getMyCart(userId));
     }
 
 

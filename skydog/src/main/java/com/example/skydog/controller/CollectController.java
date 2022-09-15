@@ -95,7 +95,7 @@ public class CollectController {
      * @return
      */
     @GetMapping("/queryId/{collectId}")
-    @ApiOperation("查询用户收藏列表")
+    @ApiOperation("Id查询收藏")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "collectId", value = "收藏Id", dataType = "Integer"),
     })
