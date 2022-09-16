@@ -18,24 +18,6 @@
     <!-- 添加 -->
     <insert id="add" parameterType="Address">
         insert into tb_address
-        <!--        <trim prefix="  values ("-->
-        <!--              suffix=")" suffixOverrides=",">-->
-        <!--            <if test="consigneeName != null">-->
-        <!--                #{consigneeName},-->
-        <!--            </if>-->
-        <!--            <if test="consigneePhone != null">-->
-        <!--                #{consigneePhone},-->
-        <!--            </if>-->
-        <!--            <if test="zone != null">-->
-        <!--                #{zone},-->
-        <!--            </if>-->
-        <!--            <if test="fullAddress != null">-->
-        <!--                #{fullAddress},-->
-        <!--            </if>-->
-        <!--            <if test="isDefault != null">-->
-        <!--                #{isDefault},-->
-        <!--            </if>-->
-        <!--        </trim>-->
         values (#{addressId}, #{userId}, #{consigneeName}, #{consigneePhone},#{zone},#{fullAddress},#{isDefault})
     </insert>
 

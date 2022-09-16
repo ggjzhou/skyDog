@@ -75,8 +75,8 @@
     </select>
 
 
-    <!-- 条件查询 -->
-    <select id="queryCondition" parameterType="Collect" resultType="Collect ">
+    <!-- 条件查询收藏 -->
+    <select id="queryCondition" parameterType="Collect" resultType="Collect">
         select * from tb_collect c
         <where>
             <if test="userId!=null">
