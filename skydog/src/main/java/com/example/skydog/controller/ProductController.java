@@ -85,15 +85,27 @@ public class ProductController {
      * @param product
      * @return
      */
-    @GetMapping("/queryCondition")
+    @PostMapping("/queryCondition")
     @ApiOperation("id查询商品")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "productId", value = "产品id", dataType = "Int"),
+            @ApiImplicitParam(name = "product", value = "产品id", dataType = "Product"),
     })
     public ResultVO queryCondition(@RequestBody Product product) {
         return productService.queryCondition(product);
     }
-
+    /**
+     * 模糊分页查询商品
+     * @param productVo
+     * @return
+     */
+    @PostMapping("/getMyProduct")
+    @ApiOperation("id查询商品")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "product", value = "产品id", dataType = "Product"),
+    })
+    public ResultVO getMyProduct(@RequestBody ProductVo productVo) {
+        return productService.getMyProduct(productVo);
+    }
     /**
      * 商品名查询
      * @param productName

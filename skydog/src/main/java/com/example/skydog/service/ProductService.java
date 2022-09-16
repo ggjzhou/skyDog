@@ -27,6 +27,8 @@ public interface ProductService {
 
    ResultVO queryByCategory(Category category);
 
+   ResultVO getMyProduct(ProductVo productVo);
+
    ResultVO queryByPrice(ProductVo productVo);
 
    ResultVO queryByName(String productName);

@@ -112,7 +112,7 @@
         </set>
         where productId = #{productId}
     </update>
-    <sql id="selectActive">
+    <sql id="condition">
         <where>
             <if test="productId != null">
                 p.productId = #{productId}
@@ -147,7 +147,6 @@
             <if test="imgId != null">
                 and p.imgId = #{imgId}
             </if>
-
         </where>
     </sql>
     <sql id="price">
@@ -175,7 +174,7 @@
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         LEFT JOIN tb_scale s ON (p.productId = s.productId)
         <!-- 查询条件 -->
-        <include refid="selectActive"/>
+        <include refid="condition"/>
     </select>
     <!--    通过种类查询-->
     <select id="queryByCategory" parameterType="Category" resultMap="ProductDtoMap">
@@ -185,14 +184,8 @@
         LEFT JOIN tb_scale s ON (p.productId = s.productId)
         where g.categoryName = #{categoryName}
     </select>
-<!--    条件查询分页-->
-    <select id="queryBySelectActive" resultMap="BaseProductMap">
-        select p.*,g.*,i.*,s.* from tb_product p
-        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
-        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
-        LEFT JOIN tb_scale s ON (p.productId = s.productId)
-        <!-- 查询条件 -->
-        <include refid="selectActive"/>
+
+    <sql id="selectActive">
         <where>
             <if test="productId != null">
                 p.productId = #{productId}
@@ -236,13 +229,29 @@
                 ]]>
             </if>
         </where>
+    </sql>
+<!--    条件查询分页-->
+    <select id="queryBySelectActive" resultMap="BaseProductMap">
+        select p.*,g.*,i.*,s.* from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
+        <!-- 查询条件 -->
+        <include refid="selectActive"/>
         <!-- 分页-->
         <if test="currentPage != null and pageSize != null">
             <bind name="start" value="(currentPage - 1) * pageSize"/>
             limit #{start},#{pageSize}
         </if>
     </select>
-
+    <select id="countBySelectActive" resultType="int">
+        select count(1) from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
+        <!-- 查询条件 -->
+        <include refid="selectActive"/>
+    </select>
     <select id="search" resultMap="BaseProductMap">
         select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)

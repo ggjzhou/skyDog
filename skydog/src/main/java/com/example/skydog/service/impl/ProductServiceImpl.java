@@ -102,7 +102,24 @@ public class ProductServiceImpl implements ProductService {
       }
 
    }
+   /**
+    * 动态模糊查询商品
+    * @param productVo
+    * @return
+    */
+   public ResultVO getMyProduct(ProductVo productVo) {
+      PageBeans pageBeans = new PageBeans();
+      pageBeans.setCurrentPage(productVo.getCurrentPage());
+      pageBeans.setPageSize(productVo.getPageSize());
+      pageBeans.setCount(productDao.countBySelectActive(productVo));
+      pageBeans.setData(productDao.queryBySelectActive(productVo));
+      if(pageBeans.getData().isEmpty()){
+         return new ResultVO(ResultEnum.SUCCESS,"未找到相关商品");
+      }else {
+         return new ResultVO(ResultEnum.SUCCESS,pageBeans);
+      }
 
+   }
 
    public ResultVO queryByPage(PageBeans pageBeans){
       return null;

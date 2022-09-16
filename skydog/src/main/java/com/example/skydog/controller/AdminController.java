@@ -1,8 +1,10 @@
 package com.example.skydog.controller;
 
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Admin;
 import com.example.skydog.module.entity.Scale;
 import com.example.skydog.module.entity.User;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 @Api(tags = "管理员控制器")
 public class AdminController {
@@ -29,9 +31,9 @@ public class AdminController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "admin", value = "管理员", dataType = "Admin"),
     })
-    public Admin add(@RequestBody Admin admin) {
+    public ResultVO add(@RequestBody Admin admin) {
         adminService.add(admin);
-        return admin;
+        return new ResultVO(ResultEnum.ADD_SUCCESS);
     }
     /*
      * 删除管理员
@@ -41,9 +43,9 @@ public class AdminController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "adminId", value = "管理员id", dataType = "Int"),
     })
-    public Object delete(@PathVariable Integer adminId) {
+    public ResultVO delete(@PathVariable Integer adminId) {
         adminService.delete(adminId);
-        return true;
+        return new ResultVO(ResultEnum.DELETE_SUCCESS);
     }
     /*
    修改管理员信息
@@ -53,9 +55,9 @@ public class AdminController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "admin", value = "管理员", dataType = "Admin"),
     })
-    public Admin update(@RequestBody Admin admin) {
+    public ResultVO update(@RequestBody Admin admin) {
         adminService.update(admin);
-        return admin;
+        return new ResultVO(ResultEnum.UPDATE_SUCCESS);
     }
     /*
   按id查询
@@ -65,22 +67,21 @@ public class AdminController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "adminId", value = "管理员id", dataType = "Int"),
     })
-    public Admin queryById(@PathVariable Integer adminId) {
+    public ResultVO queryById(@PathVariable Integer adminId) {
         Admin admin =adminService.queryId(adminId);
-        return admin;
+        return new ResultVO(ResultEnum.DELETE_SUCCESS);
     }
 
     /**
      * 登入模块
-     * @param adminAcc,adminPwd
+     * @param admin
      * @return
      */
-    @PostMapping("/login/{adminAcc} &&{adminPwd}")
-
-    public Admin login(@PathVariable String adminAcc,@PathVariable String adminPwd) {
+    @PostMapping("/login")
+    public ResultVO login(@RequestBody Admin admin) {
 //        ResultVO resultVO = new ResultVO();
 //        resultVO.ResultVOa();
-        return adminService.login( adminAcc,adminPwd);
+        return adminService.login(admin);
     }
 
 }

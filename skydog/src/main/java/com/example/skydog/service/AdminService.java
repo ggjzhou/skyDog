@@ -1,6 +1,7 @@
 package com.example.skydog.service;
 
 import com.example.skydog.module.entity.Admin;
+import com.example.skydog.module.vo.ResultVO;
 
 import java.util.*;
 
@@ -9,7 +10,7 @@ public interface AdminService {
 
    void add(Admin admin);
 
-   void delete(Integer id);
+   ResultVO delete(Integer id);
 
    void update(Admin admin);
 
@@ -17,6 +18,6 @@ public interface AdminService {
 
    List<Admin> queryCodition(Admin admin);
 
-   Admin login(String adminAcc, String adminPwd);
+   ResultVO login(Admin admin);
 
 }

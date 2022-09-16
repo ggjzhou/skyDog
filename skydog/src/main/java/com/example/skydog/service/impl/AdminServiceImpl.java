@@ -1,8 +1,10 @@
 package com.example.skydog.service.impl;
 
 import com.example.skydog.dao.AdminDao;
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Admin;
 import com.example.skydog.module.entity.User;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,10 @@ public class AdminServiceImpl implements AdminService {
    }
 
 
-   public void delete(Integer id) {
+   public ResultVO delete(Integer id) {
       // TODO: implement
       admindao.delete(id);
+      return new ResultVO(ResultEnum.DELETE_SUCCESS);
    }
 
 
@@ -46,20 +49,21 @@ public class AdminServiceImpl implements AdminService {
 
    /**
     * 登录模块
-    * @param adminAcc
-    * @param adminPwd
+    * @param admin
     * @return
     */
-   public Admin login(String adminAcc, String adminPwd) {
+   public ResultVO login(Admin admin) {
       Admin a = new Admin();
-      a.setAdminName(adminAcc);
+      a.setAdminName(admin.getAdminName());
+
       List<Admin> list = admindao.queryCondition(a);
       if (list == null || list.isEmpty()) {
-         return null;
-      } else if(list.get(0).getAdminPwd().equals(adminPwd)) {
-         return a;
-      }else
-         return null;
+         return new ResultVO(ResultEnum.FAIL, "该账号不存在");
+      } else if (list.get(0).getAdminPwd().equals(admin.getAdminPwd())) {
+         return new ResultVO(list.get(0));
+      } else {
+         return new ResultVO(ResultEnum.FAIL, "密码错误");
+      }
    }
 
 }

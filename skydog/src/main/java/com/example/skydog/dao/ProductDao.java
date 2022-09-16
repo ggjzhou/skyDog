@@ -30,7 +30,9 @@ public interface ProductDao<E> {
 
    List<Product> queryByCategory(Category category);
 
-   List<Product> queryBySelectActive(Product product);
+   List<Product> queryBySelectActive(ProductVo productVo);
+
+   Integer countBySelectActive(ProductVo productVo);
 
    List<Product> search(ProductVo productVo);
 
