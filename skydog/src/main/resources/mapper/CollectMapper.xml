@@ -16,7 +16,7 @@
     </resultMap>
 
     <!-- 添加 -->
-    <insert id="add" parameterType="Collect">
+    <insert id="add" parameterType="Collect" >
         insert into tb_collect
         values (#{collectId}, #{userId}, #{productId}, #{collectTime})
     </insert>
@@ -76,7 +76,7 @@
 
 
     <!-- 条件查询 -->
-    <select id="queryCondition" parameterType="Collect">
+    <select id="queryCondition" parameterType="Collect" resultType="Collect ">
         select * from tb_collect c
         <where>
             <if test="userId!=null">

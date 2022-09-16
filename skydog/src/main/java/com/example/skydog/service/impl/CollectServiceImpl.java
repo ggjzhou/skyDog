@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,9 +43,10 @@ public class CollectServiceImpl implements CollectService {
         Collect collect1 = new Collect();
         collect1.setUserId(collect.getUserId());
         collect1.setProductId(collect.getProductId());
-        collect1.setCollectTime(collect.getCollectTime()); /**时间*/
+//        collect1.setCollectTime(collect.getCollectTime()); /**时间*/
         List<Collect> list = collectDao.queryCondition(collect1);
         if (list.isEmpty()) {
+            collect1.setCollectTime(new Date());
             collectDao.add(collect);
             return new ResultVO(ResultEnum.ADD_SUCCESS);
         } else {
