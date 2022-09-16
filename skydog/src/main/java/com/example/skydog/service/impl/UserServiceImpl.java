@@ -65,9 +65,10 @@ public class UserServiceImpl implements UserService {
         String nick = "User " + new Date();
         u.setNick(nick);
         u.setUserName(user.getUserName());
-        u.setPassword(user.getPassword());
+
         List<User> list = userDao.queryCondition(u);
         if (list.isEmpty()) {
+            u.setPassword(user.getPassword());
             userDao.add(u);
             return new ResultVO(ResultEnum.SUCCESS, "注册成功");
         } else {
@@ -79,11 +80,11 @@ public class UserServiceImpl implements UserService {
     public ResultVO login(User user) {
         User u = new User();
         u.setUserName(user.getUserName());
-//        u.setPassword(user.getPassword());
+
         List<User> list = userDao.queryCondition(u);
         if (list == null || list.isEmpty()) {
             return new ResultVO(ResultEnum.FAIL, "该账号不存在");
-        } else if (list.get(0).getPassword().equals(u.getPassword())) {
+        } else if (list.get(0).getPassword().equals(user.getPassword())) {
             return new ResultVO(list.get(0));
         } else {
             return new ResultVO(ResultEnum.FAIL, "密码错误");

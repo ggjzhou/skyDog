@@ -104,4 +104,37 @@ public class CollectController {
     }
 
 
+    /**
+     * 收藏失效商品
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getUseless/{userId}")
+    @ApiOperation("查询收藏列表失效商品")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
+    })
+    public ResultVO getUseless(@PathVariable Integer userId) {
+        return collectService.getUseless((userId));
+    }
+
+    /**
+     * 收藏商品搜索
+     *
+     * @param userId
+     * @param keyword
+     * @return
+     */
+    @GetMapping("/getSearch")
+    @ApiOperation("查询收藏列表失效商品")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
+            @ApiImplicitParam(name = "keyword", value = "关键词", dataType = "String"),
+    })
+    public ResultVO getSearch(Integer userId, String keyword) {
+        return collectService.getSearch(userId, keyword);
+    }
+
+
 }

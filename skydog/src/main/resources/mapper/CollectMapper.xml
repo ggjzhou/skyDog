@@ -11,14 +11,14 @@
         <result property="productId" column="productId"></result>
         <result property="collectTime" column="collectTime"></result>
 
-        <association property="productDto" column="productId" javaType="com.example.skydog.module.dto.ProductDto"
-                     resultMap="com.example.skydog.module.entity.Product.ProductDtoMap"></association>
+        <association property="product" column="productId" javaType="Product"
+                     resultMap="com.example.skydog.dao.ProductDao.BaseProductMap"></association>
     </resultMap>
 
     <!-- 添加 -->
     <insert id="add" parameterType="Collect">
         insert into tb_collect
-        values (#{collectId},#{userId}, #{productId}, #{collectTime})
+        values (#{collectId}, #{userId}, #{productId}, #{collectTime})
     </insert>
 
     <!-- 删除 -->
@@ -30,20 +30,50 @@
     </delete>
 
     <!--    通过id查询-->
-    <select id="queryId" parameterType="int">
+    <select id="queryId" parameterType="int" resultMap="collectMap">
         select *
         from tb_collect c
+                 LEFT JOIN tb_product p ON (c.productId = p.productId)
+                 LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.collectId = #{collectId}
     </select>
 
     <!-- 获取用户收藏 -->
     <select id="getMyCollect" parameterType="int" resultMap="collectMap">
-        select u.*, c.*, p.*
+        select c.*, p.*, i.*
         from tb_user u
                  LEFT JOIN tb_collect c ON (u.userId = c.userId)
                  LEFT JOIN tb_product p ON (c.productId = p.productId)
+                 LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.userId = #{userId}
     </select>
+
+    <!--  获取失效收藏商品-->
+    <select id="getUseless" parameterType="int" resultMap="collectMap">
+        select c.*, p.*, i.*
+        from tb_user u
+                 LEFT JOIN tb_collect c ON (u.userId = c.userId)
+                 LEFT JOIN tb_product p ON (c.productId = p.productId)
+                 LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        where c.userId = #{userId}
+          and p.productStatus = '下架'
+    </select>
+
+    <!--  收藏商品搜索-->
+    <select id="getSearch"  resultMap="collectMap">
+        select c.*, p.*, i.*
+        from tb_user u
+                 LEFT JOIN tb_collect c ON (u.userId = c.userId)
+                 LEFT JOIN tb_product p ON (c.productId = p.productId)
+                 LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+                 LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        where c.userId = #{userId}
+            and g.categoryName like concat('%', #{keyword}, '%')
+           or p.productName like concat('%', #{keyword}, '%')
+           or p.productDec like concat('%', #{keyword}, '%')
+
+    </select>
+
 
     <!-- 条件查询 -->
     <select id="queryCondition" parameterType="Collect">

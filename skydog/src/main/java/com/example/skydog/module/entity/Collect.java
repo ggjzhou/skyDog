@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @description:
@@ -20,5 +21,7 @@ public class Collect {
     private Integer userId;
     private Integer productId;
     private Date collectTime;
+    private Product product;
+    private Img img;
 
 }

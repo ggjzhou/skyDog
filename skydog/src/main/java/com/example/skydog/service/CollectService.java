@@ -15,6 +15,10 @@ public interface CollectService {
 
     ResultVO getMyCollect(Integer userId);
 
+    ResultVO getUseless(Integer userId);
+
+    ResultVO getSearch(Integer userId, String keyword);
+
     ResultVO queryCondition(Collect collect);
 
     ResultVO queryId(Integer collectId);

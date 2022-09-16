@@ -18,14 +18,18 @@ public interface CollectDao {
 
     void add(Collect collect);
 
-    void delete(Integer userId,Integer productId);
+    void delete(Integer userId, Integer productId);
 
-    List<Collect> getMyCollect (Integer userId);
+    List<Collect> getMyCollect(Integer userId);
+
+    List<Collect> getUseless(Integer userId);
+
+    List<Collect> getSearch(Integer userId, String keyword);
 
     Collect queryId(Integer collectId);
 
     List<Collect> queryCondition(Collect collect);
 
-    void batchDelete(Integer userId,List list);
+    void batchDelete(Integer userId, List list);
 
 }

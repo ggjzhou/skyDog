@@ -86,6 +86,25 @@ public class CollectServiceImpl implements CollectService {
     }
 
 
+
+    /**
+     * 收藏失效商品
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public ResultVO getUseless(Integer userId) {
+        return new ResultVO(collectDao.getUseless(userId));
+    }
+
+    @Override
+    public ResultVO getSearch(Integer userId, String keyword) {
+
+        return new ResultVO(collectDao.getSearch(userId,keyword));
+    }
+
+
     /**
      * 动态查询列表商品
      *
