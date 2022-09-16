@@ -1,5 +1,7 @@
 package com.example.skydog.controller;
 
+import com.example.skydog.enums.ResultEnum;
+import com.example.skydog.module.entity.Address;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.UserService;
@@ -58,6 +60,18 @@ public class UserController {
     public ResultVO updatePwd(String oldPassword, String newPassword, Integer userId){
         return this.userService.updatePassword(oldPassword,newPassword,userId);
     }
+
+
+    @GetMapping("/queryId/{userId}")
+    @ApiOperation("Id查询用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
+    })
+    public ResultVO queryId(@PathVariable Integer userId) {
+        return new ResultVO(ResultEnum.SUCCESS, userService.queryId(userId));
+    }
+
+
 
 
 }
