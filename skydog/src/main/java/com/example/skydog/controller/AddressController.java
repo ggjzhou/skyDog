@@ -44,7 +44,7 @@ public class AddressController {
         return addressService.delete(addressId);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/updateAddress")
     @ApiOperation("地址更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "address", value = "地址", dataType = "Address"),

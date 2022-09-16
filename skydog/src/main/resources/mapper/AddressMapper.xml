@@ -18,7 +18,7 @@
     <!-- 添加 -->
     <insert id="add" parameterType="Address">
         insert into tb_address
-        values (#{addressId}, #{userId}, #{consigneeName}, #{consigneePhone},#{zone},#{fullAddress},#{isDefault})
+        values (#{addressId}, #{userId}, #{consigneeName}, #{consigneePhone}, #{zone}, #{fullAddress}, #{isDefault})
     </insert>
 
 
@@ -33,14 +33,14 @@
     <update id="update" parameterType="Address">
         update tb_address a
         <set>
-            <if test="addressId!=null">
-                a.addressId=#{addressId},
-            </if>
             <if test="userId!=null">
                 a.userId=#{userId},
             </if>
             <if test="consigneeName!=null">
                 a.consigneeName=#{consigneeName},
+            </if>
+            <if test="consigneePhone!=null">
+                a.consigneePhone=#{consigneePhone},
             </if>
             <if test="zone!=null">
                 a.zone=#{zone},
@@ -52,11 +52,11 @@
                 a.isDefault=#{isDefault},
             </if>
         </set>
-        where a.addressId = #{addressId}
+        where a.addressId=#{addressId}
     </update>
 
     <!-- Id查询 -->
-    <select id="queryId" parameterType="int">
+    <select id="queryId" parameterType="int" resultType="Address">
         select *
         from tb_address a
         where a.addressId = #{addressId}
