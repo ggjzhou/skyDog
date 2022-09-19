@@ -2,6 +2,7 @@ package com.example.skydog.controller;
 
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Order;
+import com.example.skydog.module.vo.OrderVo;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.OrderService;
 import io.swagger.annotations.Api;
@@ -64,4 +65,17 @@ public class OrderController {
         return new ResultVO(ResultEnum.SUCCESS,orderService.getMyOrder(order));
     }
 
+    /**
+     * 条件分页查询订单
+     * @param orderVo
+     * @return
+     */
+    @PostMapping("/getOrder")
+    @ApiOperation("条件分页查询订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderVo", value = "订单对象", dataType = "OrderVo"),
+    })
+    public ResultVO getMyOrder(@RequestBody OrderVo orderVo) {
+        return new ResultVO(ResultEnum.SUCCESS,orderService.getOrder(orderVo));
+    }
 }

@@ -5,8 +5,11 @@ package com.example.skydog.service.impl; /**************************************
  ***********************************************************************/
 
 import com.example.skydog.dao.OrderDao;
+import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.vo.OrderVo;
+import com.example.skydog.module.vo.PageBeans;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,5 +91,19 @@ public class OrderServiceImpl implements OrderService {
 
    public List<Order> getMyOrder(Order order){
       return orderdao.getMyOrder(order);
+   }
+
+   /**
+    * 分页查询
+    * @param orderVo
+    * @return
+    */
+   public  ResultVO getOrder(OrderVo orderVo){
+      PageBeans pageBeans = new PageBeans();
+      pageBeans.setCurrentPage(orderVo.getCurrentPage());
+      pageBeans.setPageSize(orderVo.getPageSize());
+      pageBeans.setCount(orderdao.countBySelectActive(orderVo));
+      pageBeans.setData(orderdao.queryBySelectActive(orderVo));
+      return new ResultVO(ResultEnum.SUCCESS,pageBeans);
    }
 }

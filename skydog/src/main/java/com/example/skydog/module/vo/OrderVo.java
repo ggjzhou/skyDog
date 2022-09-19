@@ -15,6 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderVo extends Order {
-    private Date beginTime;
-    private Date endTime;
+    private Date beginDate;
+    private Date endDate;
+    private Integer currentPage;
+    private Integer pageSize;
 }

@@ -5,6 +5,9 @@ package com.example.skydog.dao; /***********************************************
  ***********************************************************************/
 
 import com.example.skydog.module.entity.Order;
+import com.example.skydog.module.entity.Product;
+import com.example.skydog.module.vo.OrderVo;
+import com.example.skydog.module.vo.ProductVo;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -29,5 +32,9 @@ public interface OrderDao {
 
 
    List<Order> getMyOrder(Order order);
+
+   List<Order> queryBySelectActive(OrderVo orderVo);
+
+   Integer countBySelectActive(OrderVo orderVo);
 
 }

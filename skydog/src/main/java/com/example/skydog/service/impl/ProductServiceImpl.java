@@ -65,12 +65,7 @@ public class ProductServiceImpl implements ProductService {
     */
    public ResultVO delete(Integer productId) {
       productDao.delete(productId);
-      //判断是否删除成功
-      if(productDao.queryId(productId).getProductId()==null){
-         return new ResultVO(ResultEnum.DELETE_SUCCESS);
-      }else {
-         return new ResultVO(ResultEnum.DELETE_SUCCESS);
-      }
+      return new ResultVO(ResultEnum.DELETE_SUCCESS);
    }
 
    /**
