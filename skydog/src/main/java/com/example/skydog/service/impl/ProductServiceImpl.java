@@ -124,9 +124,14 @@ public class ProductServiceImpl implements ProductService {
    }
 
 
-   public ResultVO queryByCategory(Category category) {
-      System.out.println(category);
-      return new ResultVO(ResultEnum.SUCCESS,productDao.queryByCategory(category));
+   public ResultVO queryByCategory(ProductVo productVo) {
+      System.out.println(productVo);
+      PageBeans pageBeans = new PageBeans();
+      pageBeans.setCurrentPage(productVo.getCurrentPage());
+      pageBeans.setPageSize(productVo.getPageSize());
+      pageBeans.setCount(productDao.countByCategory(productVo));
+      pageBeans.setData(productDao.queryByCategory(productVo));
+      return new ResultVO(ResultEnum.SUCCESS,pageBeans);
    }
 
    public ResultVO queryByPrice(ProductVo productVo) {

@@ -25,7 +25,7 @@ public interface ProductService {
 
    ResultVO queryByPage(PageBeans pageBeans);
 
-   ResultVO queryByCategory(Category category);
+   ResultVO queryByCategory(ProductVo productVo);
 
    ResultVO getProduct(ProductVo productVo);
 

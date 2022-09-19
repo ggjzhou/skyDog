@@ -99,7 +99,7 @@ public class ProductController {
      * @return
      */
     @PostMapping("/getProduct")
-    @ApiOperation("id查询商品")
+    @ApiOperation("模糊分页查询商品")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "product", value = "商品", dataType = "ProductVo"),
     })
@@ -137,10 +137,10 @@ public class ProductController {
     @PostMapping("/queryByCategory")
     @ApiOperation("商品种类查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
+            @ApiImplicitParam(name = "productVo", value = "商品种类", dataType = "ProductVo"),
     })
-    public ResultVO queryByCategory(@RequestBody Category category) {
-        return productService.queryByCategory(category);
+    public ResultVO queryByCategory(@RequestBody ProductVo productVo) {
+        return productService.queryByCategory(productVo);
     }
     @PostMapping("/queryByPrice")
     @ApiOperation("商品价格查询")

@@ -19,32 +19,19 @@
                      resultMap="com.example.skydog.dao.AddressDao.addressMap"></association>
     </resultMap>
 <!--  添加订单  -->
-    <insert id="add">
-        insert tb_order(
-        orderId,
-        userId
-        cartId,
-        addressId,
-        productId,
-        scaleId,
-        productCount,
-        orderStatus,
-        createTime,
-        payTime,
-        endTime
-        )values(
-        #{orderId},
+    <insert id="add" parameterType="Order">
+        insert into tb_order
+        values (#{orderId},
         #{userId},
         #{cartId},
         #{addressId},
         #{productId},
         #{scaleId},
-        #{productCount}
+        #{productCount},
         #{orderStatus},
         #{createTime},
         #{payTime},
-        #{endTime}
-        )
+        #{endTime})
     </insert>
 <!--  删除订单  -->
     <delete id="delete" parameterType="java.lang.Integer">
@@ -58,42 +45,47 @@
     <sql id="selectActive">
         <where>
             <if test="orderId != null">
-                orderId=#{orderId}
+                o.orderId=#{orderId}
             </if>
             <if test="userId !=null">
-                userId=#{userId}
+                and o.userId=#{userId}
             </if>
             <if test="cartId !=null">
-                cartId=#{cartId}
+                and o.cartId=#{cartId}
             </if>
             <if test="addressId !=null">
-                addressId=#{addressId}
+                and o.addressId=#{addressId}
             </if>
             <if test="productId !=null">
-                productId=#{productId}
+                and o.productId=#{productId}
             </if>
             <if test="scaleId !=null">
-                scaleId=#{scaleId}
+                and o.scaleId=#{scaleId}
             </if>
             <if test="productCount !=null">
-                productCount=#{productCount}
+                and o.productCount=#{productCount}
             </if>
             <if test="orderStatus !=null">
-                orderStatus=#{orderStatus}
+                and o.orderStatus=#{orderStatus}
             </if>
             <if test="createTime !=null">
-                createTime=#{createTime}
+                and o.createTime=#{createTime}
             </if>
             <if test="payTime !=null">
-                payTime=#{payTime}
+                and o.payTime=#{payTime}
             </if>
             <if test="endTime !=null">
-                endTime=#{endTime}
+                and o.endTime=#{endTime}
             </if>
         </where>
     </sql>
     <select id="queryCondition" parameterType="Order" resultMap="OrderMap">
-            select *from tb_order
+        select o.*,a.*,p.*,g.*,i.*,s.* from tb_order o
+        LEFT JOIN tb_address a ON (o.addressId = a.addressId)
+        LEFT JOIN tb_product p ON (o.productId = p.productId)
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (o.scaleId = s.scaleId)
         <include refid="selectActive"/>
     </select>
 <!--  修改订单信息  -->
@@ -179,7 +171,7 @@
                 o.orderId=#{orderId}
             </if>
             <if test="userId !=null">
-                and o.userId=#{userId}
+                and u.userId=#{userId}
             </if>
             <if test="orderStatus !=null">
                 and o.orderStatus=#{orderStatus}

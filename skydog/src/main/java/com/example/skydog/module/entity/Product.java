@@ -27,6 +27,7 @@ public class Product implements Serializable {
     private Long productSale;//商品销量
     private Double productGrade;//商品评分
     private Integer imgId;
+    private String productDetail;
     private Img img;
     private List<Scale> scaleList;
 }

@@ -14,6 +14,8 @@ import com.example.skydog.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -25,10 +27,17 @@ public class OrderServiceImpl implements OrderService {
 
    @Autowired
    OrderDao orderdao;
-   public void add(Order order) {
+   public ResultVO add(Order order) throws ParseException {
       // TODO: implement
       orderdao.add(order);
-
+      System.out.println(order.toString());
+      SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+      String date_string = formatter.format(order.getCreateTime());
+      SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+      order.setCreateTime(format.parse(date_string));
+      System.out.println(order.toString());
+      List<Order> orderList = orderdao.queryCondition(new Order());
+      return new ResultVO(ResultEnum.SUCCESS,orderList.get(orderList.size()-1));
    }
 
 

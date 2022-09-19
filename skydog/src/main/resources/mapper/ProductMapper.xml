@@ -14,6 +14,7 @@
         <result column="productStatus" property="productStatus"/>
         <result column="productSale" property="productSale"/>
         <result column="productGrade" property="productGrade"/>
+        <result column="productDetail" property="productDetail"/>
         <association property="img" column="imgId"
                      resultMap="com.example.skydog.dao.ImgDao.ImgMap"></association>
         <collection property="scaleList" ofType="Scale"
@@ -92,16 +93,16 @@
             productDec = #{productDec},
         </if>
         <if test="productStatus != null">
-            productStatus = #{productStatus}
+            productStatus = #{productStatus},
         </if>
         <if test="productSale != null">
-            productSale = #{productSale}
+            productSale = #{productSale},
         </if>
         <if test="productGrade != null">
-            productGrade = #{productGrade}
+            productGrade = #{productGrade},
         </if>
         <if test="imgId != null">
-            imgId = #{imgId}
+            imgId = #{imgId},
         </if>
     </sql>
     <!--修改数据-->
@@ -177,14 +178,26 @@
         <include refid="condition"/>
     </select>
     <!--    通过种类查询-->
-    <select id="queryByCategory" parameterType="Category" resultMap="ProductDtoMap">
+    <select id="queryByCategory" resultMap="ProductDtoMap">
         select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         LEFT JOIN tb_scale s ON (p.productId = s.productId)
-        where g.categoryName = #{categoryName}
+        where g.categoryName = #{keyword}
+        <if test="currentPage != null and pageSize != null">
+            <bind name="start" value="(currentPage - 1) * pageSize"/>
+            limit #{start},#{pageSize}
+        </if>
     </select>
 
+    <!--    通过种类查询-->
+    <select id="countByCategory" resultType="int">
+        select count(1) from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
+        where g.categoryName = #{keyword}
+    </select>
     <sql id="selectActive">
         <where>
             <if test="productId != null">
@@ -301,7 +314,7 @@
     </select>
 
     <select id="getMyProduct" resultMap="ProductDtoMap">
-        select p.*,g.*,i.*,s.* from tb_product p,
+        select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_user u ON (p.userId = u.userId)
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -25,11 +26,10 @@ import java.util.List;
 public class OrderController {
     @Autowired
     OrderService orderService;
-    @GetMapping("/add")
+    @PostMapping("/add")
     @ApiOperation("添加订单")
-    public Order add(@RequestBody Order order) {
-        orderService.add(order);
-        return order;
+    public ResultVO add(@RequestBody Order order) throws ParseException {
+        return orderService.add(order);
     }
     @GetMapping("/delete/{orderId}")
     @ApiOperation("删除订单")

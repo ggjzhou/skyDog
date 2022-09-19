@@ -9,12 +9,13 @@ import com.example.skydog.module.vo.OrderVo;
 import com.example.skydog.module.vo.ProductVo;
 import com.example.skydog.module.vo.ResultVO;
 
+import java.text.ParseException;
 import java.util.*;
 
 
 public interface OrderService {
 
-   void add(Order order);
+   ResultVO add(Order order) throws ParseException;
 
    void delete(int orderId);
 

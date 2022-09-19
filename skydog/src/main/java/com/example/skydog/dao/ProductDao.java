@@ -28,7 +28,9 @@ public interface ProductDao<E> {
 
    List<Product> queryCondition(E query);
 
-   List<Product> queryByCategory(Category category);
+   List<Product> queryByCategory(ProductVo productVo);
+
+   Integer countByCategory(ProductVo productVo);
 
    List<Product> queryBySelectActive(ProductVo productVo);
 
