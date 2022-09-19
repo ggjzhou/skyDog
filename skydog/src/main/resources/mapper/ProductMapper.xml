@@ -160,7 +160,7 @@
         </if>
     </sql>
     <!--    通过id查询-->
-    <select id="queryId" parameterType="int" resultMap="BaseProductMap">
+    <select id="queryId" parameterType="int" resultMap="ProductDtoMap">
         select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
@@ -168,7 +168,7 @@
         where p.productId = #{productId}
     </select>
     <!--    动态模糊查询-->
-    <select id="queryCondition" resultMap="BaseProductMap">
+    <select id="queryCondition" resultMap="ProductDtoMap">
         select p.*,g.*,i.*,s.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
@@ -231,11 +231,10 @@
         </where>
     </sql>
 <!--    条件查询分页-->
-    <select id="queryBySelectActive" resultMap="BaseProductMap">
-        select p.*,g.*,i.*,s.* from tb_product p
+    <select id="queryBySelectActive" resultMap="ProductDtoMap">
+        select p.*,g.*,i.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
-        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
         <!-- 分页-->
@@ -248,15 +247,13 @@
         select count(1) from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
-        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         <!-- 查询条件 -->
         <include refid="selectActive"/>
     </select>
-    <select id="search" resultMap="BaseProductMap">
-        select p.*,g.*,i.*,s.* from tb_product p
+    <select id="search" resultMap="ProductDtoMap">
+        select p.*,g.*,i.* from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
-        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         <where>
             <if test="1 == 1">
                 p.productStatus = "在售"
@@ -286,7 +283,6 @@
         select count(1) from tb_product p
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
-        LEFT JOIN tb_scale s ON (p.productId = s.productId)
         <where>
             <if test="lowPrice != null">
                 p.productPrice >= #{lowPrice}

@@ -101,7 +101,7 @@ public class ProductController {
     @PostMapping("/getMyProduct")
     @ApiOperation("id查询商品")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "product", value = "产品id", dataType = "Product"),
+            @ApiImplicitParam(name = "product", value = "商品", dataType = "ProductVo"),
     })
     public ResultVO getMyProduct(@RequestBody ProductVo productVo) {
         return productService.getMyProduct(productVo);

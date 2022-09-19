@@ -6,6 +6,8 @@ package com.example.skydog.service; /*******************************************
 
 import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.vo.OrderVo;
+import com.example.skydog.module.vo.ProductVo;
+import com.example.skydog.module.vo.ResultVO;
 
 import java.util.*;
 
@@ -35,4 +37,6 @@ public interface OrderService {
    List<Order> queryByStatus(Order order);
 
    List<Order> getMyOrder(Order order);
+
+   ResultVO getOrder(OrderVo orderVo);
 }

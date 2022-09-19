@@ -162,6 +162,8 @@
             delete from tb_order where orderId=#{orderId}
         </foreach>
     </delete>
+
+    <!--    获取个人订单-->
     <select id="getMyOrder" parameterType="Order" resultMap="OrderMap">
         select o.*,a.*,p.*,g.*,i.*,s.* from tb_user u
         LEFT JOIN tb_order o ON (u.userId = o.userId)
@@ -182,6 +184,74 @@
             </if>
         </where>
     </select>
-
-
+    <sql id="selectOrder">
+        <where>
+            <if test="orderId != null">
+                orderId=#{orderId}
+            </if>
+            <if test="userId !=null">
+                userId=#{userId}
+            </if>
+            <if test="cartId !=null">
+                cartId=#{cartId}
+            </if>
+            <if test="addressId !=null">
+                addressId=#{addressId}
+            </if>
+            <if test="productId !=null">
+                productId=#{productId}
+            </if>
+            <if test="scaleId !=null">
+                scaleId=#{scaleId}
+            </if>
+            <if test="productCount !=null">
+                productCount=#{productCount}
+            </if>
+            <if test="orderStatus !=null">
+                orderStatus=#{orderStatus}
+            </if>
+            <if test="createTime !=null">
+                createTime=#{createTime}
+            </if>
+            <if test="payTime !=null">
+                payTime=#{payTime}
+            </if>
+            <if test="endTime !=null">
+                endTime=#{endTime}
+            </if>
+            <if test="lowPrice != null">
+                and p.productPrice >= #{lowPrice}
+            </if>
+            <if test="highPrice != null">
+                <![CDATA[
+                and p.productPrice <= #{highPrice}
+                ]]>
+            </if>
+        </where>
+    </sql>
+    <select id="queryBySelectActive">
+        select o.*,a.*,p.*,g.*,i.*,s.* from tb_user u
+        LEFT JOIN tb_order o ON (u.userId = o.userId)
+        LEFT JOIN tb_address a ON (o.addressId = a.addressId)
+        LEFT JOIN tb_product p ON (o.productId = p.productId)
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (o.scaleId = s.scaleId)
+        <include refid="selectOrder"></include>
+        <!-- 分页-->
+        <if test="currentPage != null and pageSize != null">
+            <bind name="start" value="(currentPage - 1) * pageSize"/>
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <select id="countBySelectActive">
+        select o.*,a.*,p.*,g.*,i.*,s.* from tb_user u
+        LEFT JOIN tb_order o ON (u.userId = o.userId)
+        LEFT JOIN tb_address a ON (o.addressId = a.addressId)
+        LEFT JOIN tb_product p ON (o.productId = p.productId)
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (o.scaleId = s.scaleId)
+        <include refid="selectOrder"></include>
+    </select>
 </mapper>
