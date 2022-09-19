@@ -299,6 +299,15 @@
             </if>
         </where>
     </select>
+
+    <select id="getMyProduct" resultMap="ProductDtoMap">
+        select p.*,g.*,i.*,s.* from tb_product p,
+        LEFT JOIN tb_user u ON (p.userId = u.userId)
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
+        where u.userId = #{userId}
+    </select>
 <!--    &#45;&#45;         where g.categoryName like concat('%',#{keyword},'%')-->
 <!--    &#45;&#45;         OR p.productName like concat('%',#{keyword},'%')-->
 <!--    &#45;&#45;         OR p.productDec like concat('%',#{keyword},'%')-->

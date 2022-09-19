@@ -98,13 +98,27 @@ public class ProductController {
      * @param productVo
      * @return
      */
-    @PostMapping("/getMyProduct")
+    @PostMapping("/getProduct")
     @ApiOperation("id查询商品")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "product", value = "商品", dataType = "ProductVo"),
     })
-    public ResultVO getMyProduct(@RequestBody ProductVo productVo) {
-        return productService.getMyProduct(productVo);
+    public ResultVO getProduct(@RequestBody ProductVo productVo) {
+        return productService.getProduct(productVo);
+    }
+
+    /**
+     * 查询个人商品
+     * @param userId
+     * @return
+     */
+    @PostMapping("/getMyProduct")
+    @ApiOperation("id查询商品")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "商品Id", dataType = "Integer"),
+    })
+    public ResultVO getMyProduct(Integer userId) {
+        return productService.getMyProduct(userId);
     }
     /**
      * 商品名查询

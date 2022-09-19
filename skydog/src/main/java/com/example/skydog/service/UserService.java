@@ -3,7 +3,9 @@ package com.example.skydog.service;
 import com.example.skydog.module.entity.Cart;
 import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.entity.User;
+import com.example.skydog.module.vo.OrderVo;
 import com.example.skydog.module.vo.ResultVO;
+import com.example.skydog.module.vo.UserVO;
 
 import java.util.*;
 
@@ -41,6 +43,6 @@ public interface UserService {
 
    ResultVO getEvaluate(Integer uerId);
 
-
+   ResultVO getUser(UserVO userVO);
 
 }

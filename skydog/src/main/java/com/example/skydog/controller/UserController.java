@@ -4,6 +4,7 @@ import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Address;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.module.vo.ResultVO;
+import com.example.skydog.module.vo.UserVO;
 import com.example.skydog.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -71,7 +72,13 @@ public class UserController {
         return new ResultVO(ResultEnum.SUCCESS, userService.queryId(userId));
     }
 
-
-
+    @PostMapping("/getUser")
+    @ApiOperation("查询用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userVO", value = "用户", dataType = "UserVO"),
+    })
+    public ResultVO getUser(@RequestBody UserVO userVO) {
+        return userService.getUser(userVO);
+    }
 
 }

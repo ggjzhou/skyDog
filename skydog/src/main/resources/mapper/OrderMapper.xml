@@ -3,11 +3,12 @@
 <mapper namespace="com.example.skydog.dao.OrderDao">
     <resultMap id="OrderMap" type="com.example.skydog.module.entity.Order">
         <id column="orderId" property="orderId" />
+        <result column="userId" property="userId" />
         <result column="cartId" property="cartId" />
         <result column="addressId" property="addressId" />
         <result column="productId" property="productId" />
         <result column="scaleId" property="scaleId" />
-        <result column="productCount" property="scaleId" />
+        <result column="productCount" property="productCount" />
         <result column="orderStatus" property="orderStatus" />
         <result column="createTime" property="createTime" />
         <result column="payTime" property="payTime"/>
@@ -96,41 +97,42 @@
         <include refid="selectActive"/>
     </select>
 <!--  修改订单信息  -->
-    <select id="update" parameterType="com.example.skydog.module.entity.Order">
+    <select id="update">
      update tb_order
      <set>
          <if test="userId !=null">
-             userId=#{userId}
+             userId=#{userId},
          </if>
          <if test="cartId !=null">
-             cartId=#{cartId}
+             cartId=#{cartId},
          </if>
          <if test="addressId !=null">
-             addressId=#{addressId}
+             addressId=#{addressId},
          </if>
          <if test="productId !=null">
-             productId=#{productId}
+             productId=#{productId},
          </if>
          <if test="scaleId !=null">
-             scaleId=#{scaleId}
+             scaleId=#{scaleId},
          </if>
          <if test="productCount !=null">
-             productCount=#{productCount}
+             productCount=#{productCount},
          </if>
          <if test="orderStatus !=null">
-             orderStatus=#{orderStatus}
+             orderStatus=#{orderStatus},
          </if>
          <if test="createTime !=null">
-             createTime=#{createTime}
+             createTime=#{createTime},
          </if>
          <if test="payTime !=null">
-             payTime=#{payTime}
+             payTime=#{payTime},
          </if>
          <if test="endTime !=null">
-             endTime=#{endTime}
+             endTime=#{endTime},
          </if>
-         where orderId=#{orderId}
+
      </set>
+        where orderId=#{orderId}
     </select>
 
     <!--<insert id="batchAdd">
@@ -187,51 +189,50 @@
     <sql id="selectOrder">
         <where>
             <if test="orderId != null">
-                orderId=#{orderId}
+                o.orderId=#{orderId}
             </if>
             <if test="userId !=null">
-                userId=#{userId}
+                and o.userId=#{userId}
             </if>
             <if test="cartId !=null">
-                cartId=#{cartId}
+                and o.cartId=#{cartId}
             </if>
             <if test="addressId !=null">
-                addressId=#{addressId}
+                and o.addressId=#{addressId}
             </if>
             <if test="productId !=null">
-                productId=#{productId}
+                and o.productId=#{productId}
             </if>
             <if test="scaleId !=null">
-                scaleId=#{scaleId}
+                and o.scaleId=#{scaleId}
             </if>
             <if test="productCount !=null">
-                productCount=#{productCount}
+                and o.productCount=#{productCount}
             </if>
             <if test="orderStatus !=null">
-                orderStatus=#{orderStatus}
+                and o.orderStatus=#{orderStatus}
             </if>
             <if test="createTime !=null">
-                createTime=#{createTime}
+                and o.createTime=#{createTime}
             </if>
             <if test="payTime !=null">
-                payTime=#{payTime}
+                and o.payTime=#{payTime}
             </if>
             <if test="endTime !=null">
-                endTime=#{endTime}
+                and o.endTime=#{endTime}
             </if>
-            <if test="lowPrice != null">
-                and p.productPrice >= #{lowPrice}
+            <if test="beginDate != null">
+                and o.createTime >= #{beginDate}
             </if>
-            <if test="highPrice != null">
+            <if test="endDate != null">
                 <![CDATA[
-                and p.productPrice <= #{highPrice}
+                and o.createTime <= #{endDate}
                 ]]>
             </if>
         </where>
     </sql>
-    <select id="queryBySelectActive">
-        select o.*,a.*,p.*,g.*,i.*,s.* from tb_user u
-        LEFT JOIN tb_order o ON (u.userId = o.userId)
+    <select id="queryBySelectActive" resultMap="OrderMap">
+        select o.*,a.*,p.*,g.*,i.*,s.* from tb_order o
         LEFT JOIN tb_address a ON (o.addressId = a.addressId)
         LEFT JOIN tb_product p ON (o.productId = p.productId)
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
@@ -244,9 +245,8 @@
             limit #{start},#{pageSize}
         </if>
     </select>
-    <select id="countBySelectActive">
-        select o.*,a.*,p.*,g.*,i.*,s.* from tb_user u
-        LEFT JOIN tb_order o ON (u.userId = o.userId)
+    <select id="countBySelectActive" resultType="int">
+        select count(1) from tb_order o
         LEFT JOIN tb_address a ON (o.addressId = a.addressId)
         LEFT JOIN tb_product p ON (o.productId = p.productId)
         LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)

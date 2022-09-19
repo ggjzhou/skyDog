@@ -22,7 +22,7 @@ public class Order {
     private Integer addressId;
     private Integer productId;
     private Integer scaleId;
-    private Integer count;
+    private Integer productCount;
     private String orderStatus;
     private Date createTime;
     private Date payTime;

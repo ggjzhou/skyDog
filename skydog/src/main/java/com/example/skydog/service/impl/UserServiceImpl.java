@@ -5,7 +5,9 @@ import com.example.skydog.dao.UserDao;
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.entity.User;
+import com.example.skydog.module.vo.PageBeans;
 import com.example.skydog.module.vo.ResultVO;
+import com.example.skydog.module.vo.UserVO;
 import com.example.skydog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -150,5 +152,20 @@ public class UserServiceImpl implements UserService {
     public ResultVO getEvaluate(Integer uerId) {
         return null;
     }
+
+    /**
+     * 分页查询
+     * @param userVO
+     * @return
+     */
+    public ResultVO getUser(UserVO userVO){
+        PageBeans pageBeans = new PageBeans();
+        pageBeans.setCurrentPage(userVO.getCurrentPage());
+        pageBeans.setPageSize(userVO.getPageSize());
+        pageBeans.setCount(userDao.countBySelectActive(userVO));
+        pageBeans.setData(userDao.queryBySelectActive(userVO));
+        return new ResultVO(ResultEnum.SUCCESS,pageBeans);
+    }
+
 
 }

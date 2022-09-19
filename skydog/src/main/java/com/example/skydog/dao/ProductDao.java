@@ -37,4 +37,6 @@ public interface ProductDao<E> {
    List<Product> search(ProductVo productVo);
 
    Integer searchCount(ProductVo productVo);
+
+   List<Product> getMyProduct (Integer userId);
 }

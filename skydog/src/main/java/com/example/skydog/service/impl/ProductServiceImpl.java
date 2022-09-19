@@ -102,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
     * @param productVo
     * @return
     */
-   public ResultVO getMyProduct(ProductVo productVo) {
+   public ResultVO getProduct(ProductVo productVo) {
       PageBeans pageBeans = new PageBeans();
       pageBeans.setCurrentPage(productVo.getCurrentPage());
       pageBeans.setPageSize(productVo.getPageSize());
@@ -114,6 +114,9 @@ public class ProductServiceImpl implements ProductService {
          return new ResultVO(ResultEnum.SUCCESS,pageBeans);
       }
 
+   }
+   public ResultVO getMyProduct(Integer userId) {
+      return new ResultVO(ResultEnum.SUCCESS,productDao.getMyProduct(userId));
    }
 
    public ResultVO queryByPage(PageBeans pageBeans){
@@ -144,6 +147,12 @@ public class ProductServiceImpl implements ProductService {
          return new ResultVO(ResultEnum.SUCCESS,productDao.queryCondition(product));
       }
    }
+
+   /**
+    * 简单的搜索
+    * @param productVo
+    * @return
+    */
    public ResultVO search(ProductVo productVo){
       if(productVo.getKeyword()==null || productVo.getKeyword().equals("") || productVo.getKeyword().length()==0){
          productVo.setPageSize(30);

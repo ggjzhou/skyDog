@@ -1,6 +1,7 @@
 package com.example.skydog.dao;
 
 import com.example.skydog.module.entity.User;
+import com.example.skydog.module.vo.UserVO;
 import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,7 +20,9 @@ public interface UserDao {
 
     List<User> queryCondition(User user);
 
+    List<User> queryBySelectActive(UserVO userVO);
 
+    Integer countBySelectActive(UserVO userVO);
 
 //    void batchDelete(List list);
 

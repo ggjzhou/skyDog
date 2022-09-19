@@ -37,7 +37,7 @@ public class OrderController {
         orderService.delete(orderId);
         return true;
     }
-    @GetMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("修改订单信息")
     public Order update(@RequestBody Order order) {
         orderService.update(order);
@@ -76,6 +76,6 @@ public class OrderController {
             @ApiImplicitParam(name = "orderVo", value = "订单对象", dataType = "OrderVo"),
     })
     public ResultVO getMyOrder(@RequestBody OrderVo orderVo) {
-        return new ResultVO(ResultEnum.SUCCESS,orderService.getOrder(orderVo));
+        return orderService.getOrder(orderVo);
     }
 }

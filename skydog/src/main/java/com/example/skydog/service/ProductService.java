@@ -27,11 +27,14 @@ public interface ProductService {
 
    ResultVO queryByCategory(Category category);
 
-   ResultVO getMyProduct(ProductVo productVo);
+   ResultVO getProduct(ProductVo productVo);
 
    ResultVO queryByPrice(ProductVo productVo);
 
    ResultVO queryByName(String productName);
 
    ResultVO search(ProductVo productVo);
+
+   ResultVO getMyProduct(Integer userId);
+
 }

@@ -128,6 +128,19 @@
         <include refid="selectActive"/>
     </select>
 
+    <select id="queryBySelectActive" resultMap="userMap">
+        select * from tb_user
+        <include refid="selectActive"></include>
+        <!-- 分页-->
+        <if test="currentPage != null and pageSize != null">
+            <bind name="start" value="(currentPage - 1) * pageSize"/>
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <select id="countBySelectActive" resultType="int">
+        select count(1) from tb_user
+        <include refid="selectActive"></include>
+    </select>
 
 
 <!--    <delete id="batchDelete" parameterType="List">-->
