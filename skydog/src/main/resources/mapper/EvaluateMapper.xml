@@ -39,9 +39,9 @@
     <!-- 删除 -->
     <delete id="delete" parameterType="int">
         delete
-        from tb_evaluate e
-        where e.evaluateId = #{evaluateId}
-          and e.userId = #{userId}
+        from tb_evaluate
+        where evaluateId = #{evaluateId}
+          and userId = #{userId}
     </delete>
 
     <!-- Id查询 -->

@@ -24,9 +24,9 @@
     <!-- 删除 -->
     <delete id="delete" parameterType="int">
         delete
-        from tb_collect c
-        where c.userId = #{userId}
-          and c.productId = #{productId}
+        from tb_collect
+        where userId = #{userId}
+          and productId = #{productId}
     </delete>
 
     <!-- 通过id查询 -->
