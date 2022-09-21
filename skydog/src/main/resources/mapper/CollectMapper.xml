@@ -25,11 +25,11 @@
     <delete id="delete" parameterType="int">
         delete
         from tb_collect c
-        where c.userId = #{uerId}
+        where c.userId = #{userId}
           and c.productId = #{productId}
     </delete>
 
-    <!--    通过id查询-->
+    <!-- 通过id查询 -->
     <select id="queryId" parameterType="int" resultMap="collectMap">
         select *
         from tb_collect c
