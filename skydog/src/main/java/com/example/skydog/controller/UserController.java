@@ -62,10 +62,9 @@ public class UserController {
         return this.userService.updatePassword(oldPassword,newPassword,userId);
     }
 
-
     @GetMapping("/queryId/{userId}")
-    @ApiOperation("Id查询用户")
-    @ApiImplicitParams({
+            @ApiOperation("Id查询用户")
+            @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
     })
     public ResultVO queryId(@PathVariable Integer userId) {

@@ -32,6 +32,7 @@ public class AlipayBean {
      * 根据支付宝接口协议，必须使用下划线
      */
     private String total_amount;
+
     /**
      * 商品描述，可空
      */
@@ -44,7 +45,6 @@ public class AlipayBean {
      * 产品编号
      */
     private String product_code = "FAST_INSTANT_TRADE_PAY";
-
 
 }
 
