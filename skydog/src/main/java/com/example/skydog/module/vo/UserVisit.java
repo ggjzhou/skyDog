@@ -11,7 +11,7 @@ public class UserVisit {
     private String time;//时间搓
     private String province;//省份
     private String city;//城市
-    private String UID;//用户ID
+    private String uID;//用户ID
     private String adID;//广告ID
 
 }
