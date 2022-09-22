@@ -31,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
       // TODO: implement
       orderdao.add(order);
       System.out.println(order.toString());
+//      Long num = Long.parseLong(order.getCreateTime());
+//      Date date1 = new Date(num);
       SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
       String date_string = formatter.format(order.getCreateTime());
       SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");

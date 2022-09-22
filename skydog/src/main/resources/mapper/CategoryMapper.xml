@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.skydog.dao.CategoryDao">
+
+    <resultMap id="categoryMap" type="com.example.skydog.module.entity.Category">
+        <id column="categoryId" property="categoryId"/>
+        <result column="categoryName" property="categoryName"/>
+        <result column="categoryDec" property="categoryDec"/>
+    </resultMap>
     <!--
        插入数据
    -->
@@ -52,13 +58,14 @@
     <sql id="selectActive">
         <where>
             <if test="categoryId != null">
-                c.categoryId = #{categoryId},
+                c.categoryId = #{categoryId}
             </if>
             <if test="categoryName != null">
-                and c.categoryName = #{categoryName},
+                and c.categoryName like concat('%',#{categoryName},'%')
             </if>
             <if test="categoryDec != null">
-                and c.categoryDec = #{categoryDec},
+                and c.categoryDec like
+                concat('%',#{categoryDec},'%')
             </if>
 
         </where>
@@ -69,7 +76,7 @@
         where c.categoryId = #{categoryId}
     </select>
     <!--    动态模糊查询-->
-    <select id="queryCondition">
+    <select id="queryCondition" resultMap="categoryMap">
         select * from tb_category c
         <!-- 查询条件 -->
         <include refid="selectActive"/>

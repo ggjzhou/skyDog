@@ -88,12 +88,28 @@ public class CategoryController {
      * @param category
      * @return
      */
-    @GetMapping("/queryCondition")
+    @PostMapping("/queryCondition")
     @ApiOperation("模糊查询商品种类")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
     })
     public Object queryCondition(@RequestBody Category category) {
+        List<Category> products =categoryService.queryCondition(category);
+        return products;
+    }
+
+    /**
+     * 查询所有商品种类
+     * @param
+     * @return
+     */
+    @GetMapping("/getCategory")
+    @ApiOperation("查询所有商品种类")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "category", value = "商品种类", dataType = "Category"),
+    })
+    public Object getCategory() {
+        Category category = new Category();
         List<Category> products =categoryService.queryCondition(category);
         return products;
     }

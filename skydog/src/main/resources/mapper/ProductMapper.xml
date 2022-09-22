@@ -213,16 +213,16 @@
                 and p.categoryId = #{categoryId}
             </if>
             <if test="productName != null">
-                and p.productName = #{productName}
+                and p.productName like concat('%',#{productName},'%')
             </if>
             <if test="productPrice != null">
                 and p.productPrice = #{productPrice}
             </if>
             <if test="productDec != null">
-                and p.productDec = #{productDec}
+                and p.productDec = like concat('%',#{productDec},'%')
             </if>
             <if test="productStatus != null">
-                and p.productStatus = #{productStatus}
+                and p.productStatus = like concat('%',#{productStatus},'%')
             </if>
             <if test="productSale != null">
                 and p.productSale = #{productSale}

@@ -70,22 +70,22 @@
     <sql id="selectActive">
         <where>
             <if test="cartId != null">
-                r.cartId = #{cartId},
+                c.cartId = #{cartId}
             </if>
             <if test="userId != null">
-                and r.userId = #{userId},
+                and c.userId = #{userId}
             </if>
             <if test="productId != null">
-                and r.productId = #{productId},
+                and c.productId = #{productId}
             </if>
             <if test="scaleId != null">
-                and r.scaleId = #{scaleId},
+                and c.scaleId = #{scaleId}
             </if>
             <if test="productCount != null">
-                and r.productCount = #{productCount},
+                and c.productCount = #{productCount}
             </if>
             <if test="joinTime != null">
-                and r.joinTime = #{joinTime},
+                and c.joinTime = #{joinTime}
             </if>
         </where>
     </sql>

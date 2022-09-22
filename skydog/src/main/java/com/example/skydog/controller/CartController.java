@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Author:甘舟
  * Data:2022/9/7
@@ -47,8 +49,8 @@ public class CartController {
             @ApiImplicitParam(name = "cart", value = "购物车", dataType = "cart"),
     })
     public ResultVO add(@RequestBody Cart cart) {
-        cartService.add(cart);
-        return new ResultVO(ResultEnum.ADD_SUCCESS);
+
+        return cartService.add(cart);
     }
     /**
      * 删除购物车

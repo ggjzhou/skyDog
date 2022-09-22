@@ -10,7 +10,7 @@ import com.example.skydog.module.vo.ResultVO;
 
 public interface CartService {
 
-   void add(Cart cart);
+   ResultVO add(Cart cart);
 
    void update(Cart cart);
 

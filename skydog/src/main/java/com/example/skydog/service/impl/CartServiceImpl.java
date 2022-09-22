@@ -8,6 +8,8 @@ import com.example.skydog.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Author:甘舟
  * Data:2022/9/7
@@ -21,8 +23,11 @@ public class CartServiceImpl implements CartService {
     * 添加购物车
     * @param cart
     */
-   public void add(Cart cart) {
+   public ResultVO add(Cart cart) {
+
       cartDao.add(cart);
+      List<Cart> list = cartDao.queryCondition(cart);
+      return new ResultVO(ResultEnum.ADD_SUCCESS,list.get(list.size()-1));
    }
 
    public void update(Cart cart) {
