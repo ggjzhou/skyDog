@@ -48,7 +48,7 @@ public class CollectServiceImpl implements CollectService {
         if (list.isEmpty()) {
             collect1.setCollectTime(new Date());
             collectDao.add(collect);
-            return new ResultVO(ResultEnum.ADD_SUCCESS);
+            return new ResultVO(ResultEnum.ADD_SUCCESS,collect.getCollectId());
         } else {
             return new ResultVO(ResultEnum.ADD_FAIL, "该商品已收藏");
         }

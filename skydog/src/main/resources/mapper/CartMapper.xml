@@ -17,9 +17,12 @@
     <insert id="add">
         insert into tb_cart
         values(#{cartId},#{userId},#{productId},#{scaleId},#{productCount},#{joinTime})
+        <selectKey keyProperty="cartId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID() AS cartId
+        </selectKey>
     </insert>
     <!--指量添加数据 -->
-    <insert id="batchAdd" >
+    <insert id="batchAdd">
         <foreach collection="list" item="cart" separator=";">
             insert into tb_cart
             values(#{cartId},#{userId},#{productId},#{scaleId},#{productCount},#{joinTime})

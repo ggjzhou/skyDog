@@ -19,6 +19,9 @@
     <insert id="add" parameterType="Collect" >
         insert into tb_collect
         values (#{collectId}, #{userId}, #{productId}, #{collectTime})
+        <selectKey keyProperty="collectId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID() AS collectId
+        </selectKey>
     </insert>
 
     <!-- 删除 -->

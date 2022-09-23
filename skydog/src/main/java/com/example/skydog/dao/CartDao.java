@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface CartDao {
 
-   void add(Cart cart);
+   Integer add(Cart cart);
 
    void batchAdd(List<Cart> carts);
 

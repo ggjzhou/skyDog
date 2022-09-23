@@ -21,8 +21,10 @@
          #{productId},
           #{productScale},
            #{productScaleStock},
-            #{ productScalePrice},
-        )
+            #{ productScalePrice},)
+        <selectKey keyProperty="scaleId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID() AS scaleId
+        </selectKey>
     </insert>
 <!--    删除商品规格-->
     <delete id="delete" parameterType="int">
