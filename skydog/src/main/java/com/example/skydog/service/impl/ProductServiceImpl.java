@@ -33,13 +33,7 @@ public class ProductServiceImpl implements ProductService {
    public ResultVO add(Product product) {
 
       productDao.add(product);
-      List<Product> products = productDao.queryCondition(product);
-      //判断下是否添加成功
-      if(products.isEmpty()){
-         return new ResultVO(ResultEnum.ADD_FAIL);
-      }else {
-         return new ResultVO(ResultEnum.ADD_SUCCESS,products.get(0));
-      }
+      return new ResultVO(ResultEnum.ADD_SUCCESS,product.getProductId());
    }
 
    /**

@@ -36,8 +36,10 @@
     <insert id="add">
         insert into tb_product
         values(#{productId},#{userId},#{adminId},#{categoryId},#{productName},#{productPrice},#{productDec}
-              ,#{productStatus},#{productSale},#{productGrade}
-            )
+              ,#{productStatus},#{productSale},#{productGrade})
+        <selectKey keyProperty="productId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID() AS productId
+        </selectKey>
     </insert>
     <!--
       指量添加数据

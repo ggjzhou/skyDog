@@ -30,16 +30,7 @@ public class OrderServiceImpl implements OrderService {
    public ResultVO add(Order order) throws ParseException {
       // TODO: implement
       orderdao.add(order);
-      System.out.println(order.toString());
-//      Long num = Long.parseLong(order.getCreateTime());
-//      Date date1 = new Date(num);
-      SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-      String date_string = formatter.format(order.getCreateTime());
-      SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-      order.setCreateTime(format.parse(date_string));
-      System.out.println(order.toString());
-      List<Order> orderList = orderdao.queryCondition(new Order());
-      return new ResultVO(ResultEnum.SUCCESS,orderList.get(orderList.size()-1));
+      return new ResultVO(ResultEnum.SUCCESS,order.getOrderId());
    }
 
 

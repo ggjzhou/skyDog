@@ -24,10 +24,18 @@ public class CartServiceImpl implements CartService {
     * @param cart
     */
    public ResultVO add(Cart cart) {
+      Cart cart1 = new Cart();
+      cart1.setProductCount(cart.getProductCount());
+      cart1.setUserId(cart.getUserId());
+      List<Cart> cartList = cartDao.queryCondition(cart1);
+      if(cartList.isEmpty()){
+         cartDao.add(cart);
+         return new ResultVO(ResultEnum.ADD_SUCCESS,cart.getCartId());
+      }else {
+         return new ResultVO(ResultEnum.ADD_SUCCESS,cartList.get(0).getCartId());
+      }
 
-      cartDao.add(cart);
-      List<Cart> list = cartDao.queryCondition(cart);
-      return new ResultVO(ResultEnum.ADD_SUCCESS,list.get(list.size()-1));
+
    }
 
    public void update(Cart cart) {
