@@ -55,6 +55,28 @@ public class CollectServiceImpl implements CollectService {
     }
 
     /**
+     * 店铺收藏
+     *
+     * @param collect
+     * @return
+     */
+    @Override
+    public ResultVO addStore(Collect collect) {
+        Collect collect1 = new Collect();
+        collect1.setUserId(collect.getUserId());
+        collect1.setSellerId(collect.getSellerId());
+//        collect1.setCollectTime(collect.getCollectTime()); /**时间*/
+        List<Collect> list = collectDao.queryCondition(collect1);
+        if (list.isEmpty()) {
+            collect1.setCollectTime(new Date());
+            collectDao.add(collect);
+            return new ResultVO(ResultEnum.ADD_SUCCESS,collect.getCollectId());
+        } else {
+            return new ResultVO(ResultEnum.ADD_FAIL, "该店铺已收藏");
+        }
+    }
+
+    /**
      * 删除收藏
      *
      * @param userId
@@ -73,11 +95,33 @@ public class CollectServiceImpl implements CollectService {
             collectDao.delete(userId, productId);
             return new ResultVO(ResultEnum.DELETE_SUCCESS);
         }
-
     }
 
     /**
-     * 个人收藏查询
+     * 删除收藏
+     *
+     * @param userId
+     * @param sellerId
+     * @return ResultVO
+     */
+    @Override
+    public ResultVO deleteStore(Integer userId, Integer sellerId) {
+        Collect collect1 = new Collect();
+        collect1.setUserId(userId);
+        collect1.setSellerId(sellerId);
+        List<Collect> list = collectDao.queryCondition(collect1);
+        if (list.isEmpty()) {
+            return new ResultVO(ResultEnum.DELETE_FAIL, "该店铺不存在收藏列表中");
+        } else {
+            collectDao.delete(userId, sellerId);
+            return new ResultVO(ResultEnum.DELETE_SUCCESS);
+        }
+    }
+
+
+
+    /**
+     * 商品收藏查询
      *
      * @param userId
      * @return
@@ -87,6 +131,17 @@ public class CollectServiceImpl implements CollectService {
         return new ResultVO(collectDao.getMyCollect(userId));
     }
 
+
+    /**
+     * 店铺收藏查询
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public ResultVO getMyStore(Integer userId) {
+        return new ResultVO(collectDao.getMyStore(userId));
+    }
 
 
     /**

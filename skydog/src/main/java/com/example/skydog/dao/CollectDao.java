@@ -22,6 +22,8 @@ public interface CollectDao {
 
     List<Collect> getMyCollect(Integer userId);
 
+    List<Collect> getMyStore(Integer userId);
+
     List<Collect> getUseless(Integer userId);
 
     List<Collect> getSearch(Integer userId, String keyword);

@@ -11,9 +11,15 @@ public interface CollectService {
 
     ResultVO add(Collect collect);
 
+    ResultVO addStore(Collect collect);
+
     ResultVO delete(Integer userId, Integer productId);
 
+    ResultVO deleteStore(Integer userId, Integer sellerId);
+
     ResultVO getMyCollect(Integer userId);
+
+    ResultVO getMyStore(Integer userId);
 
     ResultVO getUseless(Integer userId);
 

@@ -29,7 +29,7 @@ public class CollectController {
 
 
     /**
-     * 添加收藏
+     * 商品收藏
      *
      * @param collect
      * @return
@@ -44,6 +44,23 @@ public class CollectController {
         return collectService.add(collect);
     }
 
+    /**
+     * 店铺收藏
+     *
+     * @param collect
+     * @return
+     */
+    @PostMapping("/addStore")
+    @ApiOperation("店铺收藏")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "collect", value = "收藏对象", dataType = "Collect"),
+    })
+    public ResultVO addStore(@RequestBody Collect collect) {
+
+        return collectService.addStore(collect);
+    }
+
+
 
     @GetMapping("/delete/{userId}&&{productId}")
     @ApiOperation("删除收藏商品")
@@ -55,6 +72,17 @@ public class CollectController {
         return collectService.delete(userId, productId);
     }
 
+
+    @GetMapping("/deleteStore/{userId}&&{sellerId}")
+    @ApiOperation("删除收藏商品")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
+            @ApiImplicitParam(name = "sellerId", value = "店铺Id", dataType = "Integer"),
+    })
+    public ResultVO deleteStore(@PathVariable Integer userId, @PathVariable Integer sellerId) {
+        return collectService.delete(userId, sellerId);
+    }
+
     /**
      * 查询收藏列表
      *
@@ -62,13 +90,31 @@ public class CollectController {
      * @return
      */
     @GetMapping("/getMyCollect/{userId}")
-    @ApiOperation("查询用户收藏列表")
+    @ApiOperation("查询商品收藏列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
     })
     public ResultVO getMyCollect(@PathVariable Integer userId) {
         return collectService.getMyCollect((userId));
     }
+
+
+    /**
+     * 查询收藏列表
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getMyStore/{userId}")
+    @ApiOperation("查询店铺收藏列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
+    })
+    public ResultVO getMyStore(@PathVariable Integer userId) {
+        return collectService.getMyStore((userId));
+    }
+
+
 
 
     /**

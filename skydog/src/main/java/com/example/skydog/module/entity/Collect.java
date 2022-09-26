@@ -24,5 +24,6 @@ public class Collect {
     private Date collectTime;
     private Product product;
     private Img img;
-
+    private Integer sellerId;
+    private User user;
 }
