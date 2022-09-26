@@ -26,4 +26,5 @@ public class Collect {
     private Img img;
     private Integer sellerId;
     private User user;
+    private List<Product> productList;
 }

@@ -217,7 +217,10 @@
                 and o.endTime=#{endTime}
             </if>
             <if test="beginDate != null">
+
+                <![CDATA[
                 and o.createTime >= #{beginDate}
+                ]]>
             </if>
             <if test="endDate != null">
                 <![CDATA[

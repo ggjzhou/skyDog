@@ -108,4 +108,14 @@ public class OrderServiceImpl implements OrderService {
       pageBeans.setData(orderdao.queryBySelectActive(orderVo));
       return new ResultVO(ResultEnum.SUCCESS,pageBeans);
    }
+
+   /**
+    * 获取用户最近消费曲线
+    * @param userId
+    * @return
+    */
+   public ResultVO getOrderCount(Integer userId){
+
+      return new ResultVO(ResultEnum.SUCCESS);
+   }
 }

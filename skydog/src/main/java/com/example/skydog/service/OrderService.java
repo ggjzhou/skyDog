@@ -40,4 +40,6 @@ public interface OrderService {
    List<Order> getMyOrder(Order order);
 
    ResultVO getOrder(OrderVo orderVo);
+
+   ResultVO getOrderCount(Integer userId);
 }

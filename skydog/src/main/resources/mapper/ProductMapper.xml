@@ -284,6 +284,12 @@
         <if test="sort == 4">
             ORDER BY p.productGrade desc
         </if>
+        <if test="sort == 5">
+            ORDER BY p.productPrice
+        </if>
+        <if test="sort == 6">
+            ORDER BY p.productPrice desc
+        </if>
     </sql>
     <select id="search" resultMap="ProductDtoMap">
         select p.*,g.*,i.* from tb_product p

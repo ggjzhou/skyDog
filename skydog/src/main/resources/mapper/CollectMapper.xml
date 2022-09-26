@@ -16,6 +16,8 @@
 
         <association property="user" column="userId" javaType="User"
                      resultMap="com.example.skydog.dao.UserDao.userMap"></association>
+        <collection property="productList" ofType="Product"
+                    resultMap="com.example.skydog.dao.ProductDao.ProductDtoMap"></collection>
     </resultMap>
 
     <!-- 添加 -->
@@ -39,8 +41,7 @@
 
     <!-- 通过id查询 -->
     <select id="queryId" parameterType="int" resultMap="collectMap">
-        select *
-        from tb_collect c
+        select * from tb_collect c
                  LEFT JOIN tb_product p ON (c.productId = p.productId)
                  LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.collectId = #{collectId}
@@ -55,15 +56,19 @@
                  LEFT JOIN tb_product p ON (c.productId = p.productId)
                  LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.userId = #{userId}
+        and c.productId = p.productId
     </select>
 
     <!-- 获取店铺收藏 -->
     <select id="getMyStore" parameterType="int" resultMap="collectMap">
-        select c.*, s.*
+        select c.*, s.*,p.*,i.*
         from tb_collect c
                  LEFT JOIN tb_user u ON (u.userId = c.userId)
                  LEFT JOIN tb_user s ON (s.userId = c.sellerId)
+                 LEFT JOIN tb_product p ON (c.sellerId = p.userId)
+                 LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.userId = #{userId}
+        and s.userId = c.sellerId
     </select>
 
 
