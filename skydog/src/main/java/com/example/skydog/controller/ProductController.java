@@ -153,7 +153,7 @@ public class ProductController {
     @PostMapping("/search")
     @ApiOperation("商品搜索")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "productVo", value = "", dataType = "ProductVo"),
+            @ApiImplicitParam(name = "productVo", value = "", dataType = "ProductVo")
     })
     public ResultVO search(@RequestBody ProductVo productVo) {
         return productService.search(productVo);

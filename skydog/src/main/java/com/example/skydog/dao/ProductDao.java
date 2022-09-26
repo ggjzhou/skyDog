@@ -1,5 +1,6 @@
 package com.example.skydog.dao;
 
+import com.example.skydog.module.dto.ProductDto;
 import com.example.skydog.module.entity.Category;
 import com.example.skydog.module.entity.Product;
 import com.example.skydog.module.vo.ProductVo;
@@ -26,19 +27,19 @@ public interface ProductDao<E> {
 
    Product queryId(Integer productId);
 
-   List<Product> queryCondition(E query);
+   List<ProductDto> queryCondition(E query);
 
-   List<Product> queryByCategory(ProductVo productVo);
+   List<ProductDto> queryByCategory(ProductVo productVo);
 
    Integer countByCategory(ProductVo productVo);
 
-   List<Product> queryBySelectActive(ProductVo productVo);
+   List<ProductDto> queryBySelectActive(ProductVo productVo);
 
    Integer countBySelectActive(ProductVo productVo);
 
-   List<Product> search(ProductVo productVo);
+   List<ProductDto> search(ProductVo productVo);
 
    Integer searchCount(ProductVo productVo);
 
-   List<Product> getMyProduct (Integer userId);
+   List<ProductDto> getMyProduct (Integer userId);
 }

@@ -21,4 +21,5 @@ public class ProductVo extends Product implements Serializable {
     private Double highPrice;
     private Integer currentPage;
     private Integer pageSize;
+    private Integer sort;
 }

@@ -35,14 +35,14 @@ public class HotRecommend {
     })
     public void saveEventTrack(@RequestBody UserVisit userVisit) throws Exception{
 //        HashMap<String, Object> pros = new HashMap<>(3);
-//        pros.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.60.128:9092");
+//        pros.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "https://59733751ac.goho.co:443");
 //        pros.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
 //        pros.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
 //        KafkaProducer<String, String> producer = new KafkaProducer<>(pros);
-//        //将对象转换成字符串发送到kafka
+        //将对象转换成字符串发送到kafka
         String elem=userVisit.toString();
 //        ProducerRecord<String, String> record = new ProducerRecord<>("HotRecommend", null, elem);
-        //producer.send(record);
+//        producer.send(record);
 
         String path = "F:\\test\\test.txt";
         String word = elem;

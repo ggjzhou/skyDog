@@ -105,7 +105,7 @@ public class UserVisit {
 
     public void setProductId(String productId1) {
         if(productId1 == null){
-            productId1 = "-1";
+            productId1 = "null";
         }
         this.productId1 = productId1;
     }
@@ -116,49 +116,49 @@ public class UserVisit {
 
     public void setOrderId(String orderId) {
         if(orderId == null){
-            orderId = "-1";
+            orderId = "null";
         }
         this.orderId = orderId;
     }
 
     public void setProductId2(String productId2) {
         if(productId2 == null){
-            productId2 = "-1";
+            productId2 = "null";
         }
         this.productId2 = productId2;
     }
 
     public void setOrderId2(String orderId2) {
         if(orderId2 == null){
-            orderId2 = "-1";
+            orderId2 = "null";
         }
         this.orderId2 = orderId2;
     }
 
     public void setProductId3(String productId3) {
         if(productId3 == null){
-            productId3 = "-1";
+            productId3 = "null";
         }
         this.productId3 = productId3;
     }
 
     public void setCollectId(String collectId) {
         if(collectId == null){
-            collectId = "-1";
+            collectId = "null";
         }
         this.collectId = collectId;
     }
 
     public void setProductId4(String productId4) {
         if(productId4 == null){
-            productId4 = "-1";
+            productId4 = "null";
         }
         this.productId4 = productId4;
     }
 
     public void setEvaluateId(String evaluateId) {
         if(evaluateId == null){
-            evaluateId = "-1";
+            evaluateId = "null";
         }
         this.evaluateId = evaluateId;
     }
@@ -179,7 +179,7 @@ public class UserVisit {
 
     public void setProductId5(String productId5) {
         if(productId5 == null){
-            productId5 = "-1";
+            productId5 = "null";
         }
         this.productId5 = productId5;
     }

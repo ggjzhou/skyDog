@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto extends Product {
+    private Double grade;
     private String categoryName;
     private String productScale;
     private String productScaleStock;
