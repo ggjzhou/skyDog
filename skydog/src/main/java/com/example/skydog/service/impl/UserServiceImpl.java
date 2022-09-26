@@ -1,11 +1,15 @@
 package com.example.skydog.service.impl;
 
 import com.example.skydog.dao.CartDao;
+import com.example.skydog.dao.CollectDao;
+import com.example.skydog.dao.RecommendDao;
 import com.example.skydog.dao.UserDao;
 import com.example.skydog.enums.ResultEnum;
+import com.example.skydog.module.dto.ProductDto;
 import com.example.skydog.module.entity.Order;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.module.vo.PageBeans;
+import com.example.skydog.module.vo.ProductVo;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.module.vo.UserVO;
 import com.example.skydog.service.UserService;
@@ -24,6 +28,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private CartDao cartDao;
+
+    @Autowired
+    private RecommendDao recommendDao;
+
 
     public void add(User user) {
         userDao.add(user);
@@ -98,22 +106,8 @@ public class UserServiceImpl implements UserService {
         return new ResultVO(userDao.queryCondition(user));
     }
 
-    public void batchAdd(List<User> userList) {
-        // TODO: implement
-    }
 
-
-    public void batchDelete(List list) {
-        // TODO: implement
-    }
-
-
-    public List<User> pageQuery() {
-        // TODO: implement
-        return null;
-    }
-
-
+    @Override
     public ResultVO updatePassword(String oldPassword, String newPassword, Integer userId) {
         User u = userDao.queryId(userId);
         if (u == null) {
@@ -155,17 +149,36 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 分页查询
+     *
      * @param userVO
      * @return
      */
-    public ResultVO getUser(UserVO userVO){
+    @Override
+    public ResultVO getUser(UserVO userVO) {
         PageBeans pageBeans = new PageBeans();
         pageBeans.setCurrentPage(userVO.getCurrentPage());
         pageBeans.setPageSize(userVO.getPageSize());
         pageBeans.setCount(userDao.countBySelectActive(userVO));
         pageBeans.setData(userDao.queryBySelectActive(userVO));
-        return new ResultVO(ResultEnum.SUCCESS,pageBeans);
+        return new ResultVO(ResultEnum.SUCCESS, pageBeans);
     }
 
+    @Override
+    public ResultVO getUserRecommend(Integer userId) {
+
+        String str = userDao.queryId(userId).getBrowse();
+        String[] list = str.split(",");
+
+        List res = new ArrayList();
+        for (int i = 0; i < list.length; i++) {
+            System.out.println(list[i]);
+            ProductVo productVo = new ProductVo();
+            productVo.setCategoryId(Integer.parseInt(list[i]));
+            productVo.setCurrentPage(1);
+            productVo.setPageSize(30);
+            res.addAll(new ArrayList(Arrays.asList(recommendDao.hotRecommend(productVo))));
+        }
+        return new ResultVO(ResultEnum.SUCCESS,res);
+    }
 
 }

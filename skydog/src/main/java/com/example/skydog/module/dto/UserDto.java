@@ -6,14 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Author:zhangzhengbin
- * Data:2022/9/26
+ * @description:
+ * @author: 张振彬
+ * @create: 2022-09-26
+ * @version: 1.0
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class userDto extends User {
+public class UserDto extends User {
     private String search;
     private String browse;
-
+    private String consume;
 }

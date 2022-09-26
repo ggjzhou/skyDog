@@ -5,7 +5,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.skydog.dao.UserDao">
-    <resultMap id="userMap" type="User">
+    <resultMap id="userMap" type="com.example.skydog.module.entity.User">
         <id property="userId" column="userId"></id>
         <result property="userName" column="userName"></result>
         <result property="password" column="password"></result>
@@ -14,41 +14,24 @@
         <result property="avatar" column="avatar"></result>
         <result property="gender" column="gender"></result>
         <result property="IDCard" column="IDCard"></result>
+
+        <association property="product" column="productId" javaType="Product"
+                     resultMap="com.example.skydog.dao.ProductDao.BaseProductMap"></association>
+
     </resultMap>
+
+    <resultMap id="userDtoMap" extends="userMap" type="com.example.skydog.module.dto.UserDto">
+        <result column="search" property="search"/>
+        <result column="browse" property="browse"/>
+        <result column="consume" property="consume"/>
+    </resultMap>
+
 
     <!-- 添加 -->
     <insert id="add" parameterType="User">
         insert into tb_user
-<!--        <trim prefix="  values ("-->
-<!--              suffix=")" suffixOverrides=",">-->
-<!--            <if test="userId != null">-->
-<!--                #{userId},-->
-<!--            </if>-->
-<!--            <if test="userName != null">-->
-<!--                #{userName},-->
-<!--            </if>-->
-<!--            <if test="password != null">-->
-<!--                #{password},-->
-<!--            </if>-->
-<!--            <if test="nick != null">-->
-<!--                #{nick},-->
-<!--            </if>-->
-<!--            <if test="phone != null">-->
-<!--                #{phone},-->
-<!--            </if>-->
-<!--            <if test="avatar != null">-->
-<!--                #{avatar},-->
-<!--            </if>-->
-<!--            <if test="gender != null">-->
-<!--                #{gender}-->
-<!--            </if>-->
-<!--            <if test="IDCard != null">-->
-<!--                #{IDCard}-->
-<!--            </if>-->
-<!--        </trim>-->
-        values (#{userId},#{userName},#{password},#{nick},#{phone},#{avatar},#{gender},#{IDCard})
+        values (#{userId}, #{userName}, #{password}, #{nick}, #{phone}, #{avatar}, #{gender}, #{IDCard})
     </insert>
-
 
     <!-- 删除 -->
     <delete id="delete" parameterType="int">
@@ -87,7 +70,7 @@
     </update>
 
     <!-- Id查询 -->
-    <select id="queryId" parameterType="int" resultType="User">
+    <select id="queryId" parameterType="int" resultMap="userDtoMap">
         select *
         from tb_user u
         where u.userId = #{userId}
@@ -100,7 +83,7 @@
                 u.userId = #{userId}
             </if>
             <if test="userName != null">
-                and u.userName  like
+                and u.userName like
                 concat('%',#{userName},'%')
             </if>
             <if test="nick != null">
@@ -112,7 +95,7 @@
                 concat('%',#{password},'%')
             </if>
             <if test="phone != null">
-                and u.phone  like
+                and u.phone like
                 concat('%',#{phone},'%')
             </if>
             <if test="gender != null">
@@ -128,6 +111,7 @@
         <include refid="selectActive"/>
     </select>
 
+    <!-- 分页 -->
     <select id="queryBySelectActive" resultMap="userMap">
         select * from tb_user
         <include refid="selectActive"></include>
@@ -137,18 +121,69 @@
             limit #{start},#{pageSize}
         </if>
     </select>
+
     <select id="countBySelectActive" resultType="int">
         select count(1) from tb_user
         <include refid="selectActive"></include>
     </select>
 
+    <!-- 用户推荐 -->
 
-<!--    <delete id="batchDelete" parameterType="List">-->
-<!--        -->
-<!--    </delete>-->
 
-<!--    <select id="pageQuery" parameterType="List">-->
 
+
+
+<!--    <sql id="sort">-->
+<!--        <if test="sort == 1">-->
+<!--            ORDER BY p.productSale-->
+<!--        </if>-->
+<!--        <if test="sort == 2">-->
+<!--            ORDER BY p.productSale desc-->
+<!--        </if>-->
+<!--        <if test="sort == 3">-->
+<!--            ORDER BY p.productGrade-->
+<!--        </if>-->
+<!--        <if test="sort == 4">-->
+<!--            ORDER BY p.productGrade desc-->
+<!--        </if>-->
+<!--    </sql>-->
+<!--    <select id="search" resultMap="ProductDtoMap">-->
+<!--        select p.*,g.*,i.* from tb_product p-->
+<!--        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)-->
+<!--        LEFT JOIN tb_img i ON (p.imgId = i.imgId)-->
+<!--        <where>-->
+<!--            <if test="1 == 1">-->
+<!--                p.productStatus = "在售"-->
+<!--            </if>-->
+<!--            <if test="lowPrice != null">-->
+<!--                and p.productPrice >= #{lowPrice}-->
+<!--            </if>-->
+<!--            <if test="highPrice != null">-->
+<!--                <![CDATA[-->
+<!--                    and p.productPrice <= #{highPrice}-->
+<!--                    ]]>-->
+<!--            </if>-->
+<!--            <if test="keyword != null">-->
+<!--                and (g.categoryName like concat('%',#{keyword},'%')-->
+<!--                OR p.productName like concat('%',#{keyword},'%')-->
+<!--                OR p.productDec like concat('%',#{keyword},'%'))-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        <include refid="sort"></include>-->
+<!--        &lt;!&ndash; 分页&ndash;&gt;-->
+<!--        <if test="currentPage != null and pageSize != null">-->
+<!--            <bind name="start" value="(currentPage - 1) * pageSize"/>-->
+<!--            limit #{start},#{pageSize}-->
+<!--        </if>-->
 <!--    </select>-->
+
+    <select id="getUserRecommend" parameterType="int" resultMap="userDtoMap">
+        select u.*
+        from tb_user u
+--                  LEFT JOIN tb_collect c ON (u.userId = c.userId)
+--                  LEFT JOIN tb_product p ON (c.productId = p.productId)
+--                   LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        where u.userId = #{userId}
+    </select>
 
 </mapper>

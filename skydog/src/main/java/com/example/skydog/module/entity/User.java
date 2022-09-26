@@ -23,5 +23,6 @@ public class User {
     private String avatar;//头像
     private String gender;
     private String IDCard;
-
+    private Product product;
+    private Img img;
 }

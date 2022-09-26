@@ -188,7 +188,7 @@ public class AlipayUtil {
                 "  }");
         AlipayTradeQueryResponse response = alipayClient.execute(request);
         System.out.println("【查询返回交易状态】" + response.getTradeStatus());
-        return response.getTradeStatus();
+        return "【查询返回交易状态】" + response.getTradeStatus();
     }
 
 

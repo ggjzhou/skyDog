@@ -1,6 +1,8 @@
 package com.example.skydog.dao;
 
+import com.example.skydog.module.dto.UserDto;
 import com.example.skydog.module.entity.User;
+import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.module.vo.UserVO;
 import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,7 +16,7 @@ public interface UserDao {
 
     void delete(Integer userId);
 
-    User queryId(Integer userId);
+    UserDto queryId(Integer userId);
 
     void update(User user);
 
@@ -23,6 +25,9 @@ public interface UserDao {
     List<User> queryBySelectActive(UserVO userVO);
 
     Integer countBySelectActive(UserVO userVO);
+
+    List getUserRecommend(Integer userId);//个性推荐
+
 
 //    void batchDelete(List list);
 

@@ -26,11 +26,6 @@ public interface UserService {
 
    ResultVO queryCondition(User user);
 
-
-   void batchDelete(List list);
-
-   List<User> pageQuery();
-
    ResultVO updatePassword(String oldPassword, String newPassword,Integer userId);
 
    void updateAvatar();//更新头像
@@ -44,5 +39,7 @@ public interface UserService {
    ResultVO getEvaluate(Integer uerId);
 
    ResultVO getUser(UserVO userVO);
+
+   ResultVO getUserRecommend(Integer userId);//个性推荐
 
 }

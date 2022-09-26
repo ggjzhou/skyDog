@@ -62,6 +62,8 @@ public class UserController {
         return this.userService.updatePassword(oldPassword,newPassword,userId);
     }
 
+
+
     @GetMapping("/queryId/{userId}")
             @ApiOperation("Id查询用户")
             @ApiImplicitParams({
@@ -71,6 +73,8 @@ public class UserController {
         return new ResultVO(ResultEnum.SUCCESS, userService.queryId(userId));
     }
 
+
+
     @PostMapping("/getUser")
     @ApiOperation("查询用户")
     @ApiImplicitParams({
@@ -78,6 +82,18 @@ public class UserController {
     })
     public ResultVO getUser(@RequestBody UserVO userVO) {
         return userService.getUser(userVO);
+    }
+
+
+
+
+    @GetMapping("/getUserRecommend/{userId}")
+    @ApiOperation("获取用户个性推荐")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户Id", dataType = "Integer"),
+    })
+    public ResultVO getUserRecommend(@PathVariable Integer userId) {
+        return new ResultVO(ResultEnum.SUCCESS, userService.getUserRecommend(userId));
     }
 
 }
