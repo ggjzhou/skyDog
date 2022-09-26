@@ -33,4 +33,17 @@ public class RecommendController {
     public ResultVO hotRec(@RequestBody ProductVo productVo) {
         return recommendService.hotRecommend(productVo);
     }
+    /**
+     * 用户推荐
+     * @return
+     */
+    @PostMapping("/userRec")
+    @ApiOperation("查询热门商品")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "productVo", value = "商品", dataType = "ProductVo"),
+    })
+    public ResultVO userRec(@RequestBody ProductVo productVo) {
+        return recommendService.hotRecommend(productVo);
+    }
+
 }

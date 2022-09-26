@@ -41,4 +41,5 @@ public class RecommendServiceImpl implements RecommendService {
 //                productList.stream().sorted(Comparator.comparing(ProductDto::getGrade).reversed());
         return new ResultVO(ResultEnum.SUCCESS,recommendDao.hotRecommend(productVo));
     }
+
 }
