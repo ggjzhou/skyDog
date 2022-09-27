@@ -25,4 +25,5 @@ public class User {
     private String IDCard;
     private Product product;
     private Img img;
+    private Collect collect;
 }

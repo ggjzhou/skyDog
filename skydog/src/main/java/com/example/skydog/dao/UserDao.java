@@ -1,6 +1,8 @@
 package com.example.skydog.dao;
 
 import com.example.skydog.module.dto.UserDto;
+import com.example.skydog.module.entity.Cart;
+import com.example.skydog.module.entity.Collect;
 import com.example.skydog.module.entity.User;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.module.vo.UserVO;
@@ -27,6 +29,10 @@ public interface UserDao {
     Integer countBySelectActive(UserVO userVO);
 
     List getUserRecommend(Integer userId);//个性推荐
+
+    List<Integer> getCartCategory(Integer userId);
+
+    List<Integer> getCollectCategory(Integer userId);
 
 
 //    void batchDelete(List list);
