@@ -129,53 +129,27 @@
 
     <!-- 用户推荐 -->
 
+    <select id="getCollectCategory" resultType="int">
+        select g.categoryId
+        from tb_user u
+                 LEFT JOIN tb_collect c ON (u.userId = c.userId)
+                 LEFT JOIN tb_product p ON (c.productId = p.productId)
+                 LEFT OUTER JOIN tb_category g ON (p.categoryId = g.categoryId)
+        where c.userId = #{userId}
+          and c.productId = p.productId
+    </select>
 
 
+    <select id="getCartCategory" resultType="int">
+        select g.categoryId
+        from tb_user u
+                 LEFT JOIN tb_cart c ON (u.userId = c.userId)
+                 LEFT JOIN tb_product p ON (c.productId = p.productId)
+                 LEFT OUTER JOIN tb_category g ON (p.categoryId = g.categoryId)
+        where c.userId = #{userId}
+          and c.productId = p.productId
+    </select>
 
-
-<!--    <sql id="sort">-->
-<!--        <if test="sort == 1">-->
-<!--            ORDER BY p.productSale-->
-<!--        </if>-->
-<!--        <if test="sort == 2">-->
-<!--            ORDER BY p.productSale desc-->
-<!--        </if>-->
-<!--        <if test="sort == 3">-->
-<!--            ORDER BY p.productGrade-->
-<!--        </if>-->
-<!--        <if test="sort == 4">-->
-<!--            ORDER BY p.productGrade desc-->
-<!--        </if>-->
-<!--    </sql>-->
-<!--    <select id="search" resultMap="ProductDtoMap">-->
-<!--        select p.*,g.*,i.* from tb_product p-->
-<!--        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)-->
-<!--        LEFT JOIN tb_img i ON (p.imgId = i.imgId)-->
-<!--        <where>-->
-<!--            <if test="1 == 1">-->
-<!--                p.productStatus = "在售"-->
-<!--            </if>-->
-<!--            <if test="lowPrice != null">-->
-<!--                and p.productPrice >= #{lowPrice}-->
-<!--            </if>-->
-<!--            <if test="highPrice != null">-->
-<!--                <![CDATA[-->
-<!--                    and p.productPrice <= #{highPrice}-->
-<!--                    ]]>-->
-<!--            </if>-->
-<!--            <if test="keyword != null">-->
-<!--                and (g.categoryName like concat('%',#{keyword},'%')-->
-<!--                OR p.productName like concat('%',#{keyword},'%')-->
-<!--                OR p.productDec like concat('%',#{keyword},'%'))-->
-<!--            </if>-->
-<!--        </where>-->
-<!--        <include refid="sort"></include>-->
-<!--        &lt;!&ndash; 分页&ndash;&gt;-->
-<!--        <if test="currentPage != null and pageSize != null">-->
-<!--            <bind name="start" value="(currentPage - 1) * pageSize"/>-->
-<!--            limit #{start},#{pageSize}-->
-<!--        </if>-->
-<!--    </select>-->
 
     <select id="getUserRecommend" parameterType="int" resultMap="userDtoMap">
         select u.*

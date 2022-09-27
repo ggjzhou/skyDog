@@ -42,4 +42,5 @@ public interface UserService {
 
    ResultVO getUserRecommend(Integer userId);//个性推荐
 
+
 }

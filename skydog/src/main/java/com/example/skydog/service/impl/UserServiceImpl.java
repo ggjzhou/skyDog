@@ -32,6 +32,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RecommendDao recommendDao;
 
+    @Autowired
+    private CollectDao collectDao;
+
 
     public void add(User user) {
         userDao.add(user);
@@ -165,20 +168,57 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultVO getUserRecommend(Integer userId) {
+        //获取用户消费水平
+        String consume = userDao.queryId(userId).getConsume();
 
-        String str = userDao.queryId(userId).getBrowse();
-        String[] list = str.split(",");
+        //获取用户收藏商品类别
+        List<Integer> collectList = userDao.getCollectCategory(userId);
+        //获取用户购物车商品类别
+        List<Integer> cartList = userDao.getCartCategory(userId);
+        collectList.addAll(cartList);
 
-        List res = new ArrayList();
-        for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i]);
+        List<ProductDto> buildRes = new ArrayList();
+        for (int i = 0; i < collectList.toArray().length; i++) {
+            System.out.println(collectList.get(i));
             ProductVo productVo = new ProductVo();
-            productVo.setCategoryId(Integer.parseInt(list[i]));
+            productVo.setCategoryId(collectList.get(i));
+            productVo.setCurrentPage(1);
+            productVo.setPageSize(100);
+            buildRes.addAll(recommendDao.hotRecommend(productVo));
+        }
+
+        String search = userDao.queryId(userId).getSearch();
+        String[] searchList = search.split(",");
+        List<ProductDto> searchRes = new ArrayList();
+        for (int i = 0; i < searchList.length; i++) {
+            System.out.println(searchList[i]);
+            ProductVo productVo = new ProductVo();
+            productVo.setKeyword(searchList[i]);
             productVo.setCurrentPage(1);
             productVo.setPageSize(30);
-            res.addAll(new ArrayList(Arrays.asList(recommendDao.hotRecommend(productVo))));
+            searchRes.addAll(recommendDao.hotRecommend(productVo));
         }
-        return new ResultVO(ResultEnum.SUCCESS,res);
+
+        String browse = userDao.queryId(userId).getBrowse();
+        String[] browseList = browse.split(",");
+        List<ProductDto> browseRes = new ArrayList();
+        for (int i = 0; i < browseList.length; i++) {
+            System.out.println(browseList[i]);
+            ProductVo productVo = new ProductVo();
+            productVo.setCategoryId(Integer.parseInt(browseList[i]));
+            productVo.setCurrentPage(1);
+            productVo.setPageSize(100);
+            browseRes.addAll(recommendDao.hotRecommend(productVo));
+        }
+
+        Set<ProductDto> set = new HashSet<ProductDto>();
+        set.addAll(buildRes);
+        set.addAll(browseRes);
+        List<ProductDto> res = new ArrayList<ProductDto>(set);
+        res.addAll(searchRes);
+        System.out.println(res);
+
+        return new ResultVO(ResultEnum.SUCCESS, res);
     }
 
 }
