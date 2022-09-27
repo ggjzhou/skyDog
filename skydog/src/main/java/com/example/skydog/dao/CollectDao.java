@@ -18,7 +18,7 @@ public interface CollectDao {
 
     void add(Collect collect);
 
-    void delete(Integer userId, Integer productId);
+    void delete(Collect collect);
 
     List<Collect> getMyCollect(Integer userId);
 

@@ -17,12 +17,14 @@
                 and p.categoryId = #{categoryId}
             </if>
             <if test="lowPrice != null">
+                <![CDATA[
                 and p.productPrice >= #{lowPrice}
+                ]]>
             </if>
             <if test="highPrice != null">
                 <![CDATA[
-                    and p.productPrice <= #{highPrice}
-                    ]]>
+                and p.productPrice <= #{highPrice}
+                ]]>
             </if>
             <if test="keyword != null">
                 and (g.categoryName like concat('%',#{keyword},'%')
@@ -36,5 +38,35 @@
             <bind name="start" value="(currentPage - 1) * pageSize"/>
             limit #{start},#{pageSize}
         </if>
+    </select>
+    <select id="countRecommend" resultType="int">
+        select count(1) from tb_product p
+        LEFT JOIN tb_category g ON (p.categoryId = g.categoryId)
+        LEFT JOIN tb_img i ON (p.imgId = i.imgId)
+        LEFT JOIN tb_scale s ON (p.productId = s.productId)
+        <where>
+            <if test="1 == 1">
+                p.productStatus = "在售"
+            </if>
+            <if test="categoryId != null">
+                and p.categoryId = #{categoryId}
+            </if>
+            <if test="lowPrice != null">
+                <![CDATA[
+                and p.productPrice >= #{lowPrice}
+                ]]>
+            </if>
+            <if test="highPrice != null">
+                <![CDATA[
+                and p.productPrice <= #{highPrice}
+                ]]>
+            </if>
+            <if test="keyword != null">
+                and (g.categoryName like concat('%',#{keyword},'%')
+                OR p.productName like concat('%',#{keyword},'%')
+                OR p.productDec like concat('%',#{keyword},'%'))
+            </if>
+        </where>
+
     </select>
 </mapper>

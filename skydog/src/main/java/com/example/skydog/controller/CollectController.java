@@ -80,7 +80,7 @@ public class CollectController {
             @ApiImplicitParam(name = "sellerId", value = "店铺Id", dataType = "Integer"),
     })
     public ResultVO deleteStore(@PathVariable Integer userId, @PathVariable Integer sellerId) {
-        return collectService.delete(userId, sellerId);
+        return collectService.deleteStore(userId, sellerId);
     }
 
     /**

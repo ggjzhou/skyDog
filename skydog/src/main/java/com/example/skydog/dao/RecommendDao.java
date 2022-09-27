@@ -13,4 +13,5 @@ import java.util.List;
 @Mapper
 public interface RecommendDao {
     List<ProductDto> hotRecommend(ProductVo productVo);
+    Integer countRecommend(ProductVo productVo);
 }

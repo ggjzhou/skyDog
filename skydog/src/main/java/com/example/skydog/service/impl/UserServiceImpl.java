@@ -32,12 +32,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RecommendDao recommendDao;
 
-
     public void add(User user) {
         userDao.add(user);
     }
-
-
     /**
      *
      */

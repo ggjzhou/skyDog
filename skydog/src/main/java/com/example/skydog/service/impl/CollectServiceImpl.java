@@ -1,8 +1,10 @@
 package com.example.skydog.service.impl;
 
+import com.alipay.api.domain.UserDTO;
 import com.example.skydog.dao.CollectDao;
 import com.example.skydog.dao.UserDao;
 import com.example.skydog.enums.ResultEnum;
+import com.example.skydog.module.dto.ProductDto;
 import com.example.skydog.module.entity.Address;
 import com.example.skydog.module.entity.Admin;
 import com.example.skydog.module.entity.Collect;
@@ -92,7 +94,7 @@ public class CollectServiceImpl implements CollectService {
         if (list.isEmpty()) {
             return new ResultVO(ResultEnum.DELETE_FAIL, "该商品不存在收藏列表中");
         } else {
-            collectDao.delete(userId, productId);
+            collectDao.delete(collect1);
             return new ResultVO(ResultEnum.DELETE_SUCCESS);
         }
     }
@@ -106,14 +108,16 @@ public class CollectServiceImpl implements CollectService {
      */
     @Override
     public ResultVO deleteStore(Integer userId, Integer sellerId) {
+
         Collect collect1 = new Collect();
         collect1.setUserId(userId);
         collect1.setSellerId(sellerId);
         List<Collect> list = collectDao.queryCondition(collect1);
+        System.out.println(collect1.toString());
         if (list.isEmpty()) {
             return new ResultVO(ResultEnum.DELETE_FAIL, "该店铺不存在收藏列表中");
         } else {
-            collectDao.delete(userId, sellerId);
+            collectDao.delete(collect1);
             return new ResultVO(ResultEnum.DELETE_SUCCESS);
         }
     }

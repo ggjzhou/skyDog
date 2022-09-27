@@ -53,8 +53,7 @@
             insert into tb_product
             values(#{productId},#{userId},#{adminId},#{categoryId},#{productName},
                    #{productPrice},#{productDec},
-                   #{productStatus},#{productSale},#{productGrade}
-            )
+                   #{productStatus},#{productSale},#{productGrade})
         </foreach>
     </insert>
     <!--  删除数据  -->

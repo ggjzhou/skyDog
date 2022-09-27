@@ -5,6 +5,7 @@ import com.example.skydog.dao.RecommendDao;
 import com.example.skydog.enums.ResultEnum;
 import com.example.skydog.module.dto.ProductDto;
 import com.example.skydog.module.entity.Product;
+import com.example.skydog.module.vo.PageBeans;
 import com.example.skydog.module.vo.ProductVo;
 import com.example.skydog.module.vo.ResultVO;
 import com.example.skydog.service.RecommendService;
@@ -39,7 +40,12 @@ public class RecommendServiceImpl implements RecommendService {
 //        }
 //        Stream<ProductDto> hotRecommend=
 //                productList.stream().sorted(Comparator.comparing(ProductDto::getGrade).reversed());
-        return new ResultVO(ResultEnum.SUCCESS,recommendDao.hotRecommend(productVo));
+        PageBeans pageBeans = new PageBeans();
+        pageBeans.setCurrentPage(productVo.getCurrentPage());
+        pageBeans.setPageSize(productVo.getPageSize());
+        pageBeans.setCount(recommendDao.countRecommend(productVo));
+        pageBeans.setData(recommendDao.hotRecommend(productVo));
+        return new ResultVO(ResultEnum.SUCCESS,pageBeans);
     }
 
 }

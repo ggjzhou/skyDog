@@ -35,8 +35,12 @@
         delete
         from tb_collect
         where userId = #{userId}
+        <if test="productId != null">
             and productId = #{productId}
-           or sellerId = #{sellerId}
+        </if>
+        <if test="productId != null">
+            and sellerId = #{sellerId}
+        </if>
     </delete>
 
     <!-- 通过id查询 -->
@@ -111,6 +115,9 @@
             </if>
             <if test="collectTime!=null">
                 and c.collectTime = #{collectTime}
+            </if>
+            <if test="sellerId!=null">
+                and c.sellerId = #{sellerId}
             </if>
         </where>
     </select>

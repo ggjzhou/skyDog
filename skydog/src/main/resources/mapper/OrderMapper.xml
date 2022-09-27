@@ -216,17 +216,10 @@
             <if test="endTime !=null">
                 and o.endTime=#{endTime}
             </if>
-            <if test="beginDate != null">
+            <if test="beginDate != null and endDate!=null">
+                and o.createTime between #{beginDate} and #{endDate}
+            </if>
 
-                <![CDATA[
-                and o.createTime >= #{beginDate}
-                ]]>
-            </if>
-            <if test="endDate != null">
-                <![CDATA[
-                and o.createTime <= #{endDate}
-                ]]>
-            </if>
         </where>
     </sql>
     <select id="queryBySelectActive" resultMap="OrderMap">
