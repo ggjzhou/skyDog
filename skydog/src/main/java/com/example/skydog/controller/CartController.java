@@ -49,7 +49,6 @@ public class CartController {
             @ApiImplicitParam(name = "cart", value = "购物车", dataType = "cart"),
     })
     public ResultVO add(@RequestBody Cart cart) {
-
         return cartService.add(cart);
     }
     /**

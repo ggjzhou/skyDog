@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
     */
    public ResultVO add(Cart cart) {
       Cart cart1 = new Cart();
-      cart1.setProductCount(cart.getProductCount());
+      cart1.setProductId(cart.getProductId());
       cart1.setUserId(cart.getUserId());
       List<Cart> cartList = cartDao.queryCondition(cart1);
       if(cartList.isEmpty()){

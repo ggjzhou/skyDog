@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * @description:
  * @author: 张振彬
@@ -14,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
     private Integer userId;
     private String userName;
     private String password;
@@ -23,7 +26,7 @@ public class User {
     private String avatar;//头像
     private String gender;
     private String IDCard;
-    private Product product;
+    private List<Product> productList;
     private Img img;
     private Collect collect;
 }

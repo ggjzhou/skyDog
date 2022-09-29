@@ -14,9 +14,8 @@
         <result property="avatar" column="avatar"></result>
         <result property="gender" column="gender"></result>
         <result property="IDCard" column="IDCard"></result>
-
-        <association property="product" column="productId" javaType="Product"
-                     resultMap="com.example.skydog.dao.ProductDao.BaseProductMap"></association>
+        <collection property="productList" ofType="Product"
+                    resultMap="com.example.skydog.dao.ProductDao.ProductDtoMap"></collection>
 
     </resultMap>
 

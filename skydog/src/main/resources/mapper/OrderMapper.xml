@@ -90,6 +90,7 @@
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         LEFT JOIN tb_scale s ON (o.scaleId = s.scaleId)
         <include refid="selectActive"/>
+        ORDER BY o.createTime DESC
     </select>
 <!--  修改订单信息  -->
     <select id="update">
@@ -180,6 +181,7 @@
                 and o.orderStatus=#{orderStatus}
             </if>
         </where>
+        ORDER BY o.createTime DESC
     </select>
     <sql id="selectOrder">
         <where>
@@ -230,6 +232,7 @@
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         LEFT JOIN tb_scale s ON (o.scaleId = s.scaleId)
         <include refid="selectOrder"></include>
+        ORDER BY o.createTime DESC
         <!-- 分页-->
         <if test="currentPage != null and pageSize != null">
             <bind name="start" value="(currentPage - 1) * pageSize"/>

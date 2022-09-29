@@ -90,9 +90,6 @@ public class AliPayController {
     public String requestQuery(String outTradeNo) throws AlipayApiException {
         return aliPayService.queryOrder(outTradeNo);
     }
-
-
-
 }
 
 

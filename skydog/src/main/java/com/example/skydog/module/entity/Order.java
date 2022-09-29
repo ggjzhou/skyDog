@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * Author:付贵平，甘舟
@@ -15,7 +16,7 @@ import java.util.Date;
 @Data//含有set,get方法
 @AllArgsConstructor//含有参构造方法
 @NoArgsConstructor//含无参构造方法
-public class Order {
+public class Order implements Serializable {
     private Integer orderId;
     private Integer userId;
     private Integer cartId;

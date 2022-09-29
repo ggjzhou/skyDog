@@ -61,6 +61,7 @@
                  LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.userId = #{userId}
         and c.productId = p.productId
+        ORDER BY c.collectTime DESC
     </select>
 
     <!-- 获取店铺收藏 -->
@@ -73,6 +74,7 @@
                  LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.userId = #{userId}
         and s.userId = c.sellerId
+        ORDER BY c.collectTime DESC
     </select>
 
 
@@ -85,6 +87,7 @@
                  LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         where c.userId = #{userId}
           and p.productStatus = '下架'
+        ORDER BY c.collectTime DESC
     </select>
 
     <!--  收藏商品搜索-->
@@ -99,7 +102,7 @@
             and g.categoryName like concat('%', #{keyword}, '%')
            or p.productName like concat('%', #{keyword}, '%')
            or p.productDec like concat('%', #{keyword}, '%')
-
+        ORDER BY c.collectTime DESC
     </select>
 
 
@@ -120,6 +123,7 @@
                 and c.sellerId = #{sellerId}
             </if>
         </where>
+        ORDER BY c.collectTime DESC
     </select>
 
     <!-- 批量删除 -->

@@ -120,5 +120,6 @@
         LEFT JOIN tb_img i ON (p.imgId = i.imgId)
         LEFT JOIN tb_scale s ON (c.scaleId = s.scaleId)
         where u.userId = #{userId}
+        ORDER BY c.joinTime DESC
     </select>
 </mapper>
